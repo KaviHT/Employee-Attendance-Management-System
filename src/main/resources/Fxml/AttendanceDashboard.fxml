@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.employeeattendancesystem.Controllers.AttendanceDashboardController">
+   <children>
+      <HBox alignment="CENTER" layoutX="50.0" layoutY="20.0" prefHeight="150.0" prefWidth="600.0" spacing="40.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="20.0">
+         <children>
+            <VBox alignment="CENTER" prefHeight="150.0" prefWidth="150.0" style="-fx-background-color: grey;">
+               <children>
+                  <Label text="Present" />
+                  <Label fx:id="presentCountLbl" text="Label" />
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="150.0" prefWidth="150.0" style="-fx-background-color: grey;">
+               <children>
+                  <Label text="Leave" />
+                  <Label fx:id="leaveCountLbl" text="Label" />
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="150.0" prefWidth="150.0" style="-fx-background-color: grey;">
+               <children>
+                  <Label text="Half day" />
+                  <Label fx:id="halfDayCountLbl" text="Label" />
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </VBox>
+         </children>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+      </HBox>
+      <TextField fx:id="siteSearchField" layoutX="310.0" layoutY="184.0" prefHeight="25.0" prefWidth="185.0" />
+      <Label layoutX="234.0" layoutY="189.0" text="Search SIte:">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <ListView fx:id="allSitesListView" layoutX="33.0" layoutY="367.0" prefHeight="360.0" prefWidth="660.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" />
+   </children>
+</AnchorPane>

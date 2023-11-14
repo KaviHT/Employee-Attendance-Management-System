@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+
+<AnchorPane prefHeight="600.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.employeeattendancesystem.Controllers.SummaryDayController">
+   <children>
+      <HBox alignment="CENTER" layoutX="281.0" layoutY="43.0" prefHeight="50.0" prefWidth="200.0" spacing="10.0">
+         <children>
+            <Button fx:id="previousDayBtn" mnemonicParsing="false" onAction="#previousDay" text="&lt;" />
+            <Label fx:id="monthLbl" text="month" />
+            <Label fx:id="dateLbl" text="date" />
+            <Button fx:id="nextDayBtn" mnemonicParsing="false" onAction="#nextDay" text="&gt;" />
+         </children>
+      </HBox>
+      <ListView fx:id="daySummaryList" layoutX="57.0" layoutY="362.0" prefHeight="430.0" prefWidth="700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+      <Label fx:id="displayDateLbl" layoutX="162.0" layoutY="59.0" text="Label" />
+      <Button fx:id="todayBtn" layoutX="514.0" layoutY="54.0" mnemonicParsing="false" onAction="#currentDay" text="Today" />
+      <Label fx:id="noRecordsMsgLbl" layoutX="293.0" layoutY="144.0" text="No Records Available" visible="false" />
+   </children>
+</AnchorPane>

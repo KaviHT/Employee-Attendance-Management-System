@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="425.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.employeeattendancesystem.Controllers.SitesRDController">
+   <children>
+      <Button fx:id="backBtn" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#switchToDashboard">
+         <graphic>
+            <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/back.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <TextField fx:id="siteSearchField" layoutX="150.0" layoutY="13.0" onAction="#searchSite" prefHeight="25.0" prefWidth="215.0" promptText="Site name" />
+      <Button fx:id="searchBtn" layoutX="376.0" layoutY="13.0" mnemonicParsing="false" onAction="#searchSite" text="Search" />
+      <ListView fx:id="siteSuggestionList" layoutX="150.0" layoutY="38.0" prefHeight="200.0" prefWidth="215.0" visible="false" />
+      <Label layoutX="161.0" layoutY="73.0" text="Site ID:" />
+      <Label layoutX="142.0" layoutY="101.0" text="Site Name:" />
+      <Label layoutX="141.0" layoutY="193.0" text="Employees:" />
+      <ListView fx:id="siteEmployeeList" layoutX="220.0" layoutY="195.0" prefHeight="160.0" prefWidth="200.0" />
+      <Label fx:id="siteIDLbl" layoutX="220.0" layoutY="73.0" text="Label" />
+      <Label fx:id="siteNameLbl" layoutX="220.0" layoutY="101.0" text="Label" />
+      <Button fx:id="createBtn" layoutX="435.0" layoutY="13.0" mnemonicParsing="false" onAction="#createSite" text="Create" />
+      <Button fx:id="editBtn" layoutX="211.0" layoutY="384.0" mnemonicParsing="false" onAction="#editSite" text="Edit" />
+      <Button fx:id="deleteBtn" layoutX="258.0" layoutY="384.0" mnemonicParsing="false" onAction="#deleteSite" text="Delete" />
+      <Label layoutX="120.0" layoutY="161.0" text="Site Supervisor:" />
+      <Label fx:id="siteSupervisorLbl" layoutX="220.0" layoutY="161.0" text="Label" />
+      <Label layoutX="120.0" layoutY="131.0" text="Working hours:" />
+      <Label fx:id="workingHoursLbl" layoutX="220.0" layoutY="131.0" text="Label" />
+   </children>
+</AnchorPane>

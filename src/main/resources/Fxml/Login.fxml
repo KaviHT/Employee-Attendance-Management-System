@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="login_container" stylesheets="@../Styles/login.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.employeeattendancesystem.Controllers.LoginController">
+   <children>
+      <VBox prefHeight="400.0" prefWidth="200.0" styleClass="login_logo_container" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <ImageView fitHeight="120.0" fitWidth="188.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/logo.jpg" />
+               </image>
+               <VBox.margin>
+                  <Insets top="8.0" />
+               </VBox.margin>
+            </ImageView>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Employee Management System" textAlignment="CENTER" wrappingWidth="177.98764038085938">
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin></Text>
+         </children>
+      </VBox>
+      <VBox layoutX="250.0" layoutY="100.0" prefHeight="360.0" prefWidth="360.0" styleClass="login_form_container" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="220.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+         <children>
+            <Label text="Username:" />
+            <TextField fx:id="usernameFld" styleClass="input_field" />
+            <Label text="Password:" />
+            <PasswordField fx:id="passwordFld" styleClass="input_field" />
+            <Button fx:id="loginBtn" mnemonicParsing="false" onAction="#switchToDashboard" text="Log in" />
+            <Label fx:id="errorLbl" styleClass="error_lbl" text="Error:" />
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

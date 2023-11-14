@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="600.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.employeeattendancesystem.Controllers.MarkAttendanceSiteController">
+   <children>
+      <Label fx:id="siteNameLbl" layoutX="20.0" layoutY="87.0" text="Site Name" />
+      <ListView fx:id="employeeList" layoutX="14.0" layoutY="386.0" prefHeight="360.0" prefWidth="660.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" />
+      <Button fx:id="saveBtn" layoutX="330.0" layoutY="553.0" mnemonicParsing="false" text="Save" />
+      <Button fx:id="backBtn" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#switchToMarkAttendance">
+         <graphic>
+            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/back.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="addReplacementBtn" layoutX="22.0" layoutY="148.0" mnemonicParsing="false" onAction="#addReplacementEmployee" text="Add a Replacement" />
+      <TextField fx:id="employeeSearchField" layoutX="191.0" layoutY="148.0" prefHeight="25.0" prefWidth="180.0" promptText="Search Employee" visible="false" />
+      <ListView fx:id="employeeSuggestionList" layoutX="191.0" layoutY="173.0" prefHeight="200.0" prefWidth="180.0" visible="false" />
+      <Label fx:id="msgEmployeeLbl" layoutX="22.0" layoutY="152.0" text="Add an employee replacement:" visible="false" />
+      <Label fx:id="msgAttendanceLbl" layoutX="22.0" layoutY="120.0" text="You are editing a past attendance record" visible="false" />
+      <Label fx:id="dateLbl" layoutX="248.0" layoutY="120.0" text="Date" visible="false" />
+   </children>
+</AnchorPane>
