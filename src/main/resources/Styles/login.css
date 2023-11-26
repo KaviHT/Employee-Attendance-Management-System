@@ -1,10 +1,10 @@
 .login_container {
-    -fx-background-color: white;
+    -fx-background-color: linear-gradient(to top left, white, #7db6f0);
 }
 
 /* Logo container styles */
 .login_logo_container {
-    -fx-background-color: #325d79;
+    -fx-background-color: linear-gradient(to bottom, white, #003366);
     -fx-alignment: top_center;
 }
 
@@ -31,15 +31,15 @@
 }
 
 .login_form_container Button {
-    -fx-background-color: #325d79;
+    -fx-background-color: #003366;
     -fx-text-fill: white;
     -fx-font-size: 1.2em;
-    -fx-pref-width: 360;
-    -fx-pref-height: 30;
 }
 
 .login_form_container Button:hover {
     -fx-cursor: hand;
+    -fx-background-color: #3173b5;
+    -fx-text-fill: #003366;
 }
 
 .error_lbl {

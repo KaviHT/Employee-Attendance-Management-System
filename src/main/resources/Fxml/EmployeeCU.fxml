@@ -17,9 +17,9 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.employeeattendancesystem.Controllers.EmployeeCUController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="sites_container" stylesheets="@../Styles/siteCU.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.employeeattendancesystem.Controllers.EmployeeCUController">
    <children>
-      <Button fx:id="backBtn" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#switchToEmployeeRD">
+      <Button fx:id="backBtn" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#switchToEmployeeRD" styleClass="back_btn">
          <graphic>
             <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -118,7 +118,7 @@
          </children>
       </GridPane>
       <ListView layoutX="141.0" layoutY="38.0" prefHeight="200.0" prefWidth="200.0" visible="false" />
-      <Button fx:id="saveEmployeeBtn" layoutX="252.0" layoutY="360.0" mnemonicParsing="false" onAction="#saveEmployee" text="Save Employee" />
+      <Button fx:id="saveEmployeeBtn" layoutX="252.0" layoutY="352.0" mnemonicParsing="false" onAction="#saveEmployee" prefHeight="34.0" prefWidth="104.0" styleClass="save_btn" text="Save Employee" />
       <Label fx:id="titleLbl" alignment="CENTER" layoutX="75.0" layoutY="17.0" prefHeight="17.0" prefWidth="443.0" text="Title" />
    </children>
 </AnchorPane>

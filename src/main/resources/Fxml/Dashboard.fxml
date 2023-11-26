@@ -7,10 +7,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.employeeattendancesystem.Controllers.DashboardController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="dashboard_container" stylesheets="@../Styles/dashboard.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.employeeattendancesystem.Controllers.DashboardController">
    <children>
-      <Button fx:id="sitesBtn" layoutX="235.0" layoutY="140.0" mnemonicParsing="false" onAction="#switchToSites" prefHeight="60.0" prefWidth="130.0" text="Sites" textAlignment="RIGHT">
+      <Button fx:id="sitesBtn" layoutX="235.0" layoutY="140.0" mnemonicParsing="false" onAction="#switchToSites" prefHeight="60.0" prefWidth="130.0" styleClass="sites_btn" text="Sites" textAlignment="RIGHT">
          <graphic>
             <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -22,7 +21,7 @@
             <Font size="16.0" />
          </font>
       </Button>
-      <Button fx:id="employeeBtn" layoutX="40.0" layoutY="140.0" mnemonicParsing="false" onAction="#switchToEmployees" prefHeight="60.0" prefWidth="130.0" text="Employees">
+      <Button fx:id="employeeBtn" layoutX="40.0" layoutY="140.0" mnemonicParsing="false" onAction="#switchToEmployees" prefHeight="60.0" prefWidth="130.0" styleClass="emp_btn" text="Employees">
          <graphic>
             <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -34,7 +33,7 @@
             <Font size="14.0" />
          </font>
       </Button>
-      <Button fx:id="attendanceBtn" layoutX="430.0" layoutY="140.0" mnemonicParsing="false" onAction="#switchToAttendance" prefHeight="60.0" prefWidth="130.0" text="Attendance">
+      <Button fx:id="attendanceBtn" layoutX="430.0" layoutY="140.0" mnemonicParsing="false" onAction="#switchToAttendance" prefHeight="60.0" prefWidth="130.0" styleClass="attendance_btn" text="Attendance">
          <graphic>
             <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -46,7 +45,7 @@
             <Font size="14.0" />
          </font>
       </Button>
-      <Button fx:id="logoutBtn" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#switchToLogin" text="Log out">
+      <Button fx:id="logoutBtn" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#switchToLogin" styleClass="logout_btn" text="Log out">
          <graphic>
             <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                <image>

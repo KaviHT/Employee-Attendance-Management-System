@@ -9,26 +9,44 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.employeeattendancesystem.Controllers.AttendanceDashboardController">
+<AnchorPane prefHeight="600.0" prefWidth="700.0" styleClass="dash_container" stylesheets="@../Styles/attendanceDashboard.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.employeeattendancesystem.Controllers.AttendanceDashboardController">
    <children>
       <HBox alignment="CENTER" layoutX="50.0" layoutY="20.0" prefHeight="150.0" prefWidth="600.0" spacing="40.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="20.0">
          <children>
-            <VBox alignment="CENTER" prefHeight="150.0" prefWidth="150.0" style="-fx-background-color: grey;">
+            <VBox alignment="CENTER" prefHeight="150.0" prefWidth="150.0" style="-fx-background-color: #003F70;">
                <children>
-                  <Label text="Present" />
-                  <Label fx:id="presentCountLbl" text="Label" />
+                  <Label text="Present" textFill="WHITE">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Label>
+                  <Label fx:id="presentCountLbl" text="Label" textFill="WHITE">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Label>
                </children>
             </VBox>
-            <VBox alignment="CENTER" prefHeight="150.0" prefWidth="150.0" style="-fx-background-color: grey;">
+            <VBox alignment="CENTER" prefHeight="150.0" prefWidth="150.0" style="-fx-background-color: #003F70;">
                <children>
-                  <Label text="Leave" />
-                  <Label fx:id="leaveCountLbl" text="Label" />
+                  <Label text="Leave" textFill="WHITE">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Label>
+                  <Label fx:id="leaveCountLbl" text="Label" textFill="WHITE">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Label>
                </children>
             </VBox>
-            <VBox alignment="CENTER" prefHeight="150.0" prefWidth="150.0" style="-fx-background-color: grey;">
+            <VBox alignment="CENTER" prefHeight="150.0" prefWidth="150.0" style="-fx-background-color: #003F70;">
                <children>
-                  <Label text="Half day" />
-                  <Label fx:id="halfDayCountLbl" text="Label" />
+                  <Label text="Half day" textFill="WHITE">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Label>
+                  <Label fx:id="halfDayCountLbl" text="Label" textFill="WHITE">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Label>
                </children>
                <opaqueInsets>
                   <Insets />
