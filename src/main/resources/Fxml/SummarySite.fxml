@@ -6,19 +6,19 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 
-<AnchorPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.employeeattendancesystem.Controllers.SummarySiteController">
+<AnchorPane prefHeight="600.0" prefWidth="900.0" styleClass="summary_container" stylesheets="@../Styles/Summary.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.employeeattendancesystem.Controllers.SummarySiteController">
    <children>
       <Label fx:id="siteNameLbl" layoutX="20.0" layoutY="27.0" text="Site Name" />
       <ListView fx:id="employeeList" layoutX="47.0" layoutY="353.0" prefHeight="420.0" prefWidth="760.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
       <HBox alignment="CENTER" layoutX="198.0" layoutY="71.0" prefHeight="40.0" prefWidth="260.0" spacing="10.0">
          <children>
-            <Button fx:id="previousMonthBtn" mnemonicParsing="false" onAction="#previousMonth" text="&lt;" />
+            <Button fx:id="previousMonthBtn" mnemonicParsing="false" onAction="#previousMonth" styleClass="move_btn" text="&lt;" />
             <Label fx:id="yearLbl" text="year" />
             <Label fx:id="monthLbl" text="month" />
-            <Button fx:id="nextMonthBtn" mnemonicParsing="false" onAction="#nextMonth" text="&gt;" />
+            <Button fx:id="nextMonthBtn" mnemonicParsing="false" onAction="#nextMonth" styleClass="move_btn" text="&gt;" />
          </children>
       </HBox>
-      <Button fx:id="thisMonthBtn" layoutX="471.0" layoutY="78.0" mnemonicParsing="false" onAction="#currentMonth" text="This Month" />
+      <Button fx:id="thisMonthBtn" layoutX="471.0" layoutY="78.0" mnemonicParsing="false" onAction="#currentMonth" styleClass="date_btn" text="This Month" />
       <Label fx:id="noRecordsMsgLbl" layoutX="271.0" layoutY="153.0" text="No Records Available" visible="false" />
    </children>
 </AnchorPane>

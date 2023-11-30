@@ -1,0 +1,12 @@
+.sjobs_container{
+    -fx-background-color: linear-gradient(to top right, white, #7db6f0);
+}
+.add_btn{
+    -fx-background-color: #095d9e;
+    -fx-text-fill: white;
+}
+.add_btn:hover{
+    -fx-background-color: #4f9cd6;
+    -fx-text-fill: #033e6b;
+    -fx-cursor: hand;
+}
