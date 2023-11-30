@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="600.0" prefWidth="200.0" styleClass="left_container" stylesheets="@../Styles/attendance-menu.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.employeeattendancesystem.Controllers.AttendanceMenuController">
+<AnchorPane prefHeight="600.0" prefWidth="200.0" styleClass="left_container" stylesheets="@../Styles/attendance-menu.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.employeeattendancesystem.Controllers.AttendanceMenuController">
    <children>
       <VBox layoutX="17.0" layoutY="33.0" prefHeight="150.0" prefWidth="200.0" styleClass="logo_container" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -83,6 +83,9 @@
                      </image>
                   </ImageView>
                </graphic>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
             </Button>
          </children>
       </VBox>

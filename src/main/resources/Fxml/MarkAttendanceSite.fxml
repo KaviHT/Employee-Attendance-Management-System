@@ -7,13 +7,17 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.employeeattendancesystem.Controllers.MarkAttendanceSiteController">
+<AnchorPane prefHeight="600.0" prefWidth="700.0" styleClass="attendance_container" stylesheets="@../Styles/MarkAttendanceSite.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.employeeattendancesystem.Controllers.MarkAttendanceSiteController">
    <children>
-      <Label fx:id="siteNameLbl" layoutX="20.0" layoutY="87.0" text="Site Name" />
+      <Label fx:id="siteNameLbl" layoutX="20.0" layoutY="87.0" text="Site Name">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
       <ListView fx:id="employeeList" layoutX="14.0" layoutY="386.0" prefHeight="360.0" prefWidth="660.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" />
-      <Button fx:id="saveBtn" layoutX="330.0" layoutY="553.0" mnemonicParsing="false" text="Save" />
-      <Button fx:id="backBtn" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#switchToMarkAttendance">
+      <Button fx:id="saveBtn" layoutX="310.0" layoutY="551.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="81.0" styleClass="save_btn" text="Save" />
+      <Button fx:id="backBtn" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#switchToMarkAttendance" styleClass="back_btn">
          <graphic>
             <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -22,7 +26,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="addReplacementBtn" layoutX="22.0" layoutY="148.0" mnemonicParsing="false" onAction="#addReplacementEmployee" text="Add a Replacement" />
+      <Button fx:id="addReplacementBtn" layoutX="24.0" layoutY="141.0" mnemonicParsing="false" onAction="#addReplacementEmployee" prefHeight="29.0" prefWidth="126.0" styleClass="replace_btn" text="Add a Replacement" />
       <TextField fx:id="employeeSearchField" layoutX="191.0" layoutY="148.0" prefHeight="25.0" prefWidth="180.0" promptText="Search Employee" visible="false" />
       <ListView fx:id="employeeSuggestionList" layoutX="191.0" layoutY="173.0" prefHeight="200.0" prefWidth="180.0" visible="false" />
       <Label fx:id="msgEmployeeLbl" layoutX="22.0" layoutY="152.0" text="Add an employee replacement:" visible="false" />

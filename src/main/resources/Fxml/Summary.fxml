@@ -10,15 +10,15 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.employeeattendancesystem.Controllers.SummaryController">
+<AnchorPane prefHeight="600.0" prefWidth="700.0" styleClass="summary_container" stylesheets="@../Styles/Summary.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.employeeattendancesystem.Controllers.SummaryController">
    <children>
       <HBox alignment="CENTER" layoutX="280.0" layoutY="78.0" prefHeight="40.0" prefWidth="400.0" spacing="10.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="78.0">
          <children>
-            <Button fx:id="previousMonthBtn" mnemonicParsing="false" onAction="#previousMonth" text="&lt;" />
+            <Button fx:id="previousMonthBtn" mnemonicParsing="false" onAction="#previousMonth" styleClass="move_btn" text="&lt;" />
             <Label fx:id="yearLbl" text="year" />
             <Label fx:id="monthLbl" text="month" />
-            <Button fx:id="nextMonthBtn" mnemonicParsing="false" onAction="#nextMonth" text="&gt;" />
-            <Button fx:id="todayBtn" mnemonicParsing="false" onAction="#currentMonth" text="Today">
+            <Button fx:id="nextMonthBtn" mnemonicParsing="false" onAction="#nextMonth" styleClass="move_btn" text="&gt;" />
+            <Button fx:id="todayBtn" mnemonicParsing="false" onAction="#currentMonth" styleClass="date_btn" text="Today">
                <HBox.margin>
                   <Insets left="20.0" />
                </HBox.margin>

@@ -12,11 +12,11 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.employeeattendancesystem.Controllers.EmployeeRDController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="sites_container" stylesheets="@../Styles/SitesRD.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.employeeattendancesystem.Controllers.EmployeeRDController">
    <children>
-      <Button fx:id="backBtn" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#switchToDashboard">
+      <Button fx:id="backBtn" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#switchToDashboard" styleClass="back_btn">
          <graphic>
-            <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true" styleClass="back_btn">
                <image>
                   <Image url="@../Images/back.png" />
                </image>
@@ -24,8 +24,8 @@
          </graphic>
       </Button>
       <TextField fx:id="employeeSearchField" layoutX="141.0" layoutY="13.0" onAction="#searchEmployee" prefHeight="25.0" prefWidth="200.0" promptText="Employee name or number" />
-      <Button fx:id="searchBtn" layoutX="347.0" layoutY="13.0" mnemonicParsing="false" onAction="#searchEmployee" text="Search" />
-      <Button fx:id="createBtn" layoutX="406.0" layoutY="13.0" mnemonicParsing="false" onAction="#createEmployee" text="Create" />
+      <Button fx:id="searchBtn" layoutX="347.0" layoutY="13.0" mnemonicParsing="false" onAction="#searchEmployee" styleClass="search_btn" text="Search" />
+      <Button fx:id="createBtn" layoutX="406.0" layoutY="13.0" mnemonicParsing="false" onAction="#createEmployee" styleClass="search_btn" text="Create" />
       <GridPane layoutX="75.0" layoutY="58.0" prefHeight="283.0" prefWidth="450.0">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="295.7777557373047" minWidth="10.0" prefWidth="130.0" />
@@ -113,8 +113,8 @@
             </Label>
          </children>
       </GridPane>
-      <Button fx:id="deleteBtn" layoutX="238.0" layoutY="361.0" mnemonicParsing="false" onAction="#deleteEmployee" text="Delete" />
-      <Button fx:id="editBtn" layoutX="303.0" layoutY="361.0" mnemonicParsing="false" onAction="#editEmployee" text="Edit" />
+      <Button fx:id="deleteBtn" layoutX="233.0" layoutY="355.0" mnemonicParsing="false" onAction="#deleteEmployee" prefHeight="32.0" prefWidth="62.0" styleClass="delete_btn" text="Delete" />
+      <Button fx:id="editBtn" layoutX="303.0" layoutY="355.0" mnemonicParsing="false" onAction="#editEmployee" prefHeight="32.0" prefWidth="62.0" styleClass="edit_btn" text="Edit" />
       <ListView fx:id="employeeSuggestionList" layoutX="141.0" layoutY="38.0" prefHeight="200.0" prefWidth="200.0" visible="false" />
    </children>
 </AnchorPane>
