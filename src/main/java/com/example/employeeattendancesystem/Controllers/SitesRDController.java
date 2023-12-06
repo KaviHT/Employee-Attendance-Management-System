@@ -1,5 +1,12 @@
 package com.example.employeeattendancesystem.Controllers;
 
+import com.example.employeeattendancesystem.Utils.Database;
+import com.example.employeeattendancesystem.Utils.MongoDBConnection;
+import com.mongodb.client.FindIterable;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Filters;
+import com.mongodb.client.model.Updates;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -12,8 +19,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import org.bson.Document;
 
 import java.io.IOException;
+
+import static com.mongodb.client.model.Filters.eq;
 
 public class SitesRDController {
 
@@ -24,10 +34,16 @@ public class SitesRDController {
     public Label siteIDLbl, siteNameLbl, siteSupervisorLbl, workingHoursLbl;
     private final ObservableList<String> suggestions = FXCollections.observableArrayList();
 
-
+    MongoDatabase database = MongoDBConnection.getDatabase("attendence_db");
+    MongoCollection<Document> SiteDataCollection = database.getCollection("site");
+    MongoCollection<Document> siteSupCollection = database.getCollection("siteSupervisor");
     public void initialize() {
+
+
+        Database database = new Database();
+
         // Populating suggestions data from the database
-        suggestions.addAll("Abans", "Pizza Hut", "Barista", "IIT", "SLIIT");  // <--- add site names from the database here
+        suggestions.addAll(database.getSiteSearchDetails());
 
         // Autocomplete functionality
         siteSearchField.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -54,12 +70,40 @@ public class SitesRDController {
             if (selectedItem != null) {
                 siteSearchField.setText(selectedItem);
                 siteSuggestionList.setVisible(false);
+                SitesCUController siteCU = new SitesCUController();
+                siteCU.receiveSelectedItem(selectedItem);
             }
         });
     }
 
 
     public void searchSite(ActionEvent event) {
+
+        String empNumber = siteSearchField.getText().split(" ")[0];
+
+        FindIterable<Document> documents = SiteDataCollection.find(eq("site_id", empNumber));
+        for (Document document : documents) {
+            String siteId = document.getString("site_id");
+            String siteName = document.getString("site_name");
+            String workingHours = document.getString("working_hours");
+            String supDetails = document.getString("sup_details");
+            String empList = document.getString("employees");
+
+            siteIDLbl.setText(siteId);
+            siteNameLbl.setText(siteName);
+            siteSupervisorLbl.setText(supDetails);
+            workingHoursLbl.setText(workingHours);
+            siteEmployeeList.getItems().add(empList);
+
+            siteEmployeeList.getItems().clear();
+
+            // Split the employee list and add each employee to the ListView
+            String[] employees = empList.split(",");
+            for (String employee : employees) {
+                siteEmployeeList.getItems().add(employee);
+            }
+
+        }
 
     }
 
@@ -81,6 +125,29 @@ public class SitesRDController {
     }
 
     public void deleteSite(ActionEvent event) {
+
+        String siteID = siteIDLbl.getText();
+        String siteName=siteNameLbl.getText();
+        String fullSiteName= siteID+ " " +siteName;
+
+        String SiteNumber = siteSearchField.getText().split(" ")[0];
+
+        // Delete the document from the collection
+        SiteDataCollection.deleteOne(eq("site_id", SiteNumber));
+
+        siteSupCollection.updateOne(Filters.all("sites", fullSiteName), Updates.pull("sites", fullSiteName));
+
+
+        // Clear the employee details from the UI
+        siteIDLbl.setText("");
+        siteNameLbl.setText("");
+        siteSupervisorLbl.setText("");
+        workingHoursLbl.setText("");
+
+        ObservableList<String> emptyList = FXCollections.observableArrayList();
+        siteEmployeeList.setItems(emptyList);
+
+
         // ask for confirmation
     }
 

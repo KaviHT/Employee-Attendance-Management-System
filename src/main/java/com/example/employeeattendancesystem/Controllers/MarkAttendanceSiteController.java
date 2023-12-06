@@ -1,5 +1,10 @@
 package com.example.employeeattendancesystem.Controllers;
 
+import com.example.employeeattendancesystem.Utils.MongoDBConnection;
+import com.mongodb.client.FindIterable;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Filters;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -13,6 +18,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import org.bson.Document;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -27,6 +33,10 @@ public class MarkAttendanceSiteController {
     private final ObservableList<String> suggestions = FXCollections.observableArrayList();
     private LocalDate date;
 
+    MongoDBConnection mongoDBConnection = new MongoDBConnection();
+    MongoDatabase Database = mongoDBConnection.getDatabase("attendence_db");
+    MongoCollection<Document> AtteEmpCollection = Database.getCollection("site");
+
 
     public void initialize() throws IOException {
         date = LocalDate.now();
@@ -36,6 +46,7 @@ public class MarkAttendanceSiteController {
         // Getting site name form DummyController
         String siteName = DummyController.getSiteName();
         siteNameLbl.setText(siteName);
+
 
         if (DummyController.getEditStatus()) {
             msgAttendanceLbl.setVisible(true);
@@ -51,10 +62,17 @@ public class MarkAttendanceSiteController {
 
         System.out.println(date);
 
+        String[] parts = siteName.split(" ");
+        String siteID = parts[0];
 
 
+        Document siteDoc = AtteEmpCollection.find(Filters.eq("site_details",siteName)).first();
 
-        for (int i=0; i<3; i++) {
+// Get the employees string and split it into an array of employee IDs
+        String[] employeeIds = siteDoc.getString("employees").split(",");
+
+// Iterate over each employee ID
+        for (int i = 0; i < employeeIds.length; i++) {
             // Load the employee cell FXML
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Cells/MarkAttendanceEmployeeCell.fxml"));
             Parent employeeCell = loader.load();
@@ -62,11 +80,13 @@ public class MarkAttendanceSiteController {
             // Get the controller for the employee cell
             MarkAttendanceEmployeeCellController cellController = loader.getController();
 
+            // Set the employee details in the text fields
             cellController.employeeNumber.setText(String.valueOf(i+1));
-            cellController.employeeName.setText("Employee Number " + (i+1));
+            cellController.employeeName.setText(employeeIds[i]);
 
             // Add the employee cell to the ListView
             employeeList.getItems().add((AnchorPane) employeeCell);
+
         }
 
         /*

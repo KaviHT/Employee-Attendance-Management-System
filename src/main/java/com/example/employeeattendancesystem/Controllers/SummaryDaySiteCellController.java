@@ -23,6 +23,7 @@ public class SummaryDaySiteCellController {
 
     public void initialize() throws IOException {
         // Create a list of items to populate the ListView
+
         var items = FXCollections.<AnchorPane>observableArrayList();
 
         // Sample data to work with
