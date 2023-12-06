@@ -26,6 +26,7 @@ public class MarkAttendanceSiteController {
     public ListView<String> employeeSuggestionList;
     private final ObservableList<String> suggestions = FXCollections.observableArrayList();
     private LocalDate date;
+    private MarkAttendanceEmployeeCellController cellController = null;
 
 
     public void initialize() throws IOException {
@@ -52,15 +53,13 @@ public class MarkAttendanceSiteController {
         System.out.println(date);
 
 
-
-
         for (int i=0; i<3; i++) {
             // Load the employee cell FXML
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Cells/MarkAttendanceEmployeeCell.fxml"));
             Parent employeeCell = loader.load();
 
             // Get the controller for the employee cell
-            MarkAttendanceEmployeeCellController cellController = loader.getController();
+            cellController = loader.getController();
 
             cellController.employeeNumber.setText(String.valueOf(i+1));
             cellController.employeeName.setText("Employee Number " + (i+1));
@@ -111,17 +110,16 @@ public class MarkAttendanceSiteController {
                 } catch (IOException ignored) {}
 
                 // Get the controller for the employee cell
-                MarkAttendanceEmployeeCellController cellController = loader.getController();
+                MarkAttendanceEmployeeCellController cellController1 = loader.getController();
 
-                cellController.employeeNumber.setText("X");
-                cellController.employeeName.setText(selectedItem);
+                cellController1.employeeNumber.setText("X");
+                cellController1.employeeName.setText(selectedItem);
 
                 // Add the employee cell to the ListView
                 employeeList.getItems().add((AnchorPane) employeeCell);
 
             }
         });
-
     }
 
     public void addReplacementEmployee() {
@@ -137,6 +135,10 @@ public class MarkAttendanceSiteController {
         stage.setTitle("Mark Attendance");
         stage.setScene(scene);
         stage.show();
+    }
+
+    public void save() {
+        cellController.saveFunction();
     }
 
 }

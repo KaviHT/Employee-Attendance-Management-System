@@ -16,7 +16,7 @@
             <Font size="14.0" />
          </font></Label>
       <ListView fx:id="employeeList" layoutX="14.0" layoutY="386.0" prefHeight="360.0" prefWidth="660.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" />
-      <Button fx:id="saveBtn" layoutX="310.0" layoutY="551.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="81.0" styleClass="save_btn" text="Save" />
+      <Button fx:id="saveBtn" layoutX="310.0" layoutY="551.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="81.0" styleClass="save_btn" text="Save" onAction="#save" />
       <Button fx:id="backBtn" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#switchToMarkAttendance" styleClass="back_btn">
          <graphic>
             <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
