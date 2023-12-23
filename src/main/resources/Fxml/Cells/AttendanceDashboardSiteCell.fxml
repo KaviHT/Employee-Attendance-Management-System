@@ -6,15 +6,14 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="60.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.employeeattendancesystem.Controllers.AttendanceDashboardSiteCellController">
+<AnchorPane prefHeight="60.0" prefWidth="600.0" style="-fx-background-color: #d3eaf2;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.employeeattendancesystem.Controllers.AttendanceDashboardSiteCellController">
    <children>
       <HBox alignment="CENTER_LEFT" layoutX="6.0" layoutY="-20.0" prefHeight="60.0" prefWidth="319.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Label fx:id="siteNumberLbl" text="0" />
             <Label fx:id="siteNameLbl" text="Site Name">
                <font>
-                  <Font name="System Bold" size="12.0" />
+                  <Font name="System Bold" size="15.0" />
                </font>
             </Label>
          </children>
@@ -24,9 +23,18 @@
       </HBox>
       <HBox alignment="CENTER" layoutX="250.0" layoutY="5.0" prefHeight="60.0" prefWidth="325.0" spacing="60.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label fx:id="sitePresentCountLbl" contentDisplay="CENTER" text="Label" />
-            <Label fx:id="siteLeaveCountLbl" contentDisplay="CENTER" text="Label" />
-            <Label fx:id="siteHalfDayCountLbl" contentDisplay="CENTER" text="Label" />
+            <Label fx:id="sitePresentCountLbl" contentDisplay="CENTER" text="Label">
+               <font>
+                  <Font size="15.0" />
+               </font></Label>
+            <Label fx:id="siteLeaveCountLbl" contentDisplay="CENTER" text="Label">
+               <font>
+                  <Font size="15.0" />
+               </font></Label>
+            <Label fx:id="siteHalfDayCountLbl" contentDisplay="CENTER" text="Label">
+               <font>
+                  <Font size="15.0" />
+               </font></Label>
          </children>
       </HBox>
    </children>

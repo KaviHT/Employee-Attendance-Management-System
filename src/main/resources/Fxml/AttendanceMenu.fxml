@@ -19,9 +19,9 @@
             </ImageView>
          </children>
       </VBox>
-      <VBox layoutY="151.0" prefHeight="286.0" prefWidth="200.0" styleClass="menu_container" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <VBox layoutX="14.0" layoutY="153.0" prefHeight="295.0" prefWidth="274.0" styleClass="menu_container" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="-88.0">
          <children>
-            <Button fx:id="attendanceDashboardBtn" mnemonicParsing="false" onAction="#switchToAttendanceDashboard" text="Dashboard">
+            <Button fx:id="attendanceDashboardBtn" mnemonicParsing="false" onAction="#switchToAttendanceDashboard" prefHeight="39.0" prefWidth="343.0" text="   Dashboard">
                <graphic>
                   <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -29,8 +29,11 @@
                      </image>
                   </ImageView>
                </graphic>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
             </Button>
-            <Button fx:id="markAttendanceBtn" mnemonicParsing="false" onAction="#switchToMarkAttendance" text="Mark Attendance">
+            <Button fx:id="markAttendanceBtn" mnemonicParsing="false" onAction="#switchToMarkAttendance" text="   Mark Attendance">
                <graphic>
                   <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -39,7 +42,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="summaryBtn" mnemonicParsing="false" onAction="#switchToSummary" text="Summary">
+            <Button fx:id="summaryBtn" mnemonicParsing="false" onAction="#switchToSummary" text="   Summary">
                <graphic>
                   <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -48,16 +51,16 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="specialJobsBtn" mnemonicParsing="false" onAction="#switchToSpecialJobs" text="Special Jobs">
+            <Button fx:id="specialJobsBtn" mnemonicParsing="false" onAction="#switchToSpecialJobs" text="   Special Jobs">
                <graphic>
-                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="30.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../Images/summary.png" />
+                        <Image url="@../Images/special_jobs.png" />
                      </image>
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="reportsBtn" mnemonicParsing="false" onAction="#switchToReports" text="Reports">
+            <Button fx:id="reportsBtn" mnemonicParsing="false" onAction="#switchToReports" text="   Reports">
                <graphic>
                   <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -67,17 +70,20 @@
                </graphic>
             </Button>
          </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
       </VBox>
       <VBox layoutX="50.0" layoutY="367.0" prefHeight="163.0" prefWidth="200.0" styleClass="logout_container" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
-            <Separator prefWidth="200.0">
+            <Separator prefHeight="32.0" prefWidth="200.0">
                <VBox.margin>
                   <Insets bottom="10.0" />
                </VBox.margin>
             </Separator>
-            <Button fx:id="backBtn" mnemonicParsing="false" onAction="#switchToDashboard" styleClass="logout_btn" text="Back">
+            <Button fx:id="backBtn" mnemonicParsing="false" onAction="#switchToDashboard" prefHeight="23.0" prefWidth="110.0" styleClass="logout_btn" text="Back">
                <graphic>
-                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="24.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../Images/back.png" />
                      </image>

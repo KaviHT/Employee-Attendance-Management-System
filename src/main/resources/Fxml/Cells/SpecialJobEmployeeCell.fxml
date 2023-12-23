@@ -7,9 +7,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="75.0" prefWidth="290.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.employeeattendancesystem.Controllers.SpecialJobEmployeeCellController">
+<AnchorPane prefHeight="75.0" prefWidth="290.0" style="-fx-background-color: #d3eaf2;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.employeeattendancesystem.Controllers.SpecialJobEmployeeCellController">
    <children>
-      <Button fx:id="deleteBtn" layoutX="221.0" layoutY="35.0" mnemonicParsing="false" onAction="#deleteRecord" text="delete" />
+      <Button fx:id="deleteBtn" layoutX="221.0" layoutY="35.0" mnemonicParsing="false" onAction="#deleteRecord" styleClass="delete_btn" stylesheets="@../../Styles/SitesRD.css" text="delete" />
       <HBox alignment="CENTER_LEFT" layoutY="48.0" prefHeight="25.0" prefWidth="196.0" spacing="5.0">
          <children>
             <Label fx:id="employeeNumLbl" text="X" />
@@ -19,12 +19,12 @@
             <Insets left="5.0" />
          </padding>
       </HBox>
-      <Label fx:id="siteNameLbl" layoutX="9.0" layoutY="29.0" text="Label">
+      <Label fx:id="siteNameLbl" layoutX="9.0" layoutY="29.0" prefHeight="15.0" prefWidth="37.0" text="Label">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <Label fx:id="dateLbl" layoutX="10.0" layoutY="5.0" prefWidth="28.0" text="Label" />
+      <Label fx:id="dateLbl" layoutX="10.0" layoutY="5.0" prefHeight="17.0" prefWidth="37.0" text="Label" />
       <HBox alignment="CENTER_LEFT" layoutX="206.0" layoutY="1.0" prefHeight="25.0" prefWidth="80.0" spacing="5.0">
          <children>
             <Label fx:id="inTimeLbl" text="In" />

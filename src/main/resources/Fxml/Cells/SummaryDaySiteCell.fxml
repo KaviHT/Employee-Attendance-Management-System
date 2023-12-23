@@ -6,17 +6,27 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefWidth="660.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.employeeattendancesystem.Controllers.SummaryDaySiteCellController">
+<AnchorPane prefWidth="660.0" style="-fx-background-color: #bee0ec;" stylesheets="@../../Styles/SitesRD.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.employeeattendancesystem.Controllers.SummaryDaySiteCellController">
    <children>
       <VBox layoutX="5.0" layoutY="45.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="45.0">
          <children>
             <ListView fx:id="siteEmployeeList" fixedCellSize="50.0" prefHeight="150.0" prefWidth="660.0" />
          </children>
       </VBox>
-      <Label fx:id="siteNameLbl" layoutX="26.0" layoutY="15.0" text="Site Name" />
-      <Label fx:id="siteNumberLbl" layoutX="9.0" layoutY="15.0" text="X" />
-      <Button fx:id="editBtn" layoutX="609.0" layoutY="11.0" mnemonicParsing="false" onAction="#goToEditAttendance" text="Edit" />
+      <Label fx:id="siteNameLbl" layoutX="26.0" layoutY="15.0" text="Site Name">
+         <font>
+            <Font size="16.0" />
+         </font></Label>
+      <Label fx:id="siteNumberLbl" layoutX="9.0" layoutY="15.0" text="X">
+         <font>
+            <Font size="16.0" />
+         </font></Label>
+      <Button fx:id="editBtn" layoutX="590.0" layoutY="4.0" mnemonicParsing="false" onAction="#goToEditAttendance" prefHeight="36.0" prefWidth="57.0" styleClass="edit_btn" text="Edit">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Button>
    </children>
    <padding>
       <Insets bottom="5.0" />

@@ -22,16 +22,21 @@
 }
 
 .delete_btn{
-    -fx-background-color: #FF5003;
-    -fx-text-fill: white;
+    -fx-background-color: #4698f1;
+    -fx-text-fill: black;
 }
 
 .edit_btn{
-    -fx-background-color: #FD7702;
-    -fx-text-fill: white;
+    -fx-background-color: #6eb0f6;
+    -fx-text-fill: black;
 }
 .delete_btn:hover, .edit_btn:hover{
-    -fx-background-color: #f7ac4f;
-    -fx-text-fill: black;
+    -fx-background-color: #f70000;
+    -fx-text-fill: white;
+    -fx-cursor: hand;
+}
+.edit_btn:hover{
+    -fx-background-color: #1860b6;
+    -fx-text-fill: white;
     -fx-cursor: hand;
 }

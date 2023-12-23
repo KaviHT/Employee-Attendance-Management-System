@@ -13,23 +13,38 @@
 
 <AnchorPane prefHeight="425.0" prefWidth="600.0" styleClass="sites_container" stylesheets="@../Styles/siteCU.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.employeeattendancesystem.Controllers.SitesCUController">
    <children>
-      <Button fx:id="backBtn" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#switchToSiteRD" styleClass="back_btn">
+      <Button fx:id="backBtn" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#switchToSiteRD" prefHeight="32.0" prefWidth="30.0" styleClass="back_btn">
          <graphic>
-            <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true" styleClass="back_btn">
+            <ImageView fitHeight="29.0" fitWidth="19.0" pickOnBounds="true" preserveRatio="true" styleClass="back_btn">
                <image>
                   <Image url="@../Images/back.png" />
                </image>
             </ImageView>
          </graphic>
       </Button>
-      <Label layoutX="79.0" layoutY="72.0" text="Site ID:" />
-      <Label layoutX="60.0" layoutY="104.0" text="Site Name:" />
-      <Label layoutX="61.0" layoutY="202.0" text="Employees:" />
+      <Label layoutX="73.0" layoutY="72.0" text="Site ID:">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Label>
+      <Label layoutX="54.0" layoutY="104.0" text="Site Name:">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Label>
+      <Label layoutX="55.0" layoutY="202.0" text="Employees:">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Label>
       <ListView fx:id="siteEmployeeList" layoutX="60.0" layoutY="227.0" prefHeight="110.0" prefWidth="200.0" AnchorPane.leftAnchor="60.0" />
       <TextField fx:id="siteIDField" layoutX="138.0" layoutY="68.0" />
       <TextField fx:id="siteNameField" layoutX="138.0" layoutY="100.0" prefHeight="25.0" prefWidth="149.0" />
-      <Label fx:id="titleLbl" alignment="CENTER" layoutX="81.0" layoutY="17.0" prefHeight="17.0" prefWidth="450.0" text="Title" />
-      <Button fx:id="saveSiteBtn" layoutX="257.0" layoutY="374.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="82.0" styleClass="save_btn" text="Save Site" />
+      <Label fx:id="titleLbl" alignment="CENTER" layoutX="81.0" layoutY="17.0" prefHeight="17.0" prefWidth="450.0" text="Title">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
+      <Button fx:id="saveSiteBtn" layoutX="257.0" layoutY="374.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="92.0" styleClass="save_btn" text="Save Site">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font></Button>
       <Label layoutX="340.0" layoutY="146.0" text="Search and add" />
       <TextField fx:id="employeeSearchField" layoutX="340.0" layoutY="171.0" prefHeight="25.0" prefWidth="200.0" />
       <ListView fx:id="employeeSuggestionList" layoutX="340.0" layoutY="197.0" prefHeight="160.0" prefWidth="200.0" AnchorPane.rightAnchor="60.0" />
@@ -38,7 +53,10 @@
             <Image url="@../Images/arrow.png" />
          </image>
       </ImageView>
-      <Label layoutX="40.0" layoutY="171.0" text="Site Supervisor:" />
+      <Label layoutX="34.0" layoutY="171.0" text="Site Supervisor:">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Label>
       <Label fx:id="siteSupervisorLbl" layoutX="138.0" layoutY="171.0" text="     " />
       <Label fx:id="displayLbl" layoutX="426.0" layoutY="146.0" text="Employees:" />
       <RadioButton fx:id="employeeRBtn" layoutX="340.0" layoutY="111.0" mnemonicParsing="false" onAction="#getSelectedPerson" selected="true" text="Employee">
@@ -47,7 +65,10 @@
          </toggleGroup>
       </RadioButton>
       <RadioButton fx:id="supervisorRBtn" layoutX="431.0" layoutY="111.0" mnemonicParsing="false" onAction="#getSelectedPerson" text="Supervisor" toggleGroup="$addingStatus" />
-      <Label layoutX="40.0" layoutY="137.0" text="Working hours:" />
+      <Label layoutX="34.0" layoutY="137.0" text="Working hours:">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Label>
       <TextField fx:id="startTimeField" layoutX="161.0" layoutY="133.0" prefHeight="25.0" prefWidth="30.0" promptText="9" />
       <TextField fx:id="finishTimeField" layoutX="208.0" layoutY="133.0" prefHeight="25.0" prefWidth="30.0" promptText="17" />
       <Label layoutX="133.0" layoutY="137.0" text="from" />

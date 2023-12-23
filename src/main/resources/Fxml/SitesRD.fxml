@@ -7,12 +7,13 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="425.0" prefWidth="600.0" styleClass="sites_container" stylesheets="@../Styles/SitesRD.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.employeeattendancesystem.Controllers.SitesRDController">
    <children>
       <Button fx:id="backBtn" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#switchToDashboard" styleClass="back_btn">
          <graphic>
-            <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="24.0" fitWidth="19.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Images/back.png" />
                </image>
@@ -22,18 +23,39 @@
       <TextField fx:id="siteSearchField" layoutX="150.0" layoutY="13.0" onAction="#searchSite" prefHeight="25.0" prefWidth="215.0" promptText="Site name" />
       <Button fx:id="searchBtn" layoutX="376.0" layoutY="13.0" mnemonicParsing="false" onAction="#searchSite" styleClass="search_btn" text="Search" />
       <ListView fx:id="siteSuggestionList" layoutX="150.0" layoutY="38.0" prefHeight="200.0" prefWidth="215.0" visible="false" />
-      <Label layoutX="161.0" layoutY="73.0" text="Site ID:" />
-      <Label layoutX="142.0" layoutY="101.0" text="Site Name:" />
-      <Label layoutX="141.0" layoutY="193.0" text="Employees:" />
+      <Label layoutX="161.0" layoutY="72.0" text="Site ID:">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font></Label>
+      <Label layoutX="137.0" layoutY="101.0" text="Site Name:">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font></Label>
+      <Label layoutX="132.0" layoutY="193.0" text="Employees:">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font></Label>
       <ListView fx:id="siteEmployeeList" layoutX="220.0" layoutY="195.0" prefHeight="160.0" prefWidth="200.0" />
       <Label fx:id="siteIDLbl" layoutX="220.0" layoutY="73.0" text="Label" />
       <Label fx:id="siteNameLbl" layoutX="220.0" layoutY="101.0" text="Label" />
       <Button fx:id="createBtn" layoutX="435.0" layoutY="13.0" mnemonicParsing="false" onAction="#createSite" styleClass="search_btn" text="Create" />
-      <Button fx:id="editBtn" layoutX="360.0" layoutY="379.0" mnemonicParsing="false" onAction="#editSite" prefHeight="32.0" prefWidth="60.0" styleClass="edit_btn" text="Edit" />
-      <Button fx:id="deleteBtn" layoutX="285.0" layoutY="378.0" mnemonicParsing="false" onAction="#deleteSite" prefHeight="32.0" prefWidth="60.0" styleClass="delete_btn" text="Delete" />
-      <Label layoutX="120.0" layoutY="161.0" text="Site Supervisor:" />
+      <Button fx:id="editBtn" layoutX="360.0" layoutY="379.0" mnemonicParsing="false" onAction="#editSite" prefHeight="32.0" prefWidth="60.0" styleClass="edit_btn" text="Edit">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Button>
+      <Button fx:id="deleteBtn" layoutX="285.0" layoutY="378.0" mnemonicParsing="false" onAction="#deleteSite" prefHeight="32.0" prefWidth="60.0" styleClass="delete_btn" text="Delete">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Button>
+      <Label layoutX="107.0" layoutY="160.0" text="Site Supervisor:">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font></Label>
       <Label fx:id="siteSupervisorLbl" layoutX="220.0" layoutY="161.0" text="Label" />
-      <Label layoutX="120.0" layoutY="131.0" text="Working hours:" />
+      <Label layoutX="110.0" layoutY="131.0" text="Working hours:">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font></Label>
       <Label fx:id="workingHoursLbl" layoutX="220.0" layoutY="131.0" text="Label" />
    </children>
 </AnchorPane>

@@ -17,17 +17,38 @@
       <TextField fx:id="onTimeField" layoutX="109.0" layoutY="94.0" prefWidth="50.0" promptText="In" />
       <TextField fx:id="outTimeField" layoutX="109.0" layoutY="127.0" prefWidth="50.0" promptText="Out" />
       <TextField fx:id="noteField" layoutX="109.0" layoutY="163.0" prefHeight="25.0" prefWidth="180.0" promptText="Note" />
-      <Button fx:id="addBtn" layoutX="171.0" layoutY="469.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="57.0" styleClass="add_btn" text="Add" />
-      <Label layoutX="70.0" layoutY="27.0" text="Date:" />
-      <Label layoutX="73.0" layoutY="61.0" text="Site:" />
-      <Label layoutX="37.0" layoutY="204.0" text="Employee:" />
-      <Label layoutX="55.0" layoutY="98.0" text="In time:" />
-      <Label layoutX="45.0" layoutY="131.0" text="Out time:" />
-      <Label layoutX="64.0" layoutY="167.0" text="Note:" />
+      <Button fx:id="addBtn" layoutX="167.0" layoutY="467.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="64.0" styleClass="add_btn" text="Add">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font></Button>
+      <Label layoutX="70.0" layoutY="27.0" text="Date:">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font></Label>
+      <Label layoutX="73.0" layoutY="61.0" text="Site:">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font></Label>
+      <Label layoutX="37.0" layoutY="204.0" text="Employee:">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font></Label>
+      <Label layoutX="55.0" layoutY="98.0" text="In time:">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font></Label>
+      <Label layoutX="45.0" layoutY="131.0" text="Out time:">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font></Label>
+      <Label layoutX="64.0" layoutY="167.0" text="Note:">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font></Label>
       <ListView fx:id="summaryList" layoutX="360.0" layoutY="45.0" prefHeight="500.0" prefWidth="320.0" AnchorPane.rightAnchor="20.0" />
       <Label layoutX="360.0" layoutY="18.0" text="Special Jobs Summary">
          <font>
-            <Font name="Arial Bold" size="12.0" />
+            <Font name="Arial Bold" size="15.0" />
          </font>
       </Label>
    </children>
