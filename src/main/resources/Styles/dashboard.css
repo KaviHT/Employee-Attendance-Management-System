@@ -12,8 +12,7 @@
 }
 .logout_btn{
     -fx-background-color: #70a2d4;
-    -fx-background-radius: 15%;
-
+    -fx-background-radius: 5%;
 }
 .logout_btn:hover{
     -fx-background-color: #003F70;
