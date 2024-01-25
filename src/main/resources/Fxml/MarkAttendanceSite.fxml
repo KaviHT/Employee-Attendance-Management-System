@@ -12,7 +12,7 @@
    <children>
       <Label fx:id="siteNameLbl" layoutX="20.0" layoutY="87.0" text="Site Name" />
       <ListView fx:id="employeeList" layoutX="14.0" layoutY="386.0" prefHeight="360.0" prefWidth="660.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" />
-      <Button fx:id="saveBtn" layoutX="330.0" layoutY="553.0" mnemonicParsing="false"  text="Save" />
+      <Button fx:id="saveBtn" layoutX="330.0" layoutY="553.0" mnemonicParsing="false"  onAction="#save"  text="Save" />
       <Button fx:id="backBtn" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#switchToMarkAttendance">
          <graphic>
             <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">

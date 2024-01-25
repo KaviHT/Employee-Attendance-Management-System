@@ -1,5 +1,6 @@
 package com.example.employeeattendancesystem.Controllers;
 
+import com.example.employeeattendancesystem.Utils.Database;
 import com.example.employeeattendancesystem.Utils.MongoDBConnection;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
@@ -23,6 +24,7 @@ import org.bson.Document;
 import java.io.IOException;
 import java.time.LocalDate;
 
+
 public class MarkAttendanceSiteController {
 
     public Button backBtn, saveBtn, addReplacementBtn;
@@ -32,6 +34,8 @@ public class MarkAttendanceSiteController {
     public ListView<String> employeeSuggestionList;
     private final ObservableList<String> suggestions = FXCollections.observableArrayList();
     private LocalDate date;
+
+    private MarkAttendanceEmployeeCellController cellController = null;
 
     MongoDBConnection mongoDBConnection = new MongoDBConnection();
     MongoDatabase Database = mongoDBConnection.getDatabase("attendence_db");
@@ -78,7 +82,7 @@ public class MarkAttendanceSiteController {
             Parent employeeCell = loader.load();
 
             // Get the controller for the employee cell
-            MarkAttendanceEmployeeCellController cellController = loader.getController();
+            cellController = loader.getController();
 
             // Set the employee details in the text fields
             cellController.employeeNumber.setText(String.valueOf(i+1));
@@ -88,6 +92,7 @@ public class MarkAttendanceSiteController {
             employeeList.getItems().add((AnchorPane) employeeCell);
 
         }
+        Database database = new Database();
 
         /*
         CHECK IF EMPLOYEE REPLACEMENT WERE ADDED TODAY FROM THE DATABASE
@@ -95,7 +100,7 @@ public class MarkAttendanceSiteController {
          */
 
         // Populating suggestions data from the database
-        suggestions.addAll("Kavindu", "Brian", "Movindu", "Sayura");  // <--- add the database here
+        suggestions.addAll(database.getEmployeeSearchDetails());  // <--- add the database here
 
         // Autocomplete functionality
         employeeSearchField.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -134,7 +139,8 @@ public class MarkAttendanceSiteController {
                 MarkAttendanceEmployeeCellController cellController = loader.getController();
 
                 cellController.employeeNumber.setText("X");
-                cellController.employeeName.setText(selectedItem);
+                cellController.employeeName.setText(selectedItem+" (rep)");
+                cellController.employeeStatusChoice.setValue("Replacement");
 
                 // Add the employee cell to the ListView
                 employeeList.getItems().add((AnchorPane) employeeCell);
@@ -157,6 +163,11 @@ public class MarkAttendanceSiteController {
         stage.setTitle("Mark Attendance");
         stage.setScene(scene);
         stage.show();
+    }
+
+    public void save() {
+        cellController.saveFunction();
+
     }
 
 }

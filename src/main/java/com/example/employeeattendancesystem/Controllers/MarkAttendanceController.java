@@ -138,7 +138,6 @@ public class MarkAttendanceController {
         switchToMarkAttendanceSite(event, "00 Head Office");
 
 
-        //mokatada huththo meka damme
     }
 
     public void markAsHoliday(ActionEvent event) throws IOException {

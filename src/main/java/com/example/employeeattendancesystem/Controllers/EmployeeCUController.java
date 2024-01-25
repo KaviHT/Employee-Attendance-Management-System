@@ -78,21 +78,9 @@ public class EmployeeCUController {
                 contactNumberField.setText(contactNumber);
                 addressField.setText(empAddress);
             }
-
-
-
-
-
-
-
         }
     }
 
-    public void receiveSelectedItem(String selectedItem) {
-        // Do something with the selectedItem in this class
-        System.out.println("Received item in AnotherClass: " + selectedItem);
-        theItem = selectedItem;
-    }
 
     public void saveEmployee(ActionEvent event) {
 

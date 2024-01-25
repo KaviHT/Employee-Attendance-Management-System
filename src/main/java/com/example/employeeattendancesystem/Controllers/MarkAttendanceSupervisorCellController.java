@@ -7,6 +7,4 @@ public class MarkAttendanceSupervisorCellController {
     public FlowPane supervisorSitesList;
     public Label supervisorNumberLbl, supervisorNameLbl;
 
-
-
 }

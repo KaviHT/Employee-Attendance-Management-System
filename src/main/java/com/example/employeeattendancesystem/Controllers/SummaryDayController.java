@@ -1,5 +1,9 @@
 package com.example.employeeattendancesystem.Controllers;
 
+import com.example.employeeattendancesystem.Utils.MongoDBConnection;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
+import com.mongodb.client.MongoDatabase;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -7,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
+import org.bson.Document;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -16,6 +21,9 @@ public class SummaryDayController {
     public Label monthLbl, dateLbl, displayDateLbl, noRecordsMsgLbl;
     public ListView<AnchorPane> daySummaryList;
     LocalDate dateFocus;
+
+    MongoDatabase database = MongoDBConnection.getDatabase("attendence_db");
+    MongoCollection<Document> SiteCollection = database.getCollection("site");
 
     public void initialize() throws IOException {
         // Getting the selected date from DummyController
@@ -58,21 +66,37 @@ public class SummaryDayController {
         // Create a list of items to populate the ListView
         var items = FXCollections.<AnchorPane>observableArrayList();
 
-        // Sample data to work with
-        for (int i=0; i<5; i++) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Cells/SummaryDaySiteCell.fxml"));
-            Parent cell = loader.load();
+        MongoCursor<Document> cursor = SiteCollection.find().iterator();
 
-            SummaryDaySiteCellController siteCellController = loader.getController();
+        int i = 0;
+        try {
+            while (cursor.hasNext()) {
+                Document siteDocument = cursor.next();
 
-            siteCellController.siteNumberLbl.setText(String.valueOf(i+1));
-            siteCellController.siteNameLbl.setText("Site Name" + (i + 1));
+                String siteDetails = siteDocument.getString("site_details");
 
-            items.add((AnchorPane) cell);
+                DummyController.setSiteName(siteDetails);
+                System.out.println(siteDetails);
+
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Cells/SummaryDaySiteCell.fxml"));
+                Parent cell = loader.load();
+
+                SummaryDaySiteCellController siteCellController = loader.getController();
+
+                // Get site details from the document
+                //String siteDetails = siteDocument.getString("site_details");
+
+                siteCellController.siteNameLbl.setText(siteDetails);
+
+                items.add((AnchorPane) cell);
+                i++;
+            }
+        } finally {
+            cursor.close();
+
+            // Set the items in the ListView
+            daySummaryList.setItems(items);
         }
-
-        // Set the items in the ListView
-        daySummaryList.setItems(items);
     }
 
 }

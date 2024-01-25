@@ -1,5 +1,6 @@
 package com.example.employeeattendancesystem.Controllers;
 
+import com.example.employeeattendancesystem.Utils.Database;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -43,7 +44,8 @@ public class SummaryController {
 
         // Sample data to work with - REMOVE in final
         // Populating suggestions data from the database
-        suggestions.addAll("Abans", "Pizza Hut", "Barista", "IIT", "SLIIT");  // <--- add the database here
+        Database database = new Database();
+        suggestions.addAll(database.getSiteSearchDetails());  // <--- add the database here
 
         // Autocomplete functionality
         siteSearchField.textProperty().addListener((observable, oldValue, newValue) -> {

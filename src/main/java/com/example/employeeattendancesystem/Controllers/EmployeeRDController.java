@@ -35,11 +35,7 @@ public class EmployeeRDController {
     MongoCollection<Document> EmployeeDataCollection = database.getCollection("employee");
 
     public void initialize() {
-
-
         Database database = new Database();
-
-
 
         // Populating suggestions data from the database
         suggestions.addAll(database.getEmployeeSearchDetails());  // <--- add the database here
@@ -137,8 +133,6 @@ public class EmployeeRDController {
 
 
     }
-
-
 
     private void openEmployeeCUWindow(ActionEvent event, String windowTitle) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/EmployeeCU.fxml"));

@@ -76,9 +76,6 @@ public class SitesCUController {
                 ObservableList<String> employeeList = FXCollections.observableArrayList(siteEmployees.split(","));
                 siteEmployeeList.setItems(employeeList);
             }
-
-
-
         }
     }
 
@@ -166,8 +163,6 @@ public class SitesCUController {
         MongoCollection<Document> siteCollection = Database.getCollection("site");
         MongoCollection<Document> siteSupCollection = Database.getCollection("siteSupervisor");
 
-
-
         String startTime = startTimeField.getText();
         String finishTime = finishTimeField.getText();
         String workingHours = startTime + "-" + finishTime;
@@ -192,9 +187,6 @@ public class SitesCUController {
             }
             String siteEmployee = sb.toString();
 
-
-
-
             Document siteDoc = new Document("site_id", siteIDField.getText())
                     .append("site_name", siteNameField.getText())
                     .append("working_hours", workingHours)
@@ -202,10 +194,7 @@ public class SitesCUController {
                     .append("employees", siteEmployee)
                     .append("site_details",fullSiteName);
 
-
-
             siteCollection.insertOne(siteDoc);
-
 
 
             Document supervisor = siteSupCollection.find(Filters.eq("supName", siteSupervisorLbl.getText())).first();
@@ -228,8 +217,6 @@ public class SitesCUController {
                 // Add the new site to the existing document
                 siteSupCollection.updateOne(Filters.eq("supName", siteSupervisorLbl.getText()), Updates.addToSet("sites", fullSiteName));
             }
-
-
 
             // add newEmployee to the database
 
@@ -288,12 +275,9 @@ public class SitesCUController {
                 // Update the 'sites' field in the database
                 siteSupCollection.updateOne(Filters.eq("supName", siteSupervisorLbl.getText()), Updates.set("sites", sites));
 
-
             }
 
             siteCollection.replaceOne(Filters.eq("site_id", siteIDField.getText()), existingSite);
-
-
 
         }
     }
