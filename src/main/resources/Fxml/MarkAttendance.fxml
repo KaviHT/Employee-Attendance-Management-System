@@ -7,17 +7,17 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.employeeattendancesystem.Controllers.MarkAttendanceController">
+<AnchorPane prefHeight="600.0" prefWidth="700.0" styleClass="attendance_container" stylesheets="@../Styles/MarkAttendance.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.employeeattendancesystem.Controllers.MarkAttendanceController">
    <children>
       <TextField fx:id="siteSearchField" layoutX="306.0" layoutY="23.0" prefHeight="25.0" prefWidth="200.0" />
-      <Label layoutX="228.0" layoutY="27.0" text="Search Site:">
+      <Label layoutX="221.0" layoutY="24.0" prefHeight="26.0" prefWidth="68.0" text="Search Site:">
          <font>
-            <Font name="System Bold" size="12.0" />
+            <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <Button fx:id="markHolidayBtn" layoutX="592.0" layoutY="23.0" mnemonicParsing="false" text="Mark Holiday" onAction="#markAsHoliday" />
+      <Button fx:id="markHolidayBtn" layoutX="580.0" layoutY="20.0" mnemonicParsing="false" onAction="#markAsHoliday" prefHeight="33.0" prefWidth="90.0" styleClass="holiday_btn" text="Mark Holiday" />
       <ListView fx:id="siteSuggestionList" layoutX="306.0" layoutY="48.0" prefHeight="200.0" prefWidth="200.0" visible="false" />
       <ListView fx:id="supervisorList" layoutY="148.0" prefHeight="450.0" prefWidth="680.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" />
-      <Button fx:id="headOfficeBtn" layoutX="14.0" layoutY="100.0" mnemonicParsing="false" onAction="#switchToHeadOfficeSite" text="Head Office" />
+      <Button fx:id="headOfficeBtn" layoutX="14.0" layoutY="93.0" mnemonicParsing="false" onAction="#switchToHeadOfficeSite" prefHeight="33.0" prefWidth="90.0" styleClass="holiday_btn" text="Head Office" />
    </children>
 </AnchorPane>

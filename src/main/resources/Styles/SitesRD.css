@@ -1,0 +1,37 @@
+.sites_container{
+    -fx-background-color: linear-gradient(to top right, white, #7db6f0);
+}
+
+.back_btn{
+    -fx-background-color: #70a2d4;
+}
+
+.search_btn{
+    -fx-background-color: #003F70;
+    -fx-text-fill: white;
+}
+.back_btn:hover{
+    -fx-background-color: #7db6f0;
+    -fx-text-fill: white;
+    -fx-cursor: hand;
+}
+.search_btn:hover{
+    -fx-background-color: #7db6f0;
+    -fx-text-fill: #003F70;
+    -fx-cursor: hand;
+}
+
+.delete_btn{
+    -fx-background-color: #FF5003;
+    -fx-text-fill: white;
+}
+
+.edit_btn{
+    -fx-background-color: #FD7702;
+    -fx-text-fill: white;
+}
+.delete_btn:hover, .edit_btn:hover{
+    -fx-background-color: #f7ac4f;
+    -fx-text-fill: black;
+    -fx-cursor: hand;
+}

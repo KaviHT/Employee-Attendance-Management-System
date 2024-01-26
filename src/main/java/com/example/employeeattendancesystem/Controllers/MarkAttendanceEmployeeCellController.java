@@ -18,11 +18,14 @@ import java.util.Map;
 
 import static com.mongodb.client.model.Filters.eq;
 
+import java.util.ArrayList;
+
 public class MarkAttendanceEmployeeCellController {
     public ChoiceBox<String> employeeStatusChoice;
     public TextField onTimeField, outTimeField, noteField;
     public Label employeeNumber, employeeName;
     private final String[] status = {"Present", "Leave", "Half Day"};
+    public static ArrayList<String> employeeList = new ArrayList<>();
 
     public static List <Document> employeeList = new ArrayList<>();
 
@@ -59,13 +62,11 @@ public class MarkAttendanceEmployeeCellController {
     public void getStatus(ActionEvent event) {
         String employeeStatus = employeeStatusChoice.getValue();
         System.out.println(employeeName.getText() + " " + employeeStatus);
-
         addToArray(employeeName.getText(), employeeStatus, onTimeField.getText(), outTimeField.getText(), noteField.getText());
     }
 
     private void updateListWithTextFieldValues() {
         // Get the current values from the TextFields
-
         String inTime = onTimeField.getText();
         String outTime = outTimeField.getText();
         String note = noteField.getText();
@@ -139,7 +140,6 @@ public class MarkAttendanceEmployeeCellController {
     }
 
     public void saveFunction() {
-
             LocalDate currentDate = LocalDate.now();
             String siteName = DummyController.getSiteName();
             String dateSiteAttendance = currentDate+"_"+siteName;
@@ -158,8 +158,6 @@ public class MarkAttendanceEmployeeCellController {
 
             // Clear the list for the next batch of records
             employeeList.clear();
-
-            // Clear exisiting records of the controller
     }
 }
 

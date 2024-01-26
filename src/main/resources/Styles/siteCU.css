@@ -1,0 +1,21 @@
+.sites_container{
+    -fx-background-color: linear-gradient(to top right, white, #7db6f0);
+}
+
+.back_btn{
+    -fx-background-color: #70a2d4;
+}
+.back_btn:hover{
+    -fx-background-color: #7db6f0;
+    -fx-text-fill: white;
+    -fx-cursor: hand;
+}
+.save_btn{
+    -fx-background-color: #003F70;
+    -fx-text-fill: white;
+}
+.save_btn:hover{
+    -fx-background-color: #7db6f0;
+    -fx-text-fill: #003F70;
+    -fx-cursor: hand;
+}

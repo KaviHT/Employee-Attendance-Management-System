@@ -34,6 +34,7 @@ public class MarkAttendanceSiteController {
     public ListView<String> employeeSuggestionList;
     private final ObservableList<String> suggestions = FXCollections.observableArrayList();
     private LocalDate date;
+    private MarkAttendanceEmployeeCellController cellController = null;
 
     private MarkAttendanceEmployeeCellController cellController = null;
 
@@ -69,13 +70,12 @@ public class MarkAttendanceSiteController {
         String[] parts = siteName.split(" ");
         String siteID = parts[0];
 
-
         Document siteDoc = AtteEmpCollection.find(Filters.eq("site_details",siteName)).first();
 
-// Get the employees string and split it into an array of employee IDs
+        // Get the employees string and split it into an array of employee IDs
         String[] employeeIds = siteDoc.getString("employees").split(",");
 
-// Iterate over each employee ID
+        // Iterate over each employee ID
         for (int i = 0; i < employeeIds.length; i++) {
             // Load the employee cell FXML
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Cells/MarkAttendanceEmployeeCell.fxml"));
@@ -136,7 +136,7 @@ public class MarkAttendanceSiteController {
                 } catch (IOException ignored) {}
 
                 // Get the controller for the employee cell
-                MarkAttendanceEmployeeCellController cellController = loader.getController();
+                MarkAttendanceEmployeeCellController cellController1 = loader.getController();
 
                 cellController.employeeNumber.setText("X");
                 cellController.employeeName.setText(selectedItem+" (rep)");
@@ -147,7 +147,6 @@ public class MarkAttendanceSiteController {
 
             }
         });
-
     }
 
     public void addReplacementEmployee() {
@@ -167,7 +166,5 @@ public class MarkAttendanceSiteController {
 
     public void save() {
         cellController.saveFunction();
-
     }
-
 }

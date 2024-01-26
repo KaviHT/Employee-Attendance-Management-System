@@ -1,0 +1,27 @@
+.attendance_container{
+    -fx-background-color: linear-gradient(to top right, white, #7db6f0);
+}
+.back_btn{
+    -fx-background-color: #70a2d4;
+}
+.back_btn:hover{
+    -fx-background-color: #7db6f0;
+    -fx-text-fill: white;
+    -fx-cursor: hand;
+}
+.save_btn{
+    -fx-background-color: #095d9e;
+    -fx-text-fill: white;
+}
+.save_btn:hover{
+    -fx-background-color: #4f9cd6;
+    -fx-text-fill: #033e6b;
+    -fx-cursor: hand;
+}
+.replace_btn{
+    -fx-background-color: #003366;
+    -fx-text-fill: #b6d9fc;
+}
+.replace_btn:hover{
+    -fx-cursor: hand;
+}
