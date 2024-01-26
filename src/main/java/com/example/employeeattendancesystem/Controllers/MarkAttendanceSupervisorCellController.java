@@ -6,4 +6,5 @@ import javafx.scene.layout.FlowPane;
 public class MarkAttendanceSupervisorCellController {
     public FlowPane supervisorSitesList;
     public Label supervisorNumberLbl, supervisorNameLbl;
+
 }

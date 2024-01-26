@@ -1,5 +1,8 @@
 package com.example.employeeattendancesystem.Controllers;
 
+import com.example.employeeattendancesystem.Utils.Database;
+import com.example.employeeattendancesystem.Utils.MongoDBConnection;
+import com.mongodb.client.MongoDatabase;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -14,6 +17,13 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Optional;
+import java.util.List;
+
+import org.bson.Document;
+import com.mongodb.client.FindIterable;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Filters;
 
 public class MarkAttendanceController {
     public TextField siteSearchField;
@@ -26,9 +36,9 @@ public class MarkAttendanceController {
 
     public void initialize() throws IOException {
 
-        // Sample data to work with - REMOVE in final
+        Database database = new Database();
         // Populating suggestions data from the database
-        suggestions.addAll("Abans", "Pizza Hut", "Barista", "IIT", "SLIIT");  // <--- add the database here
+        suggestions.addAll(database.getSiteSearchDetails());  // <--- add the database here
 
         // Autocomplete functionality
         siteSearchField.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -76,23 +86,30 @@ public class MarkAttendanceController {
 
     public void showAllSites() throws IOException {
 
-        // Create a list of items to populate the ListView
+        MongoDBConnection mongoDBConnection = new MongoDBConnection();
+        MongoDatabase Database = mongoDBConnection.getDatabase("attendence_db");
+        MongoCollection<Document> supCollection = Database.getCollection("siteSupervisor");
+
         var items = FXCollections.<AnchorPane>observableArrayList();
 
-        for (int i=0; i<6; i++) {
+        for (Document doc : supCollection.find()) {
+            String supName = (String) doc.get("supName");
+            List<String> sites = (List<String>) doc.get("sites");
+
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Cells/MarkAttendanceSupervisorCell.fxml"));
             Parent cell = loader.load();
 
             MarkAttendanceSupervisorCellController cellController = loader.getController();
 
-            for (int j=0; j<10; j++) {
-                Button button = new Button();
+            cellController.supervisorNameLbl.setText(supName);
+
+            for (String site : sites) {
+                Button button = new Button(site);
+                button.setOnAction(event -> switchToMarkAttendanceSite(event, site));
                 cellController.supervisorSitesList.getChildren().add(button);
-                button.setText("Site Name " + (j+1));
-                button.setOnAction(event -> switchToMarkAttendanceSite(event, button.getText()));
             }
 
-            items.add((AnchorPane) cell);
+            items.add((AnchorPane)cell);
         }
 
         supervisorList.setItems(items);
@@ -117,7 +134,10 @@ public class MarkAttendanceController {
     }
 
     public void switchToHeadOfficeSite(ActionEvent event) {
-        switchToMarkAttendanceSite(event, "Head Office");
+
+        switchToMarkAttendanceSite(event, "00 Head Office");
+
+
     }
 
     public void markAsHoliday(ActionEvent event) throws IOException {
@@ -125,6 +145,8 @@ public class MarkAttendanceController {
         alert.setTitle("Confirmation");
         alert.setHeaderText("Mark Holiday");
         alert.setContentText("Do you want to mark today: " + today + " as a holiday?");
+
+        // gedara iddith attendence system ekata gihilla mark karanna oneda holidays
 
         ButtonType okButton = new ButtonType("OK");
         ButtonType cancelButton = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);

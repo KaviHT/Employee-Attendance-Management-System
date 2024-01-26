@@ -1,5 +1,11 @@
 package com.example.employeeattendancesystem.Controllers;
 
+import com.example.employeeattendancesystem.Utils.Database;
+import com.example.employeeattendancesystem.Utils.MongoDBConnection;
+import com.mongodb.client.FindIterable;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Filters;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -13,9 +19,11 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import org.bson.Document;
 
 import java.io.IOException;
 import java.time.LocalDate;
+
 
 public class MarkAttendanceSiteController {
 
@@ -28,6 +36,12 @@ public class MarkAttendanceSiteController {
     private LocalDate date;
     private MarkAttendanceEmployeeCellController cellController = null;
 
+    private MarkAttendanceEmployeeCellController cellController = null;
+
+    MongoDBConnection mongoDBConnection = new MongoDBConnection();
+    MongoDatabase Database = mongoDBConnection.getDatabase("attendence_db");
+    MongoCollection<Document> AtteEmpCollection = Database.getCollection("site");
+
 
     public void initialize() throws IOException {
         date = LocalDate.now();
@@ -37,6 +51,7 @@ public class MarkAttendanceSiteController {
         // Getting site name form DummyController
         String siteName = DummyController.getSiteName();
         siteNameLbl.setText(siteName);
+
 
         if (DummyController.getEditStatus()) {
             msgAttendanceLbl.setVisible(true);
@@ -52,8 +67,16 @@ public class MarkAttendanceSiteController {
 
         System.out.println(date);
 
+        String[] parts = siteName.split(" ");
+        String siteID = parts[0];
 
-        for (int i=0; i<3; i++) {
+        Document siteDoc = AtteEmpCollection.find(Filters.eq("site_details",siteName)).first();
+
+        // Get the employees string and split it into an array of employee IDs
+        String[] employeeIds = siteDoc.getString("employees").split(",");
+
+        // Iterate over each employee ID
+        for (int i = 0; i < employeeIds.length; i++) {
             // Load the employee cell FXML
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Cells/MarkAttendanceEmployeeCell.fxml"));
             Parent employeeCell = loader.load();
@@ -61,12 +84,15 @@ public class MarkAttendanceSiteController {
             // Get the controller for the employee cell
             cellController = loader.getController();
 
+            // Set the employee details in the text fields
             cellController.employeeNumber.setText(String.valueOf(i+1));
-            cellController.employeeName.setText("Employee Number " + (i+1));
+            cellController.employeeName.setText(employeeIds[i]);
 
             // Add the employee cell to the ListView
             employeeList.getItems().add((AnchorPane) employeeCell);
+
         }
+        Database database = new Database();
 
         /*
         CHECK IF EMPLOYEE REPLACEMENT WERE ADDED TODAY FROM THE DATABASE
@@ -74,7 +100,7 @@ public class MarkAttendanceSiteController {
          */
 
         // Populating suggestions data from the database
-        suggestions.addAll("Kavindu", "Brian", "Movindu", "Sayura");  // <--- add the database here
+        suggestions.addAll(database.getEmployeeSearchDetails());  // <--- add the database here
 
         // Autocomplete functionality
         employeeSearchField.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -112,8 +138,9 @@ public class MarkAttendanceSiteController {
                 // Get the controller for the employee cell
                 MarkAttendanceEmployeeCellController cellController1 = loader.getController();
 
-                cellController1.employeeNumber.setText("X");
-                cellController1.employeeName.setText(selectedItem);
+                cellController.employeeNumber.setText("X");
+                cellController.employeeName.setText(selectedItem+" (rep)");
+                cellController.employeeStatusChoice.setValue("Replacement");
 
                 // Add the employee cell to the ListView
                 employeeList.getItems().add((AnchorPane) employeeCell);
@@ -140,5 +167,4 @@ public class MarkAttendanceSiteController {
     public void save() {
         cellController.saveFunction();
     }
-
 }
