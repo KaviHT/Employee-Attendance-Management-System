@@ -132,7 +132,7 @@ public class MarkAttendanceSiteController {
                 } catch (IOException ignored) {}
 
                 // Get the controller for the employee cell
-                MarkAttendanceEmployeeCellController cellController1 = loader.getController();
+                MarkAttendanceEmployeeCellController cellController = loader.getController();
 
                 cellController.employeeNumber.setText("X");
                 cellController.employeeName.setText(selectedItem+" (rep)");
