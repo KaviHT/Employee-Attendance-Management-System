@@ -166,8 +166,8 @@ public class SitesCUController {
         String siteName=siteNameField.getText();
         String fullSiteName= siteID+ " " +siteName;
 
+        // Implementation of creating new Site
         if (titleLbl.getText().equals("Create a New Site")) {
-
 
             StringBuilder sb = new StringBuilder();
             List<String> employeeNames = new ArrayList<>();
@@ -213,6 +213,16 @@ public class SitesCUController {
                 siteSupCollection.updateOne(Filters.eq("supName", siteSupervisorLbl.getText()), Updates.addToSet("sites", fullSiteName));
             }
 
+            // Information alert for the user to indicate creation of a new Site
+            Alert siteCreated = new Alert(Alert.AlertType.INFORMATION);
+            siteCreated.setTitle("New Site Added");
+            siteCreated.setHeaderText(null); // No header text
+            siteCreated.setContentText("New Site Created Successfully");
+
+            siteCreated.showAndWait();
+            clearInputFields();
+
+        // Implementation of editing an existing Site
         } else if (titleLbl.getText().equals("Edit Site")) {
 
             StringBuilder sb = new StringBuilder();
@@ -226,9 +236,10 @@ public class SitesCUController {
                     sb.append(",");
                 }
             }
-            String siteEmployee = sb.toString();
 
+            String siteEmployee = sb.toString();
             Document existingSite = newSiteCollection.find(Filters.eq("site_id", siteIDField.getText())).first();
+
             // update the employee details
             existingSite.put("site_name", siteNameField.getText());
             existingSite.put("working_hours", workingHours);
@@ -237,6 +248,7 @@ public class SitesCUController {
             existingSite.put("site_details",fullSiteName);
 
             Document supervisor = siteSupCollection.find(Filters.eq("supName", siteSupervisorLbl.getText())).first();
+
             if (supervisor == null) {
                 // Supervisor does not exist, create a new document
                 List<String> sites = new ArrayList<>();
@@ -265,10 +277,28 @@ public class SitesCUController {
 
                 // Update the 'sites' field in the database
                 siteSupCollection.updateOne(Filters.eq("supName", siteSupervisorLbl.getText()), Updates.set("sites", sites));
-
             }
 
             newSiteCollection.replaceOne(Filters.eq("site_id", siteIDField.getText()), existingSite);
+
+            // Information alert for the user to indicate the edit of an Site
+            Alert siteEdited = new Alert(Alert.AlertType.INFORMATION);
+            siteEdited.setTitle("Site Edit Saved");
+            siteEdited.setHeaderText(null); // No header text
+            siteEdited.setContentText("Site Details Edited Successfully");
+
+            siteEdited.showAndWait();
+            clearInputFields();
         }
+    }
+
+    public void clearInputFields() {
+        siteIDField.clear();
+        siteNameField.clear();
+        startTimeField.clear();
+        finishTimeField.clear();
+        siteEmployeeList.getItems().clear();
+        siteSupervisorLbl.setText(" ");
+        employeeSearchField.clear();
     }
 }

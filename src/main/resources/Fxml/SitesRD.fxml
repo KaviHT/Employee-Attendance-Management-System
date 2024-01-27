@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="425.0" prefWidth="600.0" styleClass="sites_container" stylesheets="@../Styles/SitesRD.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.employeeattendancesystem.Controllers.SitesRDController">
+<AnchorPane prefHeight="425.0" prefWidth="600.0" styleClass="sites_container" stylesheets="@../Styles/SitesRD.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.employeeattendancesystem.Controllers.SitesRDController">
    <children>
       <Button fx:id="backBtn" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#switchToDashboard" styleClass="back_btn">
          <graphic>
@@ -36,8 +36,8 @@
             <Font name="System Bold" size="15.0" />
          </font></Label>
       <ListView fx:id="siteEmployeeList" layoutX="220.0" layoutY="195.0" prefHeight="160.0" prefWidth="200.0" />
-      <Label fx:id="siteIDLbl" layoutX="220.0" layoutY="73.0" text="Label" />
-      <Label fx:id="siteNameLbl" layoutX="220.0" layoutY="101.0" text="Label" />
+      <Label fx:id="siteIDLbl" layoutX="220.0" layoutY="73.0" text=" - " />
+      <Label fx:id="siteNameLbl" layoutX="220.0" layoutY="101.0" text=" - " />
       <Button fx:id="createBtn" layoutX="435.0" layoutY="13.0" mnemonicParsing="false" onAction="#createSite" styleClass="search_btn" text="Create" />
       <Button fx:id="editBtn" layoutX="360.0" layoutY="379.0" mnemonicParsing="false" onAction="#editSite" prefHeight="32.0" prefWidth="60.0" styleClass="edit_btn" text="Edit">
          <font>
@@ -51,11 +51,11 @@
          <font>
             <Font name="System Bold" size="15.0" />
          </font></Label>
-      <Label fx:id="siteSupervisorLbl" layoutX="220.0" layoutY="161.0" text="Label" />
+      <Label fx:id="siteSupervisorLbl" layoutX="220.0" layoutY="161.0" text=" - " />
       <Label layoutX="110.0" layoutY="131.0" text="Working hours:">
          <font>
             <Font name="System Bold" size="15.0" />
          </font></Label>
-      <Label fx:id="workingHoursLbl" layoutX="220.0" layoutY="131.0" text="Label" />
+      <Label fx:id="workingHoursLbl" layoutX="220.0" layoutY="131.0" text=" - " />
    </children>
 </AnchorPane>

@@ -14,14 +14,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import org.bson.Document;
 
 import java.io.IOException;
+import java.util.Optional;
 
 import static com.mongodb.client.model.Filters.eq;
 
@@ -120,28 +118,41 @@ public class SitesRDController {
     }
 
     public void deleteSite(ActionEvent event) {
-        String siteID = siteIDLbl.getText();
-        String siteName=siteNameLbl.getText();
-        String fullSiteName= siteID+ " " +siteName;
+        // Creating a confirmation alert to get the confirmation form the user
+        Alert deleteConfirm = new Alert(Alert.AlertType.CONFIRMATION);
+        deleteConfirm.setTitle("Confirmation");
+        deleteConfirm.setHeaderText("Delete Site");
+        deleteConfirm.setContentText("Delete " + siteNameLbl.getText() + " from the site list?");
 
-        String SiteNumber = siteSearchField.getText().split(" ")[0];
+        ButtonType yesButton = new ButtonType("Yes");
+        ButtonType noButton = new ButtonType("No");
+        deleteConfirm.getButtonTypes().setAll(yesButton, noButton);
 
-        // Delete the document from the collection
-        SiteDataCollection.deleteOne(eq("site_id", SiteNumber));
+        Optional<ButtonType> result = deleteConfirm.showAndWait();
 
-        siteSupCollection.updateOne(Filters.all("sites", fullSiteName), Updates.pull("sites", fullSiteName));
+        // Handle the user's response
+        if (result.isPresent() && result.get() == yesButton) {  // User clicked OK
+            String siteID = siteIDLbl.getText();
+            String siteName=siteNameLbl.getText();
+            String fullSiteName= siteID+ " " +siteName;
 
+            String SiteNumber = siteSearchField.getText().split(" ")[0];
 
-        // Clear the employee details from the UI
-        siteIDLbl.setText("");
-        siteNameLbl.setText("");
-        siteSupervisorLbl.setText("");
-        workingHoursLbl.setText("");
+            // Delete the document from the collection
+            SiteDataCollection.deleteOne(eq("site_id", SiteNumber));
 
-        ObservableList<String> emptyList = FXCollections.observableArrayList();
-        siteEmployeeList.setItems(emptyList);
+            siteSupCollection.updateOne(Filters.all("sites", fullSiteName), Updates.pull("sites", fullSiteName));
 
-        // Ask for confirmation
+            // Clear the site details from the UI
+            siteIDLbl.setText("");
+            siteNameLbl.setText("");
+            siteSupervisorLbl.setText("");
+            workingHoursLbl.setText("");
+            ObservableList<String> emptyList = FXCollections.observableArrayList();
+            siteEmployeeList.setItems(emptyList);
+        } else {
+            // User clicked Cancel or closed the alert
+        }
     }
 
     public void openSiteCUWindow(ActionEvent event, String windowTitle) throws IOException {

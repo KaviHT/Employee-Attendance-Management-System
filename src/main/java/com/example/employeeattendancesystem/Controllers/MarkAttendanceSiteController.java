@@ -12,16 +12,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.bson.Document;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.Optional;
 
 
 public class MarkAttendanceSiteController {
@@ -160,7 +158,24 @@ public class MarkAttendanceSiteController {
         stage.show();
     }
 
-    public void save() {
-        cellController.saveFunction();
+    public void save(ActionEvent event) throws IOException {
+        Alert saveConfirm = new Alert(Alert.AlertType.CONFIRMATION);
+        saveConfirm.setTitle("Confirmation");
+        saveConfirm.setHeaderText("Save Attendance");
+        saveConfirm.setContentText("Do you want to save the marked attendance records?");
+
+        ButtonType yesButton = new ButtonType("Yes");
+        ButtonType noButton = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
+        saveConfirm.getButtonTypes().setAll(yesButton, noButton);
+
+        Optional<ButtonType> result = saveConfirm.showAndWait();
+
+        // Handle the user's response
+        if (result.isPresent() && result.get() == yesButton) {
+            cellController.saveFunction();
+            switchToMarkAttendance(event);
+        } else {
+            // User clicked Cancel or closed the alert
+        }
     }
 }

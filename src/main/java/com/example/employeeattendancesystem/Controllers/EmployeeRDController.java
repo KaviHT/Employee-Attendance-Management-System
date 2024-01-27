@@ -12,14 +12,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import org.bson.Document;
 
 import java.io.IOException;
+import java.util.Optional;
 
 import static com.mongodb.client.model.Filters.eq;
 
@@ -110,20 +108,41 @@ public class EmployeeRDController {
     }
 
     public void deleteEmployee() {
+        // Creating a confirmation alert to get the confirmation form the user
+        Alert deleteConfirm = new Alert(Alert.AlertType.CONFIRMATION);
+        deleteConfirm.setTitle("Confirmation");
+        deleteConfirm.setHeaderText("Delete Employee");
+        deleteConfirm.setContentText("Delete " +
+                firstNameLbl.getText() + " " + lastNameLbl.getText() +
+                " from employees?");
 
-        String empNumber = employeeSearchField.getText().split(" ")[0];
+        ButtonType yesButton = new ButtonType("Yes");
+        ButtonType noButton = new ButtonType("No");
+        deleteConfirm.getButtonTypes().setAll(yesButton, noButton);
 
-        // Delete the document from the collection
-        EmployeeDataCollection.deleteOne(eq("emp_id", empNumber));
+        Optional<ButtonType> result = deleteConfirm.showAndWait();
 
-        // Clear the employee details from the UI
-        employeeNumberLbl.setText("");
-        firstNameLbl.setText("");
-        lastNameLbl.setText("");
-        genderLbl.setText("");
-        dobLbl.setText("");
-        contactNumberLbl.setText("");
-        addressLbl.setText("");
+        // Handle the user's response
+        if (result.isPresent() && result.get() == yesButton) {  // User clicked OK
+
+            String empNumber = employeeSearchField.getText().split(" ")[0];
+
+            // Delete the document from the collection
+            EmployeeDataCollection.deleteOne(eq("emp_id", empNumber));
+
+            // Clear the employee details from the UI
+            employeeNumberLbl.setText("");
+            firstNameLbl.setText("");
+            lastNameLbl.setText("");
+            genderLbl.setText("");
+            dobLbl.setText("");
+            contactNumberLbl.setText("");
+            addressLbl.setText("");
+            employeeSearchField.clear();
+
+        } else {
+            // User clicked Cancel or closed the alert
+        }
     }
 
     private void openEmployeeCUWindow(ActionEvent event, String windowTitle) throws IOException {

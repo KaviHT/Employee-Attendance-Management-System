@@ -34,12 +34,6 @@ public class EmployeeCUController {
     private static String theItem;
 
 
-    public void initialize() {
-        if (titleLbl.equals("Edit Employee")) {
-
-        }
-    }
-
     public void setStageTitle(String windowTitle) {
         if (windowTitle.equals("Create Employee")) {
             titleLbl.setText("Create a New Employee");
@@ -83,6 +77,7 @@ public class EmployeeCUController {
         MongoDatabase Database = mongoDBConnection.getDatabase("attendence_db");
         MongoCollection<Document> employeeCollection = Database.getCollection("employee");
 
+        // Implementation of creating a new Employee
         if (titleLbl.getText().equals("Create a New Employee")) {
 
             Document doc = new Document("emp_id", employeeNumberField.getText())
@@ -95,6 +90,16 @@ public class EmployeeCUController {
             // add newEmployee to the database
             employeeCollection.insertOne(doc);
 
+            // Information alert for the user to indicate the creation of a new employee
+            Alert empCreated = new Alert(Alert.AlertType.INFORMATION);
+            empCreated.setTitle("New Employee Saved");
+            empCreated.setHeaderText(null); // No header text
+            empCreated.setContentText("The employee successfully created!");
+
+            empCreated.showAndWait();
+            clearInputFields();
+
+        // Implementation of editing an existing Employee
         } else if (titleLbl.getText().equals("Edit Employee")) {
 
             Document existingEmployee = employeeCollection.find(Filters.eq("emp_id", employeeNumberField.getText())).first();
@@ -108,6 +113,14 @@ public class EmployeeCUController {
             // update the employee in the database
             employeeCollection.replaceOne(Filters.eq("emp_id", employeeNumberField.getText()), existingEmployee);
 
+            // Information alert for the user to indicate the edit of an employee
+            Alert empEdited = new Alert(Alert.AlertType.INFORMATION);
+            empEdited.setTitle("Employee Edit Saved");
+            empEdited.setHeaderText(null); // No header text
+            empEdited.setContentText("The employee successfully edited!");
+
+            empEdited.showAndWait();
+            clearInputFields();
         }
     }
 
@@ -133,5 +146,15 @@ public class EmployeeCUController {
         stage.setTitle("Employees");
         stage.setScene(scene);
         stage.show();
+    }
+
+    public void clearInputFields() {
+        employeeNumberField.clear();
+        firstNameField.clear();
+        lastNameField.clear();
+        addressField.clear();
+        dobField.setValue(null);
+        gender.selectToggle(null);
+        contactNumberField.clear();
     }
 }
