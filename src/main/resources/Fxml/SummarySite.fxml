@@ -5,10 +5,14 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="600.0" prefWidth="900.0" styleClass="summary_container" stylesheets="@../Styles/Summary.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.employeeattendancesystem.Controllers.SummarySiteController">
    <children>
-      <Label fx:id="siteNameLbl" layoutX="20.0" layoutY="27.0" text="Site Name" />
+      <Label fx:id="siteNameLbl" layoutX="20.0" layoutY="27.0" prefHeight="26.0" prefWidth="89.0" text="Site Name">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font></Label>
       <ListView fx:id="employeeList" layoutX="47.0" layoutY="353.0" prefHeight="420.0" prefWidth="760.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
       <HBox alignment="CENTER" layoutX="198.0" layoutY="71.0" prefHeight="40.0" prefWidth="260.0" spacing="10.0">
          <children>
