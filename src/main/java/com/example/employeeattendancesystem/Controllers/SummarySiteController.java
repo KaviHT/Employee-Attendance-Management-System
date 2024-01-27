@@ -1,5 +1,10 @@
 package com.example.employeeattendancesystem.Controllers;
 
+import com.example.employeeattendancesystem.Utils.MongoDBConnection;
+import com.mongodb.client.FindIterable;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Filters;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -9,6 +14,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
+import org.bson.Document;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -19,15 +25,20 @@ public class SummarySiteController {
     public Button previousMonthBtn, nextMonthBtn, thisMonthBtn;
     LocalDate dateFocus;
 
+    MongoDatabase database = MongoDBConnection.getDatabase("attendence_db");
+    MongoCollection<Document> DaySiteSummaryDataCollection = database.getCollection("EmployeeAttendance");
+
 
     public void initialize() throws IOException {
         // Getting site name form DummyController
         String siteName = DummyController.getSiteName();
         siteNameLbl.setText(siteName);
 
+
         // Setting calendar properties
         dateFocus = LocalDate.now();
         checkRecords();
+
     }
 
     public void previousMonth() throws IOException {
@@ -58,51 +69,60 @@ public class SummarySiteController {
     }
 
     private void drawSummaryTable() throws IOException {
+
+        String siteName = DummyController.getSiteName();
+
         yearLbl.setText(String.valueOf(dateFocus.getYear()));
         monthLbl.setText(String.valueOf(dateFocus.getMonth()));
 
-        // Create a list of items to populate the ListView
         var items = FXCollections.<AnchorPane>observableArrayList();
-
-        // Getting last day of the month
         int monthMaxDate = dateFocus.getMonth().maxLength();
-
-        // Checking for a leap year
         if (dateFocus.getYear() % 4 != 0 && monthMaxDate == 29) {
             monthMaxDate = 28;
         }
 
-        // Sample data to work with
-
-        // Implement the way to get number of employees assigned to the related site
-
-        // Replace "3" with the number of employees assigned to the related site
-        for (int i=0; i<3; i++) {
+        // Fetch all documents with the given siteName
+        FindIterable<Document> docs = DaySiteSummaryDataCollection.find(Filters.eq("Site", siteName));
+        int employeeCount = 0;
+        for (Document doc : docs) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Cells/SummarySiteEmployeeCell.fxml"));
             Parent cell = loader.load();
-
             SummarySiteEmployeeCellController employeeCellController = loader.getController();
 
-            employeeCellController.employeeNameLbl.setText("Employee " + (i + 1));
-            employeeCellController.employeeNumberLbl.setText(String.valueOf(i + 1));
+            // Set employee name and number
+            employeeCellController.employeeNameLbl.setText(doc.getString("_id"));
+            employeeCellController.employeeNumberLbl.setText(String.valueOf(++employeeCount));
 
             double slotWidth = employeeCellController.statusSummaryHbox.getPrefWidth() / monthMaxDate;
-
-            for (int j=0; j<monthMaxDate; j++) {
+            for (int j = 0; j < monthMaxDate; j++) {
                 Label dayStatusLbl = new Label();
-
                 dayStatusLbl.setPrefWidth(slotWidth);
 
-                // Implement getting employee's attendance status here
+                // Fill the label with the date
+                dayStatusLbl.setText(String.valueOf(j + 1));
 
-                dayStatusLbl.setText(String.valueOf(j + 1));    // <--- Add it here
+                // Get the attendance status for the day
+                String dateKey = dateFocus.getYear() + "-" + String.format("%02d", dateFocus.getMonthValue()) + "-" + String.format("%02d", j + 1);
+                String attendanceData = doc.getString(dateKey);
+                if (attendanceData != null) {
+                    String[] parts = attendanceData.split("_");
+                    String attendanceStatus = parts[0];  // Attendance status is the first element
 
-                // Here is an example of displaying the note
-                // Make sure to add an if and get the note from database
-                if (dayStatusLbl.getText().equals("12")) {
-                    Tooltip tooltip = new Tooltip("Here is an example of a Note");
-                    Tooltip.install(dayStatusLbl, tooltip);
-                    dayStatusLbl.setTextFill(Color.RED);
+                    // If the employee is present, mark the date in green
+                    if ("Present".equals(attendanceStatus)) {
+                        dayStatusLbl.setTextFill(Color.GREEN);
+                    }
+                    // If the employee is absent, mark the date in red
+                    else if ("Leave".equals(attendanceStatus)) {
+                        dayStatusLbl.setTextFill(Color.RED);
+                    }
+                    // If the employee is on half day, mark the date in yellow
+                    else if ("Half Day".equals(attendanceStatus)) {
+                        dayStatusLbl.setTextFill(Color.ORANGE);
+                    } else if ("Replacement".equals(attendanceStatus)) {
+                        dayStatusLbl.setTextFill(Color.CHOCOLATE);
+
+                    }
                 }
 
                 employeeCellController.statusSummaryHbox.getChildren().add(dayStatusLbl);
@@ -111,9 +131,8 @@ public class SummarySiteController {
             items.add((AnchorPane) cell);
         }
 
-        // Set the items in the ListView
         employeeList.setItems(items);
+    }
 
     }
 
-}
