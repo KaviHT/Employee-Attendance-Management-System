@@ -25,10 +25,7 @@ public class MarkAttendanceEmployeeCellController {
     public TextField onTimeField, outTimeField, noteField;
     public Label employeeNumber, employeeName;
     private final String[] status = {"Present", "Leave", "Half Day"};
-    public static ArrayList<String> employeeList = new ArrayList<>();
-
     public static List <Document> employeeList = new ArrayList<>();
-
     private String DayEmp;
 
     MongoDBConnection mongoDBConnection = new MongoDBConnection();

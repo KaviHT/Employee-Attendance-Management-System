@@ -35,9 +35,6 @@ public class MarkAttendanceSiteController {
     private final ObservableList<String> suggestions = FXCollections.observableArrayList();
     private LocalDate date;
     private MarkAttendanceEmployeeCellController cellController = null;
-
-    private MarkAttendanceEmployeeCellController cellController = null;
-
     MongoDBConnection mongoDBConnection = new MongoDBConnection();
     MongoDatabase Database = mongoDBConnection.getDatabase("attendence_db");
     MongoCollection<Document> AtteEmpCollection = Database.getCollection("site");
