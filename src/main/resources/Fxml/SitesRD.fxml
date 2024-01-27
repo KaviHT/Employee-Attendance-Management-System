@@ -22,7 +22,6 @@
       </Button>
       <TextField fx:id="siteSearchField" layoutX="150.0" layoutY="13.0" onAction="#searchSite" prefHeight="25.0" prefWidth="215.0" promptText="Site name" />
       <Button fx:id="searchBtn" layoutX="376.0" layoutY="13.0" mnemonicParsing="false" onAction="#searchSite" styleClass="search_btn" text="Search" />
-      <ListView fx:id="siteSuggestionList" layoutX="150.0" layoutY="38.0" prefHeight="200.0" prefWidth="215.0" visible="false" />
       <Label layoutX="161.0" layoutY="72.0" text="Site ID:">
          <font>
             <Font name="System Bold" size="15.0" />
@@ -57,5 +56,6 @@
             <Font name="System Bold" size="15.0" />
          </font></Label>
       <Label fx:id="workingHoursLbl" layoutX="220.0" layoutY="131.0" text=" - " />
+      <ListView fx:id="siteSuggestionList" layoutX="150.0" layoutY="38.0" prefHeight="200.0" prefWidth="215.0" visible="false" />
    </children>
 </AnchorPane>

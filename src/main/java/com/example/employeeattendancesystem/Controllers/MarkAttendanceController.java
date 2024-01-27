@@ -29,7 +29,7 @@ public class MarkAttendanceController {
     public ListView<String> siteSuggestionList;
     public ListView<AnchorPane> supervisorList;
     private final ObservableList<String> suggestions = FXCollections.observableArrayList();
-    public LocalDate today = LocalDate.now();
+    public DatePicker holidayDate;
 
 
     public void initialize() throws IOException {
@@ -135,10 +135,12 @@ public class MarkAttendanceController {
     }
 
     public void markAsHoliday(ActionEvent event) throws IOException {
+        String holiday = holidayDate.getValue().toString();
+
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirmation");
         alert.setHeaderText("Mark Holiday");
-        alert.setContentText("Do you want to mark today: " + today + " as a holiday?");
+        alert.setContentText("Do you want to mark today: " + holiday + " as a holiday?");
 
         // gedara iddith attendence system ekata gihilla mark karanna oneda holidays
 

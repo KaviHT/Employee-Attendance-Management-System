@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="700.0" styleClass="attendance_container" stylesheets="@../Styles/MarkAttendance.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.employeeattendancesystem.Controllers.MarkAttendanceController">
+<AnchorPane prefHeight="600.0" prefWidth="700.0" styleClass="attendance_container" stylesheets="@../Styles/MarkAttendance.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.employeeattendancesystem.Controllers.MarkAttendanceController">
    <children>
       <TextField fx:id="siteSearchField" layoutX="306.0" layoutY="23.0" prefHeight="26.0" prefWidth="200.0" />
       <Label layoutX="208.0" layoutY="23.0" prefHeight="26.0" prefWidth="88.0" text="Search Site:" textFill="#003f70">
@@ -15,15 +16,17 @@
             <Font name="System Bold" size="15.0" />
          </font>
       </Label>
-      <Button fx:id="markHolidayBtn" layoutX="574.0" layoutY="15.0" mnemonicParsing="false" onAction="#markAsHoliday" prefHeight="45.0" prefWidth="103.0" styleClass="holiday_btn" text="Mark Holiday">
+      <Button fx:id="markHolidayBtn" layoutX="574.0" layoutY="93.0" mnemonicParsing="false" onAction="#markAsHoliday" prefHeight="45.0" prefWidth="103.0" styleClass="holiday_btn" text="Mark Holiday">
          <font>
             <Font size="15.0" />
          </font></Button>
-      <ListView fx:id="siteSuggestionList" layoutX="306.0" layoutY="48.0" prefHeight="200.0" prefWidth="200.0" visible="false" />
       <ListView fx:id="supervisorList" layoutY="148.0" prefHeight="450.0" prefWidth="680.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" />
       <Button fx:id="headOfficeBtn" layoutX="14.0" layoutY="93.0" mnemonicParsing="false" onAction="#switchToHeadOfficeSite" prefHeight="45.0" prefWidth="111.0" styleClass="holiday_btn" text="Head Office">
          <font>
             <Font size="15.0" />
          </font></Button>
+      <DatePicker fx:id="holidayDate" layoutX="574.0" layoutY="57.0" prefHeight="25.0" prefWidth="103.0" promptText="Select Date" />
+      <Label layoutX="574.0" layoutY="36.0" text="Mark a holiday" />
+      <ListView fx:id="siteSuggestionList" layoutX="306.0" layoutY="48.0" prefHeight="200.0" prefWidth="200.0" visible="false" />
    </children>
 </AnchorPane>

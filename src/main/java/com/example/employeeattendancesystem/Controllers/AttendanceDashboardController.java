@@ -97,7 +97,7 @@ public class AttendanceDashboardController {
             if (!newValue.isEmpty()) {
                 // Iterate through the items to find a match
                 for (int j = 0; j < items.size(); j++) {
-                    String labelText =((Label) items.get(j).lookup("#siteNumberLbl")).getText().toLowerCase();
+                    String labelText =((Label) items.get(j).lookup("#siteNameLbl")).getText().toLowerCase();
                     String searchText = newValue.toLowerCase();
                     if (labelText.contains(newValue)) {
                         // Scroll to the matched item

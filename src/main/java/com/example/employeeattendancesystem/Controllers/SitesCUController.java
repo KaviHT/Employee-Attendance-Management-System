@@ -28,7 +28,7 @@ public class SitesCUController {
 
     public Button backBtn, saveSiteBtn;
     public TextField siteIDField, siteNameField, employeeSearchField, startTimeField, finishTimeField;
-    public Label titleLbl, siteSupervisorLbl, displayLbl;
+    public Label titleLbl, siteSupervisorLbl, displayLbl, empExistLbl;
     public ListView<String> siteEmployeeList;
     public ListView<String> employeeSuggestionList;
     private final ObservableList<String> employeeSuggestions = FXCollections.observableArrayList();

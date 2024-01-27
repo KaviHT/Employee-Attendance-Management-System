@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="425.0" prefWidth="600.0" styleClass="sites_container" stylesheets="@../Styles/siteCU.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.employeeattendancesystem.Controllers.SitesCUController">
+<AnchorPane prefHeight="425.0" prefWidth="600.0" styleClass="sites_container" stylesheets="@../Styles/siteCU.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.employeeattendancesystem.Controllers.SitesCUController">
    <children>
       <Button fx:id="backBtn" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#switchToSiteRD" prefHeight="32.0" prefWidth="30.0" styleClass="back_btn">
          <graphic>
@@ -41,7 +41,7 @@
          <font>
             <Font size="18.0" />
          </font></Label>
-      <Button fx:id="saveSiteBtn" layoutX="257.0" layoutY="374.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="92.0" styleClass="save_btn" text="Save Site" onAction="#saveSite">
+      <Button fx:id="saveSiteBtn" layoutX="257.0" layoutY="374.0" mnemonicParsing="false" onAction="#saveSite" prefHeight="38.0" prefWidth="92.0" styleClass="save_btn" text="Save Site">
          <font>
             <Font name="System Bold" size="15.0" />
          </font></Button>
@@ -78,5 +78,6 @@
             <Font size="10.0" />
          </font>
       </Label>
+      <Label fx:id="empExistLbl" layoutX="59.0" layoutY="349.0" text="Label" />
    </children>
 </AnchorPane>
