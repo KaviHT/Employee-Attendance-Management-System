@@ -30,7 +30,7 @@
     -fx-background-color: #6eb0f6;
     -fx-text-fill: black;
 }
-.delete_btn:hover, .edit_btn:hover{
+.delete_btn:hover{
     -fx-background-color: #f70000;
     -fx-text-fill: white;
     -fx-cursor: hand;
