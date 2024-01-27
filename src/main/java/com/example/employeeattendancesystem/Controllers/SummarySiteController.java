@@ -24,7 +24,6 @@ public class SummarySiteController {
     public ListView<AnchorPane> employeeList;
     public Button previousMonthBtn, nextMonthBtn, thisMonthBtn;
     LocalDate dateFocus;
-
     MongoDatabase database = MongoDBConnection.getDatabase("attendence_db");
     MongoCollection<Document> DaySiteSummaryDataCollection = database.getCollection("EmployeeAttendance");
 
@@ -34,11 +33,9 @@ public class SummarySiteController {
         String siteName = DummyController.getSiteName();
         siteNameLbl.setText(siteName);
 
-
         // Setting calendar properties
         dateFocus = LocalDate.now();
         checkRecords();
-
     }
 
     public void previousMonth() throws IOException {
@@ -130,9 +127,7 @@ public class SummarySiteController {
 
             items.add((AnchorPane) cell);
         }
-
         employeeList.setItems(items);
     }
-
-    }
+}
 

@@ -34,7 +34,6 @@ public class SitesCUController {
     private final ObservableList<String> employeeSuggestions = FXCollections.observableArrayList();
     public ToggleGroup addingStatus;
     public RadioButton employeeRBtn, supervisorRBtn;
-
     private static String theselectItem;
 
 
@@ -52,6 +51,7 @@ public class SitesCUController {
             MongoCollection<Document> siteCollection = Database.getCollection("site");
 
             FindIterable<Document> documents = siteCollection.find(eq("site_id", siteNumber));
+
             for (Document document : documents) {
                 String siteId = document.getString("site_id");
                 String siteName = document.getString("site_name");
@@ -59,17 +59,13 @@ public class SitesCUController {
                 String supDetails = document.getString("sup_details");
                 String siteEmployees = document.getString("employees");
 
-
-
                 String[] hours = workingHours.split("-");
                 String startHour = hours[0];
                 String endHour = hours[1];
 
-
                 siteIDField.setText(siteId);
                 siteNameField.setText(siteName);
                 siteSupervisorLbl.setText(supDetails);
-
 
                 startTimeField.setText(startHour);
                 finishTimeField.setText(endHour);
@@ -151,7 +147,6 @@ public class SitesCUController {
     }
 
     public void receiveSelectedItem(String selectedItem) {
-
         theselectItem = selectedItem;
     }
 
@@ -160,7 +155,7 @@ public class SitesCUController {
         MongoDBConnection mongoDBConnection = new MongoDBConnection();
 
         MongoDatabase Database = mongoDBConnection.getDatabase("attendence_db");
-        MongoCollection<Document> siteCollection = Database.getCollection("site");
+        MongoCollection<Document> newSiteCollection = Database.getCollection("site");
         MongoCollection<Document> siteSupCollection = Database.getCollection("siteSupervisor");
 
         String startTime = startTimeField.getText();
@@ -185,6 +180,7 @@ public class SitesCUController {
                     sb.append(",");
                 }
             }
+
             String siteEmployee = sb.toString();
 
             Document siteDoc = new Document("site_id", siteIDField.getText())
@@ -194,8 +190,7 @@ public class SitesCUController {
                     .append("employees", siteEmployee)
                     .append("site_details",fullSiteName);
 
-            siteCollection.insertOne(siteDoc);
-
+            newSiteCollection.insertOne(siteDoc);
 
             Document supervisor = siteSupCollection.find(Filters.eq("supName", siteSupervisorLbl.getText())).first();
             if (supervisor == null) {
@@ -218,9 +213,6 @@ public class SitesCUController {
                 siteSupCollection.updateOne(Filters.eq("supName", siteSupervisorLbl.getText()), Updates.addToSet("sites", fullSiteName));
             }
 
-            // add newEmployee to the database
-
-
         } else if (titleLbl.getText().equals("Edit Site")) {
 
             StringBuilder sb = new StringBuilder();
@@ -236,7 +228,7 @@ public class SitesCUController {
             }
             String siteEmployee = sb.toString();
 
-            Document existingSite = siteCollection.find(Filters.eq("site_id", siteIDField.getText())).first();
+            Document existingSite = newSiteCollection.find(Filters.eq("site_id", siteIDField.getText())).first();
             // update the employee details
             existingSite.put("site_name", siteNameField.getText());
             existingSite.put("working_hours", workingHours);
@@ -271,16 +263,12 @@ public class SitesCUController {
 
                 siteSupCollection.updateOne(Filters.all("sites", fullSiteName), Updates.pull("sites", fullSiteName));
 
-
                 // Update the 'sites' field in the database
                 siteSupCollection.updateOne(Filters.eq("supName", siteSupervisorLbl.getText()), Updates.set("sites", sites));
 
             }
 
-            siteCollection.replaceOne(Filters.eq("site_id", siteIDField.getText()), existingSite);
-
+            newSiteCollection.replaceOne(Filters.eq("site_id", siteIDField.getText()), existingSite);
         }
     }
-
-
 }

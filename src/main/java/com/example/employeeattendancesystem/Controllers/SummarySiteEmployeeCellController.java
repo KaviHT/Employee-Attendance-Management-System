@@ -5,6 +5,5 @@ import javafx.scene.layout.HBox;
 
 public class SummarySiteEmployeeCellController {
     public Label employeeNumberLbl, employeeNameLbl;
-
     public HBox statusSummaryHbox;
 }

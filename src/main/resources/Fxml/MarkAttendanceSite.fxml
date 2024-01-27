@@ -16,7 +16,7 @@
             <Font name="Arial Black" size="24.0" />
          </font></Label>
       <ListView fx:id="employeeList" layoutX="20.0" layoutY="175.0" prefHeight="360.0" prefWidth="660.0" AnchorPane.bottomAnchor="65.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" />
-      <Button fx:id="saveBtn" layoutX="310.0" layoutY="547.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="95.0" styleClass="save_btn" text="Save">
+      <Button fx:id="saveBtn" layoutX="310.0" layoutY="547.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="95.0" styleClass="save_btn" text="Save" onAction="#save">
          <font>
             <Font name="System Bold" size="16.0" />
          </font></Button>

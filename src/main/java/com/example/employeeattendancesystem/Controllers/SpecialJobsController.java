@@ -42,7 +42,6 @@ public class SpecialJobsController {
         // Set the items in the ListView
         summaryList.setItems(items);
 
-
         // Populating suggestions data from the database
         suggestions.addAll("Brian", "Sayura", "Kaivndu", "Movindu");  // <--- add site names from the database here
 
@@ -74,5 +73,4 @@ public class SpecialJobsController {
             }
         });
     }
-
 }

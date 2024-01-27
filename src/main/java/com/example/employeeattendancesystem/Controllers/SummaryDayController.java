@@ -21,7 +21,6 @@ public class SummaryDayController {
     public Label monthLbl, dateLbl, displayDateLbl, noRecordsMsgLbl;
     public ListView<AnchorPane> daySummaryList;
     LocalDate dateFocus;
-
     MongoDatabase database = MongoDBConnection.getDatabase("attendence_db");
     MongoCollection<Document> SiteCollection = database.getCollection("site");
 
@@ -98,5 +97,4 @@ public class SummaryDayController {
             daySummaryList.setItems(items);
         }
     }
-
 }

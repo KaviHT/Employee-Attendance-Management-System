@@ -81,9 +81,6 @@ public class SummaryController {
                     stage.setScene(scene);
                     stage.show();
                 } catch (IOException ignored) {}
-
-                //siteSearchField.setText(selectedItem);
-                //siteSuggestionList.setVisible(false);
             }
         });
     }
@@ -132,7 +129,6 @@ public class SummaryController {
             for (int j = 0; j < 7; j++) {
 
                 StackPane stackPane = new StackPane();
-//                Button button = new Button();
                 Rectangle rectangle = new Rectangle();
 
                 rectangle.setFill(Color.TRANSPARENT);
@@ -166,15 +162,12 @@ public class SummaryController {
                                 currentDate);
 
                         button.setOnAction(event -> switchToSummaryDay(event, buttonDate));
-
                     }
 
                     if (today.getYear() == dateFocus.getYear() && today.getMonth() == dateFocus.getMonth() && today.getDayOfMonth() == currentDate) {
                         button.setBackground(Background.fill(Color.GRAY));
                     }
-
                 }
-
                 calendarFlowPane.getChildren().add(stackPane);
             }
         }
@@ -193,5 +186,4 @@ public class SummaryController {
             stage.show();
         } catch (IOException ignored) {}
     }
-
 }

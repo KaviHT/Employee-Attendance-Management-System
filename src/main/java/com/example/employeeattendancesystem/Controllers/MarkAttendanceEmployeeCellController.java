@@ -4,7 +4,6 @@ import com.example.employeeattendancesystem.Utils.MongoDBConnection;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.FindOneAndUpdateOptions;
-import com.mongodb.client.model.ReplaceOptions;
 import javafx.event.ActionEvent;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
@@ -12,13 +11,10 @@ import javafx.scene.control.TextField;
 import org.bson.Document;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import static com.mongodb.client.model.Filters.eq;
 
-import java.util.ArrayList;
 
 public class MarkAttendanceEmployeeCellController {
     public ChoiceBox<String> employeeStatusChoice;
@@ -27,7 +23,6 @@ public class MarkAttendanceEmployeeCellController {
     private final String[] status = {"Present", "Leave", "Half Day"};
     public static List <Document> employeeList = new ArrayList<>();
     private String DayEmp;
-
     MongoDBConnection mongoDBConnection = new MongoDBConnection();
     MongoDatabase Database = mongoDBConnection.getDatabase("attendence_db");
     MongoCollection<Document> AtteEmpCollection = Database.getCollection("attendence");
@@ -70,7 +65,6 @@ public class MarkAttendanceEmployeeCellController {
 
         // Call addToArray to update the employeeList with the new values
         addToArray(employeeName.getText(), employeeStatusChoice.getValue(), inTime, outTime, note);
-
     }
 
     public void addToArray(String employeeName, String employeeStatus, String inTime, String outTime, String note) {
@@ -111,8 +105,7 @@ public class MarkAttendanceEmployeeCellController {
         }
         System.out.println(employeeList);
         saveEmployeeAttendance(employeeName,siteName,DayEmp);
-
-}
+    }
 
     public void saveEmployeeAttendance(String employeeName, String site, String dateEmp) {
         // Create the document in the required format

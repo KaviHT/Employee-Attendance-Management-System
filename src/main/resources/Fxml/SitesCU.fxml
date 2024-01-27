@@ -41,7 +41,7 @@
          <font>
             <Font size="18.0" />
          </font></Label>
-      <Button fx:id="saveSiteBtn" layoutX="257.0" layoutY="374.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="92.0" styleClass="save_btn" text="Save Site">
+      <Button fx:id="saveSiteBtn" layoutX="257.0" layoutY="374.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="92.0" styleClass="save_btn" text="Save Site" onAction="#saveSite">
          <font>
             <Font name="System Bold" size="15.0" />
          </font></Button>

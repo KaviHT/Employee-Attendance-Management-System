@@ -31,7 +31,6 @@ public class EmployeeCUController {
     private Stage stage;
     private Scene scene;
     private Parent root;
-
     private static String theItem;
 
 
@@ -44,20 +43,17 @@ public class EmployeeCUController {
     public void setStageTitle(String windowTitle) {
         if (windowTitle.equals("Create Employee")) {
             titleLbl.setText("Create a New Employee");
-
-
-
         } else if (windowTitle.equals("Edit Employee")) {
             titleLbl.setText("Edit Employee");
 
             String empNumber = theItem.split(" ")[0];
 
             MongoDBConnection mongoDBConnection = new MongoDBConnection();
-
             MongoDatabase Database = mongoDBConnection.getDatabase("attendence_db");
             MongoCollection<Document> employeeCollection = Database.getCollection("employee");
 
             FindIterable<Document> documents = employeeCollection.find(eq("emp_id", empNumber));
+
             for (Document document : documents) {
                 String empId = document.getString("emp_id");
                 String firstName = document.getString("first_name");
@@ -81,11 +77,9 @@ public class EmployeeCUController {
         }
     }
 
-
     public void saveEmployee(ActionEvent event) {
 
         MongoDBConnection mongoDBConnection = new MongoDBConnection();
-
         MongoDatabase Database = mongoDBConnection.getDatabase("attendence_db");
         MongoCollection<Document> employeeCollection = Database.getCollection("employee");
 
@@ -100,8 +94,6 @@ public class EmployeeCUController {
                     .append("contactNumber", contactNumberField.getText());
             // add newEmployee to the database
             employeeCollection.insertOne(doc);
-
-
 
         } else if (titleLbl.getText().equals("Edit Employee")) {
 

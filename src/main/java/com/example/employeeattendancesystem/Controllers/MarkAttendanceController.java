@@ -20,10 +20,8 @@ import java.util.Optional;
 import java.util.List;
 
 import org.bson.Document;
-import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
-import com.mongodb.client.model.Filters;
+
 
 public class MarkAttendanceController {
     public TextField siteSearchField;
@@ -81,7 +79,6 @@ public class MarkAttendanceController {
         });
 
         showAllSites();
-
     }
 
     public void showAllSites() throws IOException {
@@ -111,7 +108,6 @@ public class MarkAttendanceController {
 
             items.add((AnchorPane)cell);
         }
-
         supervisorList.setItems(items);
     }
 
@@ -130,13 +126,11 @@ public class MarkAttendanceController {
             stage.setScene(scene);
             stage.show();
         } catch (IOException ignored) {}
-
     }
 
     public void switchToHeadOfficeSite(ActionEvent event) {
 
         switchToMarkAttendanceSite(event, "00 Head Office");
-
 
     }
 
@@ -167,7 +161,6 @@ public class MarkAttendanceController {
         } else {
             // User clicked Cancel or closed the alert
         }
-
     }
 
     public void switchToAttendanceDashboard(ActionEvent event) throws IOException {
@@ -178,5 +171,4 @@ public class MarkAttendanceController {
         stage.setScene(scene);
         stage.show();
     }
-
 }

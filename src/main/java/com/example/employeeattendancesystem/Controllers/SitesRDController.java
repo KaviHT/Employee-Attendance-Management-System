@@ -33,12 +33,10 @@ public class SitesRDController {
     public ListView<String> siteEmployeeList;
     public Label siteIDLbl, siteNameLbl, siteSupervisorLbl, workingHoursLbl;
     private final ObservableList<String> suggestions = FXCollections.observableArrayList();
-
     MongoDatabase database = MongoDBConnection.getDatabase("attendence_db");
     MongoCollection<Document> SiteDataCollection = database.getCollection("site");
     MongoCollection<Document> siteSupCollection = database.getCollection("siteSupervisor");
     public void initialize() {
-
 
         Database database = new Database();
 
@@ -76,7 +74,6 @@ public class SitesRDController {
         });
     }
 
-
     public void searchSite(ActionEvent event) {
 
         String empNumber = siteSearchField.getText().split(" ")[0];
@@ -102,9 +99,7 @@ public class SitesRDController {
             for (String employee : employees) {
                 siteEmployeeList.getItems().add(employee);
             }
-
         }
-
     }
 
     public void switchToDashboard(ActionEvent event) throws IOException {
@@ -125,7 +120,6 @@ public class SitesRDController {
     }
 
     public void deleteSite(ActionEvent event) {
-
         String siteID = siteIDLbl.getText();
         String siteName=siteNameLbl.getText();
         String fullSiteName= siteID+ " " +siteName;
@@ -147,8 +141,7 @@ public class SitesRDController {
         ObservableList<String> emptyList = FXCollections.observableArrayList();
         siteEmployeeList.setItems(emptyList);
 
-
-        // ask for confirmation
+        // Ask for confirmation
     }
 
     public void openSiteCUWindow(ActionEvent event, String windowTitle) throws IOException {
@@ -164,6 +157,4 @@ public class SitesRDController {
         stage.setScene(scene);
         stage.show();
     }
-
-
 }

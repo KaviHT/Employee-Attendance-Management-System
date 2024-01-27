@@ -1,7 +1,6 @@
 package com.example.employeeattendancesystem.Controllers;
 
 import com.example.employeeattendancesystem.Utils.Database;
-import com.example.employeeattendancesystem.Utils.Employee;
 import com.example.employeeattendancesystem.Utils.MongoDBConnection;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
@@ -69,7 +68,6 @@ public class EmployeeRDController {
         });
     }
 
-
     public void switchToDashboard(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/Fxml/Dashboard.fxml"));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -93,7 +91,6 @@ public class EmployeeRDController {
             String dateOfBirth = document.getString("dateOfBirth");
             String contactNumber = document.getString("contactNumber");
 
-
             employeeNumberLbl.setText(empId);
             firstNameLbl.setText(firstName);
             lastNameLbl.setText(lastName);
@@ -101,10 +98,7 @@ public class EmployeeRDController {
             dobLbl.setText(dateOfBirth);
             contactNumberLbl.setText(contactNumber);
             addressLbl.setText(empAddress);
-
-
         }
-
     }
 
     public void createEmployee(ActionEvent event) throws IOException {
@@ -130,8 +124,6 @@ public class EmployeeRDController {
         dobLbl.setText("");
         contactNumberLbl.setText("");
         addressLbl.setText("");
-
-
     }
 
     private void openEmployeeCUWindow(ActionEvent event, String windowTitle) throws IOException {

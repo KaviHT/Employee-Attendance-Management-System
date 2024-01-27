@@ -4,7 +4,6 @@ import com.example.employeeattendancesystem.Utils.MongoDBConnection;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import com.mongodb.client.model.Filters;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,26 +12,20 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import org.bson.Document;
-import org.bson.types.ObjectId;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import static com.mongodb.client.model.Filters.eq;
 
 public class AttendanceDashboardController {
     public Label presentCountLbl, leaveCountLbl, halfDayCountLbl;
     public TextField siteSearchField;
     public ListView<AnchorPane> allSitesListView;
-
     MongoDatabase database = MongoDBConnection.getDatabase("attendence_db");
     MongoCollection<Document> AttendanceDataCollection = database.getCollection("attendence");
-
     MongoCollection<Document> AttendanceSiteCollection = database.getCollection("site");
-
-
 
 
     public void initialize() throws IOException {
@@ -89,8 +82,6 @@ public class AttendanceDashboardController {
             siteCellController.sitePresentCountLbl.setText(String.valueOf(presentCount));
             siteCellController.siteLeaveCountLbl.setText(String.valueOf(leaveCount));
             siteCellController.siteHalfDayCountLbl.setText(String.valueOf(halfDayCount));
-
-
 
             items.add((AnchorPane) cell);
             i++;

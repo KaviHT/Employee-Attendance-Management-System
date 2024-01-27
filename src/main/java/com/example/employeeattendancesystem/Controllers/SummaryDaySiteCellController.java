@@ -1,13 +1,10 @@
 package com.example.employeeattendancesystem.Controllers;
 
 import com.example.employeeattendancesystem.Utils.MongoDBConnection;
-import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import com.mongodb.client.model.Filters;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -20,13 +17,10 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.bson.Document;
-import org.bson.conversions.Bson;
 
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
 
 import static com.mongodb.client.model.Filters.eq;
 
@@ -34,10 +28,8 @@ public class SummaryDaySiteCellController {
     public ListView<AnchorPane> siteEmployeeList;
     public Label siteNameLbl, siteNumberLbl;
     public Button editBtn;
-
     MongoDatabase database = MongoDBConnection.getDatabase("attendence_db");
     MongoCollection<Document> AttendanceDataCollection = database.getCollection("attendence");
-
     LocalDate date = DummyController.getSelectedDate();
     String dateString = date.toString();
 
