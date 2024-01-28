@@ -21,7 +21,7 @@ public class AttendanceMenuController {
         root = FXMLLoader.load(getClass().getResource("/Fxml/ViewFactory/AttendanceDashboardView.fxml"));
         scene = new Scene(root);
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setTitle("Attendance Dashboard");
+        stage.setTitle("Dashboard");
         stage.setScene(scene);
         stage.show();
     }
