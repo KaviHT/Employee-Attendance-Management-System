@@ -7,6 +7,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -21,6 +22,8 @@ import java.util.List;
 
 import org.bson.Document;
 import com.mongodb.client.MongoCollection;
+
+import javafx.scene.paint.Color;
 
 
 public class MarkAttendanceController {
@@ -89,6 +92,8 @@ public class MarkAttendanceController {
 
         var items = FXCollections.<AnchorPane>observableArrayList();
 
+        // ...
+
         for (Document doc : supCollection.find()) {
             String supName = (String) doc.get("supName");
             List<String> sites = (List<String>) doc.get("sites");
@@ -100,14 +105,38 @@ public class MarkAttendanceController {
 
             cellController.supervisorNameLbl.setText(supName);
 
-            for (String site : sites) {
+
+            String[] buttonColors = {"#0082e6", "#0091ff", "#1a9cff", "#33a7ff", "#4db2ff", "#66bdff", "#80c8ff", "#99d3ff"};
+
+            for (int i = 0; i < sites.size(); i++) {
+                String site = sites.get(i);
                 Button button = new Button(site);
+
+                // Set background color based on the index
+                int colorIndex = i % buttonColors.length;
+                Color color = Color.web(buttonColors[colorIndex]);
+                String hexColor = String.format("#%02X%02X%02X",
+                        (int) (color.getRed() * 255),
+                        (int) (color.getGreen() * 255),
+                        (int) (color.getBlue() * 255));
+
+                button.setStyle("-fx-background-color: " + hexColor + ";");
+
                 button.setOnAction(event -> switchToMarkAttendanceSite(event, site));
+
+                // Set the cursor to hand when hovering over the button
+                button.setOnMouseEntered(e -> button.getScene().setCursor(Cursor.HAND));
+                button.setOnMouseExited(e -> button.getScene().setCursor(Cursor.DEFAULT));
+
                 cellController.supervisorSitesList.getChildren().add(button);
             }
 
-            items.add((AnchorPane)cell);
+
+            items.add((AnchorPane) cell);
         }
+
+// ...
+
         supervisorList.setItems(items);
     }
 
