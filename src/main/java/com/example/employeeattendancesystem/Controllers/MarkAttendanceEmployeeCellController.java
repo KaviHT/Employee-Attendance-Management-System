@@ -5,6 +5,7 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.FindOneAndUpdateOptions;
 import javafx.event.ActionEvent;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -22,6 +23,7 @@ public class MarkAttendanceEmployeeCellController {
     public Label employeeNumber, employeeName;
     private final String[] status = {"Present", "Leave", "Half Day"};
     public static List <Document> employeeList = new ArrayList<>();
+    public Button deleteReplacementBtn;
     private String DayEmp;
     MongoDBConnection mongoDBConnection = new MongoDBConnection();
     MongoDatabase Database = mongoDBConnection.getDatabase("attendence_db");

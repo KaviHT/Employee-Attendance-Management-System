@@ -84,8 +84,8 @@ public class MarkAttendanceSiteController {
 
             // Add the employee cell to the ListView
             employeeList.getItems().add((AnchorPane) employeeCell);
-
         }
+
         Database database = new Database();
 
         /*
@@ -132,13 +132,16 @@ public class MarkAttendanceSiteController {
                 // Get the controller for the employee cell
                 MarkAttendanceEmployeeCellController cellController = loader.getController();
 
-                cellController.employeeNumber.setText("X");
+                cellController.employeeNumber.setText("rep");
                 cellController.employeeName.setText(selectedItem+" (rep)");
                 cellController.employeeStatusChoice.setValue("Replacement");
+                cellController.deleteReplacementBtn.setVisible(true);
+                // Delete replacement employee functionality
+                Parent finalEmployeeCell = employeeCell;
+                cellController.deleteReplacementBtn.setOnAction(event1 -> deleteReplacementEmployee((AnchorPane) finalEmployeeCell));
 
                 // Add the employee cell to the ListView
                 employeeList.getItems().add((AnchorPane) employeeCell);
-
             }
         });
     }
@@ -147,6 +150,11 @@ public class MarkAttendanceSiteController {
         addReplacementBtn.setVisible(false);
         msgEmployeeLbl.setVisible(true);
         employeeSearchField.setVisible(true);
+    }
+
+    public void deleteReplacementEmployee(AnchorPane employeeCell) {
+        System.out.println("Replacement employee deleted");
+        employeeList.getItems().remove(employeeCell);
     }
 
     public void switchToMarkAttendance(ActionEvent event) throws IOException {
