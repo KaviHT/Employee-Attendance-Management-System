@@ -17,7 +17,7 @@
       <TextField fx:id="onTimeField" layoutX="109.0" layoutY="94.0" prefWidth="50.0" promptText="In" />
       <TextField fx:id="outTimeField" layoutX="109.0" layoutY="127.0" prefWidth="50.0" promptText="Out" />
       <TextField fx:id="noteField" layoutX="109.0" layoutY="163.0" prefHeight="25.0" prefWidth="180.0" promptText="Note" />
-      <Button fx:id="addBtn" layoutX="167.0" layoutY="467.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="64.0" styleClass="add_btn" text="Add">
+      <Button fx:id="addBtn" layoutX="167.0" layoutY="467.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="64.0" styleClass="add_btn" text="Add" onAction="#saveSpecialJobs">
          <font>
             <Font name="System Bold" size="15.0" />
          </font></Button>
