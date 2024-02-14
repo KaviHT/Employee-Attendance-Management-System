@@ -1,5 +1,11 @@
 package com.example.employeeattendancesystem.Controllers;
 
+import com.example.employeeattendancesystem.Utils.Database;
+import com.example.employeeattendancesystem.Utils.MongoDBConnection;
+import com.mongodb.client.FindIterable;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Filters;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
@@ -9,8 +15,11 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import org.bson.Document;
+import org.bson.conversions.Bson;
 
 import java.io.IOException;
+import java.time.LocalDate;
 
 public class SpecialJobsController {
     public DatePicker pickedDate;
@@ -20,21 +29,42 @@ public class SpecialJobsController {
     public Button addBtn;
     private final ObservableList<String> suggestions = FXCollections.observableArrayList();
 
+    MongoDatabase database = MongoDBConnection.getDatabase("attendence_db");
+    MongoCollection<Document> SpecialJobDataCollection = database.getCollection("special_jobs");
+    MongoCollection<Document> SpecialJobSummaryCollection = database.getCollection("special_jobs");
+
 
     public void initialize() throws IOException {
+        // Get the current month
+        LocalDate now = LocalDate.now();
+        LocalDate startOfMonth = now.withDayOfMonth(1);
+        LocalDate endOfMonth = now.withDayOfMonth(now.lengthOfMonth());
+
+        // Create a filter to get all the special jobs done during the current month
+        Bson filter = Filters.and(
+                Filters.gte("date", startOfMonth.toString()),
+                Filters.lte("date", endOfMonth.toString())
+        );
+
+        // Get all the special jobs done during the current month
+        FindIterable<Document> specialJobs = SpecialJobDataCollection.find(filter);
+
         // Create a list of items to populate the ListView
         var items = FXCollections.<AnchorPane>observableArrayList();
 
-        for (int i=0; i<5; i++) {
+        // Iterate over the special jobs
+        for (Document job : specialJobs) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Cells/SpecialJobEmployeeCell.fxml"));
             Parent cell = loader.load();
 
             SpecialJobEmployeeCellController cellController = loader.getController();
 
-            cellController.employeeNumLbl.setText(String.valueOf(i+1));
-            cellController.employeeNameLbl.setText("Employee Name");
-            cellController.siteNameLbl.setText("Site Name");
-            cellController.dateLbl.setText("date");
+            // Set the details for each job
+            cellController.employeeNameLbl.setText(job.getString("employeeName"));
+            cellController.siteNameLbl.setText(job.getString("siteName"));
+            cellController.dateLbl.setText(job.getString("date"));
+            cellController.inTimeLbl.setText(job.getString("inTime"));
+            cellController.outTimeLbl.setText(job.getString("outTime"));
 
             items.add((AnchorPane) cell);
         }
@@ -42,8 +72,10 @@ public class SpecialJobsController {
         // Set the items in the ListView
         summaryList.setItems(items);
 
+        Database database = new Database();
+
         // Populating suggestions data from the database
-        suggestions.addAll("Brian", "Sayura", "Kaivndu", "Movindu");  // <--- add site names from the database here
+        suggestions.addAll(database.getEmployeeSearchDetails());  // <--- add site names from the database here
 
         // Autocomplete functionality
         employeeSearchField.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -72,5 +104,28 @@ public class SpecialJobsController {
                 employeeList.setVisible(false);
             }
         });
+    }
+
+    public void saveSpecialJobs(){
+
+        // Get the values from the fields
+        String date = pickedDate.getValue().toString();
+        String siteName = siteNameField.getText();
+        String employeeName = employeeSearchField.getText();
+        String inTime = onTimeField.getText().isEmpty() ? "N/A" : onTimeField.getText();
+        String outTime = outTimeField.getText().isEmpty() ? "N/A" : outTimeField.getText();
+        String note = noteField.getText().isEmpty() ? "N/A" : noteField.getText();
+
+        // Create a new Document
+        Document doc = new Document("date", date)
+                .append("siteName", siteName)
+                .append("employeeName", employeeName)
+                .append("inTime", inTime)
+                .append("outTime", outTime)
+                .append("note", note);
+
+        // Add the document to the collection
+        SpecialJobDataCollection.insertOne(doc);
+
     }
 }
