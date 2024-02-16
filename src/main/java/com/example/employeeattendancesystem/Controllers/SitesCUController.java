@@ -17,6 +17,7 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import org.bson.Document;
 import com.mongodb.client.model.Updates;
+import org.bson.conversions.Bson;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -36,6 +37,12 @@ public class SitesCUController {
     public RadioButton employeeRBtn, supervisorRBtn;
     private static String theselectItem;
 
+    MongoDBConnection mongoDBConnection = new MongoDBConnection();
+
+    MongoDatabase Database = mongoDBConnection.getDatabase("attendence_db");
+    MongoCollection<Document> siteCollection = Database.getCollection("site");
+    MongoCollection<Document> EmpSearchCollection = Database.getCollection("site");
+
 
     public void setStageTitle(String windowTitle) {
         if (windowTitle.equals("Create Site")) {
@@ -45,10 +52,7 @@ public class SitesCUController {
 
             String siteNumber = theselectItem.split(" ")[0];
 
-            MongoDBConnection mongoDBConnection = new MongoDBConnection();
 
-            MongoDatabase Database = mongoDBConnection.getDatabase("attendence_db");
-            MongoCollection<Document> siteCollection = Database.getCollection("site");
 
             FindIterable<Document> documents = siteCollection.find(eq("site_id", siteNumber));
 
@@ -123,13 +127,17 @@ public class SitesCUController {
             employeeSuggestionList.setOnMouseClicked(event -> {
                 String selectedItem = employeeSuggestionList.getSelectionModel().getSelectedItem();
                 if (selectedItem != null) {
-
-                    if (!siteEmployeeList.getItems().contains(selectedItem)) {
+                    // Create a filter to find documents where 'employees' field contains the selected item
+                    Bson filter = Filters.regex("employees", selectedItem);
+                    // Find the first document that matches the filter
+                    Document doc = EmpSearchCollection.find(filter).first();
+                    if (doc != null) {
+                        System.out.println("The employee " + selectedItem + " is already added to " + doc.getString("site_details"));
+                    } else if (!siteEmployeeList.getItems().contains(selectedItem)) {
                         siteEmployeeList.getItems().add(selectedItem);
                     } else {
                         System.out.println("That employee is already added");
                     }
-
                 }
             });
             return "E";

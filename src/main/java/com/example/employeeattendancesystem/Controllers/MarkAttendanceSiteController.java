@@ -59,6 +59,7 @@ public class MarkAttendanceSiteController {
             date = DummyController.getSelectedDate();
             dateLbl.setText(String.valueOf(date));
 
+
             /*
             ADD ALL PAST RECORDS OF ATTENDANCE FROM DATABASE
              */
@@ -124,32 +125,44 @@ public class MarkAttendanceSiteController {
         employeeSuggestionList.setOnMouseClicked(event -> {
             String selectedItem = employeeSuggestionList.getSelectionModel().getSelectedItem();
             if (selectedItem != null) {
-                employeeSearchField.setText(selectedItem);
-                employeeSuggestionList.setVisible(false);
 
-                // Load the employee cell FXML
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Cells/MarkAttendanceEmployeeCell.fxml"));
-                Parent employeeCell = null;
-                try {
-                    employeeCell = loader.load();
-                } catch (IOException ignored) {}
+                // Query the database
+                Document query = new Document("site_details", siteName);
+                Document document = AtteEmpCollection.find(query).first();
 
-                // Get the controller for the employee cell
-                MarkAttendanceEmployeeCellController cellController = loader.getController();
+                if (document != null) {
+                    String employees = document.getString("employees");
+                    if (employees.contains(selectedItem)) {
+                        System.out.println("The selected employee is already in the site.");
+                    } else {
+                        employeeSearchField.setText(selectedItem);
+                        employeeSuggestionList.setVisible(false);
 
-                cellController.employeeNumber.setText("rep");
-                cellController.employeeName.setText(selectedItem+" (rep)");
-                cellController.employeeStatusChoice.setValue("Replacement");
-                cellController.deleteReplacementBtn.setVisible(true);
-                // Delete replacement employee functionality
-                Parent finalEmployeeCell = employeeCell;
-                cellController.deleteReplacementBtn.setOnAction(event1 -> deleteReplacementEmployee((AnchorPane) finalEmployeeCell));
+                        // Load the employee cell FXML
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Cells/MarkAttendanceEmployeeCell.fxml"));
+                        Parent employeeCell = null;
+                        try {
+                            employeeCell = loader.load();
+                        } catch (IOException ignored) {
+                        }
 
-                // Add the employee cell to the ListView
-                employeeList.getItems().add((AnchorPane) employeeCell);
-            }
-        });
-    }
+                        // Get the controller for the employee cell
+                        MarkAttendanceEmployeeCellController cellController = loader.getController();
+
+                        cellController.employeeNumber.setText("rep");
+                        cellController.employeeName.setText(selectedItem + " (rep)");
+                        cellController.employeeStatusChoice.setValue("Replacement");
+                        cellController.deleteReplacementBtn.setVisible(true);
+                        // Delete replacement employee functionality
+                        Parent finalEmployeeCell = employeeCell;
+                        cellController.deleteReplacementBtn.setOnAction(event1 -> deleteReplacementEmployee((AnchorPane) finalEmployeeCell));
+
+                        // Add the employee cell to the ListView
+                        employeeList.getItems().add((AnchorPane) employeeCell);}
+                    }
+                }
+            });
+        }
 
     public void addReplacementEmployee() {
         addReplacementBtn.setVisible(false);
