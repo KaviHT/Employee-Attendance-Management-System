@@ -3,6 +3,7 @@ package com.example.employeeattendancesystem.Controllers;
 import com.example.employeeattendancesystem.Utils.Database;
 import com.example.employeeattendancesystem.Utils.MongoDBConnection;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Filters;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -17,6 +18,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.Optional;
 import java.util.List;
 
@@ -33,6 +35,11 @@ public class MarkAttendanceController {
     public ListView<AnchorPane> supervisorList;
     private final ObservableList<String> suggestions = FXCollections.observableArrayList();
     public DatePicker holidayDate;
+
+    MongoDBConnection mongoDBConnection = new MongoDBConnection();
+    MongoDatabase Database = mongoDBConnection.getDatabase("attendence_db");
+    MongoCollection<Document> HolidayEmpCollection = Database.getCollection("attendence");
+    MongoCollection<Document> HolidayAtteEmpCollection = Database.getCollection("EmployeeAttendance");
 
 
     public void initialize() throws IOException {
@@ -171,7 +178,7 @@ public class MarkAttendanceController {
         alert.setHeaderText("Mark Holiday");
         alert.setContentText("Do you want to mark today: " + holiday + " as a holiday?");
 
-        // gedara iddith attendence system ekata gihilla mark karanna oneda holidays
+
 
         ButtonType okButton = new ButtonType("OK");
         ButtonType cancelButton = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
@@ -181,11 +188,42 @@ public class MarkAttendanceController {
 
         // Handle the user's response
         if (result.isPresent() && result.get() == okButton) {
-            // User clicked OK
+            // Create an instance of the Database class
+            Database db = new Database();
 
-            /*
-            Implement marking as holiday in database
-             */
+            // Get all sites
+            List<String> allSites = db.getSiteSearchDetails();
+
+            for (String site : allSites) {
+                String arrayName = holiday + "_" + site;
+
+                Document holidayDocument = new Document();
+                holidayDocument.put("empDetails", "N/A");
+                holidayDocument.put("Status", "Holiday");
+                holidayDocument.put("in_time", "N/A");
+                holidayDocument.put("out_time", "N/A");
+                holidayDocument.put("Notes", "N/A");
+
+                Document update = new Document();
+                update.put(arrayName, Arrays.asList(holidayDocument));
+
+
+
+                HolidayEmpCollection.updateOne(Filters.eq("_id", site), new Document("$set", update));
+
+            }
+
+            List<String> allEmployees = db.getEmployeeSearchDetails();
+
+            for (String empID : allEmployees) {
+                String holidayStatus ="Holiday_N/A_N/A_N/A";
+
+                Document updateEmp = new Document();
+                updateEmp.put(holiday, holidayStatus);
+
+                HolidayAtteEmpCollection.updateOne(Filters.eq("_id", empID), new Document("$set", updateEmp));
+
+            }
 
             switchToAttendanceDashboard(event);
 

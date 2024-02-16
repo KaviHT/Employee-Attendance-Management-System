@@ -25,6 +25,7 @@ public class MarkAttendanceEmployeeCellController {
     public static List <Document> employeeList = new ArrayList<>();
     public Button deleteReplacementBtn;
     private String DayEmp;
+
     MongoDBConnection mongoDBConnection = new MongoDBConnection();
     MongoDatabase Database = mongoDBConnection.getDatabase("attendence_db");
     MongoCollection<Document> AtteEmpCollection = Database.getCollection("attendence");
@@ -67,6 +68,8 @@ public class MarkAttendanceEmployeeCellController {
 
         // Call addToArray to update the employeeList with the new values
         addToArray(employeeName.getText(), employeeStatusChoice.getValue(), inTime, outTime, note);
+
+
     }
 
     public void addToArray(String employeeName, String employeeStatus, String inTime, String outTime, String note) {
@@ -106,6 +109,7 @@ public class MarkAttendanceEmployeeCellController {
             System.out.println("New employee details have been added.");
         }
         System.out.println(employeeList);
+
         saveEmployeeAttendance(employeeName,siteName,DayEmp);
     }
 
@@ -135,6 +139,8 @@ public class MarkAttendanceEmployeeCellController {
             LocalDate currentDate = LocalDate.now();
             String siteName = DummyController.getSiteName();
             String dateSiteAttendance = currentDate+"_"+siteName;
+
+
 
             Document siteAttendance = AtteEmpCollection.find(eq("_id", siteName)).first();
 
