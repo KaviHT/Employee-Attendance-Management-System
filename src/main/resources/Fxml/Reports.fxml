@@ -7,24 +7,46 @@
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.employeeattendancesystem.Controllers.ReportsController">
+<AnchorPane prefHeight="400.0" prefWidth="700.0" styleClass="container" stylesheets="@../Styles/Reports.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.employeeattendancesystem.Controllers.ReportsController">
    <children>
-      <Label alignment="CENTER" layoutY="24.0" prefHeight="17.0" prefWidth="348.0" text="Attendance Report" />
-      <Label alignment="CENTER" layoutX="350.0" layoutY="24.0" prefHeight="17.0" prefWidth="348.0" text="Special Jobs Report" />
+      <Label alignment="CENTER" layoutY="24.0" prefHeight="17.0" prefWidth="348.0" text="Attendance Report">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font></Label>
+      <Label alignment="CENTER" layoutX="350.0" layoutY="24.0" prefHeight="17.0" prefWidth="348.0" text="Special Jobs Report">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font></Label>
       <Separator layoutX="347.0" orientation="VERTICAL" prefHeight="400.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0" />
-      <Label layoutX="50.0" layoutY="77.0" text="Select Site:" />
-      <Label layoutX="51.0" layoutY="136.0" text="Start Date:" />
-      <Label layoutX="52.0" layoutY="191.0" text="End Date: " />
+      <Label layoutX="50.0" layoutY="77.0" text="Select Site:">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <Label layoutX="51.0" layoutY="136.0" text="Start Date:">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <Label layoutX="52.0" layoutY="191.0" text="End Date: ">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
       <DatePicker fx:id="atrStartDate" layoutX="50.0" layoutY="153.0" prefHeight="25.0" prefWidth="179.0" promptText="Select start date" />
       <DatePicker fx:id="atrEndDate" layoutX="50.0" layoutY="208.0" prefHeight="25.0" prefWidth="179.0" promptText="Select end date" />
       <TextField fx:id="siteSearchField" layoutX="52.0" layoutY="94.0" prefHeight="25.0" prefWidth="179.0" />
-      <Button fx:id="atrConvertBtn" layoutX="133.0" layoutY="323.0" mnemonicParsing="false" onAction="#atrConvertCSV" text="Convert CSV" />
-      <Label layoutX="404.0" layoutY="134.0" text="Start Date:" />
-      <Label layoutX="405.0" layoutY="189.0" text="End Date: " />
+      <Button fx:id="atrConvertBtn" layoutX="133.0" layoutY="323.0" mnemonicParsing="false" onAction="#atrConvertCSV" styleClass="convert_btn" text="Convert CSV" />
+      <Label layoutX="404.0" layoutY="134.0" text="Start Date:">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <Label layoutX="405.0" layoutY="189.0" text="End Date: ">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
       <DatePicker fx:id="sjrStartDate" layoutX="403.0" layoutY="151.0" prefHeight="25.0" prefWidth="179.0" promptText="Select start date" />
       <DatePicker fx:id="sjrEndDate" layoutX="403.0" layoutY="206.0" prefHeight="25.0" prefWidth="179.0" promptText="Select end date" />
-      <Button fx:id="sjrConvertBtn" layoutX="482.0" layoutY="323.0" mnemonicParsing="false" onAction="#sjrConvertCSV" text="Convert CSV" />
+      <Button fx:id="sjrConvertBtn" layoutX="482.0" layoutY="323.0" mnemonicParsing="false" onAction="#sjrConvertCSV" styleClass="convert_btn" text="Convert CSV" />
       <ListView fx:id="siteSuggestionList" layoutX="52.0" layoutY="120.0" prefHeight="190.0" prefWidth="179.0" visible="false" />
    </children>
 </AnchorPane>

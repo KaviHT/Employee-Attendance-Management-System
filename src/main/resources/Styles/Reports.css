@@ -1,0 +1,15 @@
+.container {
+    -fx-background-color: linear-gradient(to top right, white, #7db6f0);
+}
+
+.convert_btn{
+    -fx-background-color: #003F70;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.convert_btn:hover{
+    -fx-background-color: #7db6f0;
+    -fx-text-fill: #003F70;
+    -fx-cursor: hand;
+}
