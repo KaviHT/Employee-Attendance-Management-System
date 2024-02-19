@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefWidth="660.0" style="-fx-background-color: #bee0ec;" stylesheets="@../../Styles/SitesRD.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.employeeattendancesystem.Controllers.SummaryDaySiteCellController">
    <children>
@@ -16,7 +19,7 @@
          <font>
             <Font size="16.0" />
          </font></Label>
-      <Button fx:id="editBtn" layoutX="590.0" layoutY="4.0" mnemonicParsing="false" onAction="#goToEditAttendance" prefHeight="36.0" prefWidth="57.0" styleClass="edit_btn" text="Edit">
+      <Button fx:id="editBtn" layoutX="590.0" layoutY="4.0" mnemonicParsing="false" onAction="#goToEditAttendance" prefHeight="36.0" prefWidth="57.0" styleClass="edit_btn" text="Edit" visible="false">
          <font>
             <Font name="System Bold" size="14.0" />
          </font></Button>

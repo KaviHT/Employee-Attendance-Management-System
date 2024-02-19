@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="700.0" styleClass="sjobs_container" stylesheets="@../Styles/specialJobs.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.employeeattendancesystem.Controllers.SpecialJobsController">
+<AnchorPane prefHeight="600.0" prefWidth="700.0" styleClass="sjobs_container" stylesheets="@../Styles/specialJobs.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.employeeattendancesystem.Controllers.SpecialJobsController">
    <children>
       <DatePicker fx:id="pickedDate" layoutX="109.0" layoutY="23.0" prefHeight="25.0" prefWidth="180.0" />
       <TextField fx:id="siteNameField" layoutX="109.0" layoutY="57.0" prefHeight="25.0" prefWidth="180.0" />
@@ -17,31 +17,31 @@
       <TextField fx:id="onTimeField" layoutX="109.0" layoutY="94.0" prefWidth="50.0" promptText="In" />
       <TextField fx:id="outTimeField" layoutX="109.0" layoutY="127.0" prefWidth="50.0" promptText="Out" />
       <TextField fx:id="noteField" layoutX="109.0" layoutY="163.0" prefHeight="25.0" prefWidth="180.0" promptText="Note" />
-      <Button fx:id="addBtn" layoutX="167.0" layoutY="467.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="64.0" styleClass="add_btn" text="Add" onAction="#saveSpecialJobs">
+      <Button fx:id="addBtn" layoutX="167.0" layoutY="467.0" mnemonicParsing="false" onAction="#saveSpecialJobs" prefHeight="40.0" prefWidth="64.0" styleClass="add_btn" text="Add">
          <font>
             <Font name="System Bold" size="15.0" />
          </font></Button>
-      <Label layoutX="70.0" layoutY="27.0" text="Date:">
+      <Label layoutX="67.0" layoutY="27.0" text="Date:">
          <font>
             <Font name="System Bold" size="15.0" />
          </font></Label>
-      <Label layoutX="73.0" layoutY="61.0" text="Site:">
+      <Label layoutX="71.0" layoutY="61.0" text="Site:">
          <font>
             <Font name="System Bold" size="15.0" />
          </font></Label>
-      <Label layoutX="37.0" layoutY="204.0" text="Employee:">
+      <Label layoutX="27.0" layoutY="204.0" text="Employee:">
          <font>
             <Font name="System Bold" size="15.0" />
          </font></Label>
-      <Label layoutX="55.0" layoutY="98.0" text="In time:">
+      <Label layoutX="47.0" layoutY="98.0" text="In time:">
          <font>
             <Font name="System Bold" size="15.0" />
          </font></Label>
-      <Label layoutX="45.0" layoutY="131.0" text="Out time:">
+      <Label layoutX="33.0" layoutY="131.0" text="Out time:">
          <font>
             <Font name="System Bold" size="15.0" />
          </font></Label>
-      <Label layoutX="64.0" layoutY="167.0" text="Note:">
+      <Label layoutX="60.0" layoutY="167.0" text="Note:">
          <font>
             <Font name="System Bold" size="15.0" />
          </font></Label>

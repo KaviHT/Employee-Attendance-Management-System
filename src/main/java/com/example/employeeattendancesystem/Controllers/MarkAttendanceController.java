@@ -164,12 +164,6 @@ public class MarkAttendanceController {
         } catch (IOException ignored) {}
     }
 
-    public void switchToHeadOfficeSite(ActionEvent event) {
-
-        switchToMarkAttendanceSite(event, "00 Head Office");
-
-    }
-
     public void markAsHoliday(ActionEvent event) throws IOException {
         String holiday = holidayDate.getValue().toString();
 

@@ -9,14 +9,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="700.0" styleClass="attendance_container" stylesheets="@../Styles/MarkAttendanceSite.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.employeeattendancesystem.Controllers.MarkAttendanceSiteController">
+<AnchorPane prefHeight="600.0" prefWidth="700.0" styleClass="attendance_container" stylesheets="@../Styles/MarkAttendanceSite.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.employeeattendancesystem.Controllers.MarkAttendanceSiteController">
    <children>
-      <Label fx:id="siteNameLbl" layoutX="291.0" layoutY="29.0" prefHeight="65.0" prefWidth="160.0" text="Site Name">
+      <Label fx:id="siteNameLbl" alignment="CENTER" contentDisplay="CENTER" layoutX="92.0" layoutY="29.0" prefHeight="65.0" prefWidth="550.0" text="Site Name">
          <font>
             <Font name="Arial Black" size="24.0" />
          </font></Label>
       <ListView fx:id="employeeList" layoutX="20.0" layoutY="175.0" prefHeight="360.0" prefWidth="660.0" AnchorPane.bottomAnchor="65.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" />
-      <Button fx:id="saveBtn" layoutX="310.0" layoutY="547.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="95.0" styleClass="save_btn" text="Save" onAction="#save">
+      <Button fx:id="saveBtn" layoutX="310.0" layoutY="547.0" mnemonicParsing="false" onAction="#save" prefHeight="41.0" prefWidth="95.0" styleClass="save_btn" text="Save">
          <font>
             <Font name="System Bold" size="16.0" />
          </font></Button>
@@ -29,7 +29,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="addReplacementBtn" layoutX="24.0" layoutY="129.0" mnemonicParsing="false" onAction="#addReplacementEmployee" prefHeight="35.0" prefWidth="139.0" styleClass="replace_btn" text="Add a Replacement">
+      <Button fx:id="addReplacementBtn" layoutX="24.0" layoutY="129.0" mnemonicParsing="false" onAction="#addReplacementEmployee" prefHeight="35.0" prefWidth="148.0" styleClass="replace_btn" text="Add a Replacement">
          <font>
             <Font name="System Bold" size="14.0" />
          </font></Button>
@@ -38,5 +38,9 @@
       <Label fx:id="msgEmployeeLbl" layoutX="22.0" layoutY="152.0" text="Add an employee replacement:" visible="false" />
       <Label fx:id="msgAttendanceLbl" layoutX="22.0" layoutY="120.0" text="You are editing a past attendance record" visible="false" />
       <Label fx:id="dateLbl" layoutX="248.0" layoutY="120.0" text="Date" visible="false" />
+      <Label fx:id="errorLbl" layoutX="26.0" layoutY="102.0" text="Error" textFill="RED" visible="false">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
    </children>
 </AnchorPane>

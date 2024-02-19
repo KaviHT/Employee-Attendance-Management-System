@@ -29,7 +29,7 @@ public class MarkAttendanceSiteController {
 
     public Button backBtn, saveBtn, addReplacementBtn;
     public ListView<AnchorPane> employeeList;
-    public Label siteNameLbl, msgEmployeeLbl, msgAttendanceLbl, dateLbl;
+    public Label siteNameLbl, msgEmployeeLbl, msgAttendanceLbl, dateLbl, errorLbl;
     public TextField employeeSearchField;
     public ListView<String> employeeSuggestionList;
     private final ObservableList<String> suggestions = FXCollections.observableArrayList();
@@ -133,8 +133,11 @@ public class MarkAttendanceSiteController {
                 if (document != null) {
                     String employees = document.getString("employees");
                     if (employees.contains(selectedItem)) {
+                        errorLbl.setVisible(true);
+                        errorLbl.setText("The selected employee is already in the site.");
                         System.out.println("The selected employee is already in the site.");
                     } else {
+                        errorLbl.setVisible(false);
                         employeeSearchField.setText(selectedItem);
                         employeeSuggestionList.setVisible(false);
 

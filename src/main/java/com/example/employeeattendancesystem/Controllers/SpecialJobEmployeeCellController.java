@@ -19,7 +19,7 @@ import java.util.Optional;
 
 public class SpecialJobEmployeeCellController {
     public Button deleteBtn;
-    public Label employeeNumLbl, employeeNameLbl, siteNameLbl, dateLbl, inTimeLbl, outTimeLbl;
+    public Label employeeNameLbl, siteNameLbl, dateLbl, inTimeLbl, outTimeLbl;
 
     MongoDatabase database = MongoDBConnection.getDatabase("attendence_db");
     MongoCollection<Document> DelSpecialJobsCollection = database.getCollection("special_jobs");

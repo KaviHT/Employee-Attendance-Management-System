@@ -26,7 +26,7 @@
          <font>
             <Font name="System Bold" size="15.0" />
          </font></Label>
-      <Label layoutX="137.0" layoutY="101.0" text="Site Name:">
+      <Label layoutX="134.0" layoutY="101.0" text="Site Name:">
          <font>
             <Font name="System Bold" size="15.0" />
          </font></Label>
@@ -42,16 +42,16 @@
          <font>
             <Font name="System Bold" size="14.0" />
          </font></Button>
-      <Button fx:id="deleteBtn" layoutX="285.0" layoutY="378.0" mnemonicParsing="false" onAction="#deleteSite" prefHeight="32.0" prefWidth="60.0" styleClass="delete_btn" text="Delete">
+      <Button fx:id="deleteBtn" layoutX="268.0" layoutY="378.0" mnemonicParsing="false" onAction="#deleteSite" prefHeight="32.0" prefWidth="77.0" styleClass="delete_btn" text="Delete">
          <font>
             <Font name="System Bold" size="14.0" />
          </font></Button>
-      <Label layoutX="107.0" layoutY="160.0" text="Site Supervisor:">
+      <Label layoutX="102.0" layoutY="160.0" text="Site Supervisor:">
          <font>
             <Font name="System Bold" size="15.0" />
          </font></Label>
       <Label fx:id="siteSupervisorLbl" layoutX="220.0" layoutY="161.0" text=" - " />
-      <Label layoutX="110.0" layoutY="131.0" text="Working hours:">
+      <Label layoutX="102.0" layoutY="131.0" text="Working hours:">
          <font>
             <Font name="System Bold" size="15.0" />
          </font></Label>

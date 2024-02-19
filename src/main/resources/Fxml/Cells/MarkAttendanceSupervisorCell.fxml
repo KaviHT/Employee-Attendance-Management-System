@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="100.0" prefWidth="640.0" style="-fx-background-color: #d3eaf2; -fx-background-radius: 12;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.employeeattendancesystem.Controllers.MarkAttendanceSupervisorCellController">
+<AnchorPane prefHeight="100.0" prefWidth="640.0" style="-fx-background-color: #d3eaf2; -fx-background-radius: 12;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.employeeattendancesystem.Controllers.MarkAttendanceSupervisorCellController">
    <children>
       <FlowPane fx:id="supervisorSitesList" columnHalignment="CENTER" hgap="5.0" layoutX="200.0" layoutY="14.0" prefHeight="90.0" prefWidth="440.0" vgap="5.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="5.0" />
       <HBox alignment="CENTER_LEFT" prefHeight="90.0" prefWidth="200.0" spacing="5.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="5.0">
          <children>
-            <Label fx:id="supervisorNameLbl" text="Supervisor Name">
+            <Label fx:id="supervisorNameLbl" prefHeight="21.0" prefWidth="180.0" text="Supervisor Name">
                <font>
                   <Font size="15.0" />
                </font></Label>

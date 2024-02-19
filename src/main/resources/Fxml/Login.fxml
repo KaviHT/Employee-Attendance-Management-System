@@ -11,13 +11,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="login_container" stylesheets="@../Styles/login.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.employeeattendancesystem.Controllers.LoginController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="login_container" stylesheets="@../Styles/login.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.employeeattendancesystem.Controllers.LoginController">
    <children>
       <VBox prefHeight="400.0" prefWidth="200.0" styleClass="login_logo_container" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <ImageView fitHeight="120.0" fitWidth="188.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../Images/Logo%202.png" />
+                  <Image url="@../Images/Logo 2.png" />
                </image>
                <VBox.margin>
                   <Insets top="8.0" />
@@ -39,7 +39,7 @@
                <VBox.margin>
                   <Insets left="60.0" />
                </VBox.margin></Button>
-            <Label fx:id="errorLbl" styleClass="error_lbl" text="Error:" />
+            <Label fx:id="errorLbl" styleClass="error_lbl" text="Error:" visible="false" />
          </children>
       </VBox>
    </children>

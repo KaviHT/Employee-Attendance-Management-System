@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 
-<AnchorPane prefHeight="600.0" prefWidth="700.0" styleClass="summary_container" stylesheets="@../Styles/Summary.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.employeeattendancesystem.Controllers.SummaryDayController">
+<AnchorPane prefHeight="600.0" prefWidth="700.0" styleClass="summary_container" stylesheets="@../Styles/Summary.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.employeeattendancesystem.Controllers.SummaryDayController">
    <children>
       <HBox alignment="CENTER" layoutX="281.0" layoutY="43.0" prefHeight="50.0" prefWidth="200.0" spacing="10.0">
          <children>
@@ -17,7 +17,6 @@
          </children>
       </HBox>
       <ListView fx:id="daySummaryList" layoutX="57.0" layoutY="362.0" prefHeight="430.0" prefWidth="700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-      <Label fx:id="displayDateLbl" layoutX="162.0" layoutY="59.0" text="Label" />
       <Button fx:id="todayBtn" layoutX="509.0" layoutY="57.0" mnemonicParsing="false" onAction="#currentDay" prefHeight="26.0" prefWidth="65.0" styleClass="date_btn" text="Today" />
       <Label fx:id="noRecordsMsgLbl" layoutX="293.0" layoutY="144.0" text="No Records Available" visible="false" />
    </children>

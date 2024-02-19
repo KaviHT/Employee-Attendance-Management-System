@@ -18,7 +18,7 @@ import java.time.LocalDate;
 
 public class SummaryDayController {
     public Button previousDayBtn, nextDayBtn, todayBtn;
-    public Label monthLbl, dateLbl, displayDateLbl, noRecordsMsgLbl;
+    public Label monthLbl, dateLbl, noRecordsMsgLbl;
     public ListView<AnchorPane> daySummaryList;
     LocalDate dateFocus;
     MongoDatabase database = MongoDBConnection.getDatabase("attendence_db");

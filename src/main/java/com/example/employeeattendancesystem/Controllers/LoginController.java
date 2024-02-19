@@ -23,9 +23,11 @@ public class LoginController {
     public void switchToDashboard(ActionEvent event) throws IOException {
         // Account validation
         if (!usernameFld.getText().equals("1") || !passwordFld.getText().equals("1")) {
+            errorLbl.setVisible(true);
             errorLbl.setText("Wrong Username or Password");
         }
         else {
+            errorLbl.setVisible(false);
             Parent root = FXMLLoader.load(getClass().getResource("/Fxml/Dashboard.fxml"));
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);

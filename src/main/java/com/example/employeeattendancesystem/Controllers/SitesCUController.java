@@ -132,10 +132,15 @@ public class SitesCUController {
                     // Find the first document that matches the filter
                     Document doc = EmpSearchCollection.find(filter).first();
                     if (doc != null) {
-                        System.out.println("The employee " + selectedItem + " is already added to " + doc.getString("site_details"));
+                        empExistLbl.setVisible(true);
+                        empExistLbl.setText("Employee " + selectedItem + " is already in " + doc.getString("site_details"));
+                        System.out.println("Employee " + selectedItem + " is already in " + doc.getString("site_details"));
                     } else if (!siteEmployeeList.getItems().contains(selectedItem)) {
+                        empExistLbl.setVisible(false);
                         siteEmployeeList.getItems().add(selectedItem);
                     } else {
+                        empExistLbl.setVisible(true);
+                        empExistLbl.setText("That employee is already added");
                         System.out.println("That employee is already added");
                     }
                 }
@@ -289,7 +294,7 @@ public class SitesCUController {
 
             newSiteCollection.replaceOne(Filters.eq("site_id", siteIDField.getText()), existingSite);
 
-            // Information alert for the user to indicate the edit of an Site
+            // Information alert for the user to indicate the edit of a Site
             Alert siteEdited = new Alert(Alert.AlertType.INFORMATION);
             siteEdited.setTitle("Site Edit Saved");
             siteEdited.setHeaderText(null); // No header text
