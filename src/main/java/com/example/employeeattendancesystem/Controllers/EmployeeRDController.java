@@ -62,6 +62,10 @@ public class EmployeeRDController {
             if (selectedItem != null) {
                 employeeSearchField.setText(selectedItem);
                 employeeSuggestionList.setVisible(false);
+
+                // Pass the selected employee to the EmployeeCU class
+                EmployeeCUController cuController = new EmployeeCUController();
+                cuController.receiveSelectedItem(selectedItem);
             }
         });
     }

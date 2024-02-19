@@ -57,7 +57,7 @@ public class EmployeeCUController {
                 String dateOfBirth = document.getString("dateOfBirth");
                 String contactNumber = document.getString("contactNumber");
 
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
                 LocalDate date = LocalDate.parse(dateOfBirth, formatter);
 
                 employeeNumberField.setText(empId);
@@ -69,6 +69,12 @@ public class EmployeeCUController {
                 addressField.setText(empAddress);
             }
         }
+    }
+
+    // Get the selectedItem from the EmployeeRD class
+    public void receiveSelectedItem(String selectedItem) {
+        System.out.println("Received item in AnotherClass: " + selectedItem);
+        theItem = selectedItem;
     }
 
     public void saveEmployee(ActionEvent event) {
