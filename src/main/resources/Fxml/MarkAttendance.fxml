@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="700.0" styleClass="attendance_container" stylesheets="@../Styles/MarkAttendance.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.employeeattendancesystem.Controllers.MarkAttendanceController">
+<AnchorPane fx:id="anchorPane" prefHeight="600.0" prefWidth="700.0" styleClass="attendance_container" stylesheets="@../Styles/MarkAttendance.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.employeeattendancesystem.Controllers.MarkAttendanceController">
    <children>
       <TextField fx:id="siteSearchField" layoutX="306.0" layoutY="23.0" prefHeight="26.0" prefWidth="200.0" />
       <Label layoutX="208.0" layoutY="23.0" prefHeight="26.0" prefWidth="88.0" text="Search Site:" textFill="#003f70">

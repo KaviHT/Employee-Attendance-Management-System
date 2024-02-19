@@ -12,6 +12,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.apache.poi.ss.usermodel.Row;
@@ -33,6 +35,7 @@ import java.util.List;
 import java.util.Map;
 
 public class ReportsController {
+    public AnchorPane anchorPane;
     public DatePicker atrStartDate, atrEndDate, sjrStartDate, sjrEndDate;
     public Button atrConvertBtn, sjrConvertBtn;
     public ListView<String> siteSuggestionList;
@@ -93,6 +96,13 @@ public class ReportsController {
                 siteCU.receiveSelectedItem(selectedItem);
             }
         });
+
+        anchorPane.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
+            if (!event.getTarget().equals(siteSearchField) && !event.getTarget().equals(siteSuggestionList)) {
+                siteSuggestionList.setVisible(false);
+            }
+        });
+
     }
 
     public void atrConvertCSV(ActionEvent event) {

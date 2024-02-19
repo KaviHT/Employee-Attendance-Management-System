@@ -13,6 +13,8 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.bson.Document;
 
@@ -24,10 +26,12 @@ import static com.mongodb.client.model.Filters.eq;
 public class EmployeeRDController {
 
     public Button backBtn, searchBtn, createBtn, deleteBtn, editBtn;
+    public AnchorPane anchorPane;
     public Label employeeNumberLbl, firstNameLbl, lastNameLbl, genderLbl, dobLbl, contactNumberLbl, addressLbl;
     public TextField employeeSearchField;
     public ListView<String> employeeSuggestionList;
     private final ObservableList<String> suggestions = FXCollections.observableArrayList();
+
     MongoDatabase database = MongoDBConnection.getDatabase("attendence_db");
     MongoCollection<Document> EmployeeDataCollection = database.getCollection("employee");
 
@@ -62,12 +66,19 @@ public class EmployeeRDController {
             if (selectedItem != null) {
                 employeeSearchField.setText(selectedItem);
                 employeeSuggestionList.setVisible(false);
-
+                searchEmployee();
                 // Pass the selected employee to the EmployeeCU class
                 EmployeeCUController cuController = new EmployeeCUController();
                 cuController.receiveSelectedItem(selectedItem);
             }
         });
+
+        anchorPane.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
+            if (!event.getTarget().equals(employeeSearchField) && !event.getTarget().equals(employeeSuggestionList)) {
+                employeeSuggestionList.setVisible(false);
+            }
+        });
+
     }
 
     public void switchToDashboard(ActionEvent event) throws IOException {

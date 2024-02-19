@@ -14,6 +14,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.bson.Document;
@@ -28,6 +29,7 @@ import java.util.Optional;
 public class MarkAttendanceSiteController {
 
     public Button backBtn, saveBtn, addReplacementBtn;
+    public AnchorPane anchorPane;
     public ListView<AnchorPane> employeeList;
     public Label siteNameLbl, msgEmployeeLbl, msgAttendanceLbl, dateLbl, errorLbl;
     public TextField employeeSearchField;
@@ -161,11 +163,18 @@ public class MarkAttendanceSiteController {
                         cellController.deleteReplacementBtn.setOnAction(event1 -> deleteReplacementEmployee((AnchorPane) finalEmployeeCell));
 
                         // Add the employee cell to the ListView
-                        employeeList.getItems().add((AnchorPane) employeeCell);}
+                        employeeList.getItems().add((AnchorPane) employeeCell);
                     }
                 }
-            });
-        }
+            }
+        });
+
+        anchorPane.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
+            if (!event.getTarget().equals(employeeSearchField) && !event.getTarget().equals(employeeSuggestionList)) {
+                employeeSuggestionList.setVisible(false);
+            }
+        });
+    }
 
     public void addReplacementEmployee() {
         addReplacementBtn.setVisible(false);

@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="sites_container" stylesheets="@../Styles/SitesRD.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.employeeattendancesystem.Controllers.EmployeeRDController">
+<AnchorPane fx:id="anchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="sites_container" stylesheets="@../Styles/SitesRD.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.employeeattendancesystem.Controllers.EmployeeRDController">
    <children>
       <Button fx:id="backBtn" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#switchToDashboard" styleClass="back_btn">
          <graphic>
@@ -124,6 +124,6 @@
          <font>
             <Font name="System Bold" size="14.0" />
          </font></Button>
-      <ListView fx:id="employeeSuggestionList" layoutX="141.0" layoutY="38.0" prefHeight="200.0" prefWidth="200.0" visible="false" />
+      <ListView fx:id="employeeSuggestionList" layoutX="131.0" layoutY="38.0" prefHeight="200.0" prefWidth="210.0" visible="false" />
    </children>
 </AnchorPane>

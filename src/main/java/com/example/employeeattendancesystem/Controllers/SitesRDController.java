@@ -15,6 +15,8 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.bson.Document;
 
@@ -26,11 +28,13 @@ import static com.mongodb.client.model.Filters.eq;
 public class SitesRDController {
 
     public Button backBtn, searchBtn, createBtn, editBtn, deleteBtn;
+    public AnchorPane anchorPane;
     public TextField siteSearchField;
     public ListView<String> siteSuggestionList;
     public ListView<String> siteEmployeeList;
     public Label siteIDLbl, siteNameLbl, siteSupervisorLbl, workingHoursLbl;
     private final ObservableList<String> suggestions = FXCollections.observableArrayList();
+
     MongoDatabase database = MongoDBConnection.getDatabase("attendence_db");
     MongoCollection<Document> SiteDataCollection = database.getCollection("site");
     MongoCollection<Document> siteSupCollection = database.getCollection("siteSupervisor");
@@ -66,13 +70,21 @@ public class SitesRDController {
             if (selectedItem != null) {
                 siteSearchField.setText(selectedItem);
                 siteSuggestionList.setVisible(false);
+                searchSite();
                 SitesCUController siteCU = new SitesCUController();
                 siteCU.receiveSelectedItem(selectedItem);
             }
         });
+
+        anchorPane.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
+            if (!event.getTarget().equals(siteSearchField) && !event.getTarget().equals(siteSuggestionList)) {
+                siteSuggestionList.setVisible(false);
+            }
+        });
+
     }
 
-    public void searchSite(ActionEvent event) {
+    public void searchSite() {
 
         String empNumber = siteSearchField.getText().split(" ")[0];
 

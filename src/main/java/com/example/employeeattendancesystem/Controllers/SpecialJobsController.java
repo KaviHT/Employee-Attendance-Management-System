@@ -10,10 +10,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import org.bson.Document;
 import org.bson.conversions.Bson;
@@ -22,6 +20,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 
 public class SpecialJobsController {
+    public AnchorPane anchorPane;
     public DatePicker pickedDate;
     public TextField siteNameField, employeeSearchField, onTimeField, outTimeField, noteField;
     public ListView<String> employeeList;
@@ -29,48 +28,14 @@ public class SpecialJobsController {
     public Button addBtn;
     private final ObservableList<String> suggestions = FXCollections.observableArrayList();
 
+
     MongoDatabase database = MongoDBConnection.getDatabase("attendence_db");
     MongoCollection<Document> SpecialJobDataCollection = database.getCollection("special_jobs");
     MongoCollection<Document> SpecialJobSummaryCollection = database.getCollection("special_jobs");
 
 
     public void initialize() throws IOException {
-        // Get the current month
-        LocalDate now = LocalDate.now();
-        LocalDate startOfMonth = now.withDayOfMonth(1);
-        LocalDate endOfMonth = now.withDayOfMonth(now.lengthOfMonth());
-
-        // Create a filter to get all the special jobs done during the current month
-        Bson filter = Filters.and(
-                Filters.gte("date", startOfMonth.toString()),
-                Filters.lte("date", endOfMonth.toString())
-        );
-
-        // Get all the special jobs done during the current month
-        FindIterable<Document> specialJobs = SpecialJobDataCollection.find(filter);
-
-        // Create a list of items to populate the ListView
-        var items = FXCollections.<AnchorPane>observableArrayList();
-
-        // Iterate over the special jobs
-        for (Document job : specialJobs) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Cells/SpecialJobEmployeeCell.fxml"));
-            Parent cell = loader.load();
-
-            SpecialJobEmployeeCellController cellController = loader.getController();
-
-            // Set the details for each job
-            cellController.employeeNameLbl.setText(job.getString("employeeName"));
-            cellController.siteNameLbl.setText(job.getString("siteName"));
-            cellController.dateLbl.setText(job.getString("date"));
-            cellController.inTimeLbl.setText(job.getString("inTime"));
-            cellController.outTimeLbl.setText(job.getString("outTime"));
-
-            items.add((AnchorPane) cell);
-        }
-
-        // Set the items in the ListView
-        summaryList.setItems(items);
+        loadSpecialJobs();
 
         Database database = new Database();
 
@@ -104,9 +69,15 @@ public class SpecialJobsController {
                 employeeList.setVisible(false);
             }
         });
+
+        anchorPane.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
+            if (!event.getTarget().equals(employeeSearchField) && !event.getTarget().equals(employeeList)) {
+                employeeList.setVisible(false);
+            }
+        });
     }
 
-    public void saveSpecialJobs(){
+    public void saveSpecialJobs() throws IOException {
 
         // Get the values from the fields
         String date = pickedDate.getValue().toString();
@@ -127,5 +98,41 @@ public class SpecialJobsController {
         // Add the document to the collection
         SpecialJobDataCollection.insertOne(doc);
 
+        // Information alert for the user to indicate creation of a special job
+        Alert siteCreated = new Alert(Alert.AlertType.INFORMATION);
+        siteCreated.setTitle("New Special Job Added");
+        siteCreated.setHeaderText(null); // No header text
+        siteCreated.setContentText("New Special Job Created Successfully");
+
+        siteCreated.showAndWait();
+        loadSpecialJobs();
+    }
+
+    private void loadSpecialJobs() throws IOException {
+        LocalDate now = LocalDate.now();
+        LocalDate startOfMonth = now.withDayOfMonth(1);
+        LocalDate endOfMonth = now.withDayOfMonth(now.lengthOfMonth());
+        Bson filter = Filters.and(
+                Filters.gte("date", startOfMonth.toString()),
+                Filters.lte("date", endOfMonth.toString())
+        );
+        FindIterable<Document> specialJobs = SpecialJobDataCollection.find(filter);
+        var items = FXCollections.<AnchorPane>observableArrayList();
+        for (Document job : specialJobs) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Cells/SpecialJobEmployeeCell.fxml"));
+            Parent cell = loader.load();
+
+            SpecialJobEmployeeCellController cellController = loader.getController();
+
+            // Set the details for each job
+            cellController.employeeNameLbl.setText(job.getString("employeeName"));
+            cellController.siteNameLbl.setText(job.getString("siteName"));
+            cellController.dateLbl.setText(job.getString("date"));
+            cellController.inTimeLbl.setText(job.getString("inTime"));
+            cellController.outTimeLbl.setText(job.getString("outTime"));
+
+            items.add((AnchorPane) cell);
+        }
+        summaryList.setItems(items);
     }
 }

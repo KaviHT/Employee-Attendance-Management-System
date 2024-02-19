@@ -13,6 +13,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -29,8 +30,9 @@ import javafx.scene.paint.Color;
 
 
 public class MarkAttendanceController {
+    public AnchorPane anchorPane;
     public TextField siteSearchField;
-    public Button markHolidayBtn, headOfficeBtn;
+    public Button markHolidayBtn;
     public ListView<String> siteSuggestionList;
     public ListView<AnchorPane> supervisorList;
     private final ObservableList<String> suggestions = FXCollections.observableArrayList();
@@ -84,6 +86,12 @@ public class MarkAttendanceController {
                 } catch (IOException ignored) {}
 
                 siteSearchField.setText(selectedItem);
+                siteSuggestionList.setVisible(false);
+            }
+        });
+
+        anchorPane.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
+            if (!event.getTarget().equals(siteSearchField) && !event.getTarget().equals(siteSuggestionList)) {
                 siteSuggestionList.setVisible(false);
             }
         });
