@@ -5,6 +5,7 @@ import com.example.employeeattendancesystem.Utils.MongoDBConnection;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
+import com.mongodb.client.model.Updates;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -16,9 +17,11 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.bson.Document;
+import org.bson.conversions.Bson;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
 
@@ -35,6 +38,8 @@ public class MarkAttendanceSiteController {
     MongoDBConnection mongoDBConnection = new MongoDBConnection();
     MongoDatabase Database = mongoDBConnection.getDatabase("attendence_db");
     MongoCollection<Document> AtteEmpCollection = Database.getCollection("site");
+    MongoCollection<Document> RepDelCollection = Database.getCollection("attendence");
+    MongoCollection<Document> RepDelEmpCollection = Database.getCollection("EmployeeAttendance");
 
 
     public void initialize() throws IOException {
@@ -46,13 +51,14 @@ public class MarkAttendanceSiteController {
         String siteName = DummyController.getSiteName();
         siteNameLbl.setText(siteName);
 
-
+        // Checking if the user is editing or not
         if (DummyController.getEditStatus()) {
             msgAttendanceLbl.setVisible(true);
             dateLbl.setVisible(true);
 
             date = DummyController.getSelectedDate();
             dateLbl.setText(String.valueOf(date));
+
 
             /*
             ADD ALL PAST RECORDS OF ATTENDANCE FROM DATABASE
@@ -119,32 +125,44 @@ public class MarkAttendanceSiteController {
         employeeSuggestionList.setOnMouseClicked(event -> {
             String selectedItem = employeeSuggestionList.getSelectionModel().getSelectedItem();
             if (selectedItem != null) {
-                employeeSearchField.setText(selectedItem);
-                employeeSuggestionList.setVisible(false);
 
-                // Load the employee cell FXML
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Cells/MarkAttendanceEmployeeCell.fxml"));
-                Parent employeeCell = null;
-                try {
-                    employeeCell = loader.load();
-                } catch (IOException ignored) {}
+                // Query the database
+                Document query = new Document("site_details", siteName);
+                Document document = AtteEmpCollection.find(query).first();
 
-                // Get the controller for the employee cell
-                MarkAttendanceEmployeeCellController cellController = loader.getController();
+                if (document != null) {
+                    String employees = document.getString("employees");
+                    if (employees.contains(selectedItem)) {
+                        System.out.println("The selected employee is already in the site.");
+                    } else {
+                        employeeSearchField.setText(selectedItem);
+                        employeeSuggestionList.setVisible(false);
 
-                cellController.employeeNumber.setText("rep");
-                cellController.employeeName.setText(selectedItem+" (rep)");
-                cellController.employeeStatusChoice.setValue("Replacement");
-                cellController.deleteReplacementBtn.setVisible(true);
-                // Delete replacement employee functionality
-                Parent finalEmployeeCell = employeeCell;
-                cellController.deleteReplacementBtn.setOnAction(event1 -> deleteReplacementEmployee((AnchorPane) finalEmployeeCell));
+                        // Load the employee cell FXML
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Cells/MarkAttendanceEmployeeCell.fxml"));
+                        Parent employeeCell = null;
+                        try {
+                            employeeCell = loader.load();
+                        } catch (IOException ignored) {
+                        }
 
-                // Add the employee cell to the ListView
-                employeeList.getItems().add((AnchorPane) employeeCell);
-            }
-        });
-    }
+                        // Get the controller for the employee cell
+                        MarkAttendanceEmployeeCellController cellController = loader.getController();
+
+                        cellController.employeeNumber.setText("rep");
+                        cellController.employeeName.setText(selectedItem + " (rep)");
+                        cellController.employeeStatusChoice.setValue("Replacement");
+                        cellController.deleteReplacementBtn.setVisible(true);
+                        // Delete replacement employee functionality
+                        Parent finalEmployeeCell = employeeCell;
+                        cellController.deleteReplacementBtn.setOnAction(event1 -> deleteReplacementEmployee((AnchorPane) finalEmployeeCell));
+
+                        // Add the employee cell to the ListView
+                        employeeList.getItems().add((AnchorPane) employeeCell);}
+                    }
+                }
+            });
+        }
 
     public void addReplacementEmployee() {
         addReplacementBtn.setVisible(false);
@@ -154,8 +172,54 @@ public class MarkAttendanceSiteController {
 
     public void deleteReplacementEmployee(AnchorPane employeeCell) {
         System.out.println("Replacement employee deleted");
+        String siteName = DummyController.getSiteName();
+
+        LocalDate date = LocalDate.now(); // Get today's date
+
+// Create a formatter for the desired pattern
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("YYYY-MM-dd");
+
+// Convert the LocalDate to a String
+        String DayEmp = date.format(formatter);
+        System.out.println(date);
+
+
+        Label employeeNameLabel = (Label) employeeCell.lookup("#employeeName");
+        if (employeeNameLabel != null) {
+            System.out.println("employee: " + employeeNameLabel.getText());
+
+            // Iterate over the employeeList
+            for (Document doc : MarkAttendanceEmployeeCellController.employeeList) {
+                // Check if the employeeNameLabel text is in the empDetails of the document
+                if (doc.get("empDetails").toString().contains(employeeNameLabel.getText())) {
+                    // Remove the document from the list
+                    MarkAttendanceEmployeeCellController.employeeList.remove(doc);
+                    break;
+                }
+            }
+
+            // Create a filter to find the document
+            Bson filter = Filters.and(
+                    Filters.eq("_id", employeeNameLabel.getText()),
+                    Filters.eq("Site", siteName)
+            );
+
+            // Create an update operation to remove the field
+            Bson update = Updates.unset(DayEmp);
+
+            // Update the document
+            RepDelEmpCollection.updateOne(filter, update);
+        }
+
+
+
+        System.out.println(MarkAttendanceEmployeeCellController.employeeList);
+
         employeeList.getItems().remove(employeeCell);
     }
+
+
+
 
     public void switchToMarkAttendance(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/Fxml/ViewFactory/MarkAttendanceView.fxml"));

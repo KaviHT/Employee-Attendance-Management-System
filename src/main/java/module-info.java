@@ -4,6 +4,7 @@ module com.example.employeeattendancesystem {
     requires org.mongodb.driver.sync.client;
     requires org.mongodb.bson;
     requires org.mongodb.driver.core;
+    requires org.apache.poi.ooxml;
 
 
     opens com.example.employeeattendancesystem to javafx.fxml;

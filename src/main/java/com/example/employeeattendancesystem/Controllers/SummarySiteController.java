@@ -103,7 +103,13 @@ public class SummarySiteController {
                 String attendanceData = doc.getString(dateKey);
                 if (attendanceData != null) {
                     String[] parts = attendanceData.split("_");
-                    String attendanceStatus = parts[0];  // Attendance status is the first element
+                    String attendanceStatus = parts[0];// Attendance status is the first element
+                    String InTime=parts[1];
+                    String OutTime=parts[2];
+                    String Notes=parts[3];
+
+                    Tooltip tooltip = new Tooltip("InTime: " + InTime + "\nOutTime: " + OutTime + "\nNotes: " + Notes);
+                    Tooltip.install(dayStatusLbl, tooltip);
 
                     // If the employee is present, mark the date in green
                     if ("Present".equals(attendanceStatus)) {
@@ -117,7 +123,7 @@ public class SummarySiteController {
                     else if ("Half Day".equals(attendanceStatus)) {
                         dayStatusLbl.setTextFill(Color.ORANGE);
                     } else if ("Replacement".equals(attendanceStatus)) {
-                        dayStatusLbl.setTextFill(Color.CHOCOLATE);
+                        dayStatusLbl.setTextFill(Color.BLUE);
 
                     }
                 }
