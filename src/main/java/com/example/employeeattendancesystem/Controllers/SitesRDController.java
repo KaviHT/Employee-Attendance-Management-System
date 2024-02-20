@@ -63,8 +63,6 @@ public class SitesRDController {
         });
 
         // Handle item selection from the suggestion list
-        // ----- call the searchSite method inside this method -----
-        // ----- make a way to hide the list view when you don't want to search anything -----
         siteSuggestionList.setOnMouseClicked(event -> {
             String selectedItem = siteSuggestionList.getSelectionModel().getSelectedItem();
             if (selectedItem != null) {
@@ -81,7 +79,6 @@ public class SitesRDController {
                 siteSuggestionList.setVisible(false);
             }
         });
-
     }
 
     public void searchSite() {
@@ -101,7 +98,6 @@ public class SitesRDController {
             siteSupervisorLbl.setText(supDetails);
             workingHoursLbl.setText(workingHours);
             siteEmployeeList.getItems().add(empList);
-
             siteEmployeeList.getItems().clear();
 
             // Split the employee list and add each employee to the ListView
@@ -147,7 +143,6 @@ public class SitesRDController {
             String siteID = siteIDLbl.getText();
             String siteName=siteNameLbl.getText();
             String fullSiteName= siteID+ " " +siteName;
-
             String SiteNumber = siteSearchField.getText().split(" ")[0];
 
             // Delete the document from the collection

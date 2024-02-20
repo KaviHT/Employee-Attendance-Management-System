@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchorPane" prefHeight="600.0" prefWidth="700.0" styleClass="attendance_container" stylesheets="@../Styles/MarkAttendanceSite.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.employeeattendancesystem.Controllers.MarkAttendanceSiteController">
+<AnchorPane fx:id="anchorPane" prefHeight="600.0" prefWidth="700.0" styleClass="attendance_container" stylesheets="@../Styles/mark-attendance-site.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.employeeattendancesystem.Controllers.MarkAttendanceSiteController">
    <children>
       <Label fx:id="siteNameLbl" alignment="CENTER" contentDisplay="CENTER" layoutX="92.0" layoutY="29.0" prefHeight="65.0" prefWidth="550.0" text="Site Name">
          <font>

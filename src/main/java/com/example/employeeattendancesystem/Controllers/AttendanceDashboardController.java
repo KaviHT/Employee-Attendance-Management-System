@@ -48,7 +48,7 @@ public class AttendanceDashboardController {
             siteCellController.siteNumberLbl.setText(String.valueOf(i+1));
             String siteName = site.getString("site_details");
 
-            siteCellController.siteNameLbl.setText(siteName); // assuming site_details is a string
+            siteCellController.siteNameLbl.setText(siteName);
 
             // Get today's date
             String today = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
@@ -75,6 +75,7 @@ public class AttendanceDashboardController {
                     }
                 }
             }
+
             totalPresentCount += presentCount;
             totalLeaveCount += leaveCount;
             totalHalfDayCount += halfDayCount;
@@ -86,6 +87,7 @@ public class AttendanceDashboardController {
             items.add((AnchorPane) cell);
             i++;
         }
+
         presentCountLbl.setText(String.valueOf(totalPresentCount));
         leaveCountLbl.setText(String.valueOf(totalLeaveCount));
         halfDayCountLbl.setText(String.valueOf(totalHalfDayCount));
@@ -98,7 +100,6 @@ public class AttendanceDashboardController {
                 // Iterate through the items to find a match
                 for (int j = 0; j < items.size(); j++) {
                     String labelText =((Label) items.get(j).lookup("#siteNameLbl")).getText().toLowerCase();
-                    String searchText = newValue.toLowerCase();
                     if (labelText.contains(newValue)) {
                         // Scroll to the matched item
                         allSitesListView.scrollTo(j);

@@ -119,8 +119,9 @@ public class EmployeeCUController {
             empCreated.showAndWait();
             clearInputFields();
 
+        }
         // Implementation of editing an existing Employee
-        } else if (titleLbl.getText().equals("Edit Employee")) {
+        else if (titleLbl.getText().equals("Edit Employee")) {
 
             Document existingEmployee = employeeCollection.find(Filters.eq("emp_id", employeeNumberField.getText())).first();
             // update the employee details

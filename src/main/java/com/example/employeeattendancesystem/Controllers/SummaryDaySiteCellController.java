@@ -28,6 +28,7 @@ public class SummaryDaySiteCellController {
     public ListView<AnchorPane> siteEmployeeList;
     public Label siteNameLbl;
     public Button editBtn;
+
     MongoDatabase database = MongoDBConnection.getDatabase("attendence_db");
     MongoCollection<Document> AttendanceDataCollection = database.getCollection("attendence");
     LocalDate date = DummyController.getSelectedDate();

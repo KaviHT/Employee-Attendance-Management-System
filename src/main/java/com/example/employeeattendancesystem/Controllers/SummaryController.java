@@ -42,10 +42,9 @@ public class SummaryController {
         today = ZonedDateTime.now();
         drawCalendar();
 
-        // Sample data to work with - REMOVE in final
         // Populating suggestions data from the database
         Database database = new Database();
-        suggestions.addAll(database.getSiteSearchDetails());  // <--- add the database here
+        suggestions.addAll(database.getSiteSearchDetails());
 
         // Autocomplete functionality
         siteSearchField.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -65,12 +64,9 @@ public class SummaryController {
         });
 
         // Handle item selection from the suggestion list
-        // ----- call the switch method inside this method -----
-        // ----- make a way to hide the list view when you don't want to search anything -----
         siteSuggestionList.setOnMouseClicked(event -> {
             String selectedItem = siteSuggestionList.getSelectionModel().getSelectedItem();
             if (selectedItem != null) {
-
                 try {
                     DummyController.setSiteName(selectedItem);
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/ViewFactory/SummarySiteView.fxml"));

@@ -44,7 +44,6 @@ public class ReportsController {
     private String selectedItem;
 
     MongoDBConnection mongoDBConnection = new MongoDBConnection();
-
     MongoDatabase Database = mongoDBConnection.getDatabase("attendence_db");
     MongoCollection<Document> PrintEmpCollection = Database.getCollection("EmployeeAttendance");
     MongoCollection<Document> SpJobPrintCollection = Database.getCollection("special_jobs");
@@ -85,8 +84,6 @@ public class ReportsController {
         });
 
         // Handle item selection from the suggestion list
-        // ----- call the searchSite method inside this method -----
-        // ----- make a way to hide the list view when you don't want to search anything -----
         siteSuggestionList.setOnMouseClicked(event -> {
             selectedItem = siteSuggestionList.getSelectionModel().getSelectedItem();
             if (selectedItem != null) {
@@ -102,14 +99,12 @@ public class ReportsController {
                 siteSuggestionList.setVisible(false);
             }
         });
-
     }
 
     public void atrConvertCSV(ActionEvent event) {
         if (dateInputValidation(atrStartDate, atrEndDate)) {
             String startDate = atrStartDate.getValue().toString();
             String endDate = atrEndDate.getValue().toString();
-
 
             FindIterable<Document> documents;
 
@@ -186,9 +181,7 @@ public class ReportsController {
                 }
                 // Merge cells in the "Site" column for this group of records
                 sheet.addMergedRegion(new CellRangeAddress(startRow, rowIndex - 1, 0, 0));
-
             }
-
             // Save the workbook to a file
             filePathSelection(startDate, endDate, "Attendance Report", "Attendance_Report_" + selectedItem.replace(" ", "-") + "_", workbook);
         }
@@ -200,7 +193,6 @@ public class ReportsController {
             String endDate = sjrEndDate.getValue().toString();
 
             // Fetch the documents from the database
-
             Bson filter = Filters.and(Filters.gte("date", startDate), Filters.lte("date", endDate));
             FindIterable<Document> documents = SpJobPrintCollection.find(filter);
 
@@ -237,6 +229,7 @@ public class ReportsController {
     private void filePathSelection(String startDate, String endDate, String title, String fileName, Workbook workbook) {
         // Open the file path selection window
         FileChooser fileChooser = new FileChooser();
+
         // Set extension filter for Excel files
         FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Excel files (*.xlsx)", "*.xlsx");
         fileChooser.getExtensionFilters().add(extFilter);
@@ -255,12 +248,9 @@ public class ReportsController {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
             System.out.println("Save path selected: " + file.getPath());
         }
     }
-
-
 
     private boolean dateInputValidation(DatePicker startDatePicker, DatePicker endDatePicker) {
         LocalDate startDate = startDatePicker.getValue();

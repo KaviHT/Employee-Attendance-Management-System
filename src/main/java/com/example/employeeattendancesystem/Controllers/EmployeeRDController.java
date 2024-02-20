@@ -59,8 +59,6 @@ public class EmployeeRDController {
         });
 
         // Handle item selection from the suggestion list
-        // ----- call the searchEmployee method inside this method -----
-        // ----- make a way to hide the list view when you don't want to search anything -----
         employeeSuggestionList.setOnMouseClicked(event -> {
             String selectedItem = employeeSuggestionList.getSelectionModel().getSelectedItem();
             if (selectedItem != null) {
@@ -76,10 +74,8 @@ public class EmployeeRDController {
         anchorPane.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
             if (!event.getTarget().equals(employeeSearchField) && !event.getTarget().equals(employeeSuggestionList)) {
                 employeeSuggestionList.setVisible(false);
-
             }
         });
-
     }
 
     public void switchToDashboard(ActionEvent event) throws IOException {
@@ -92,10 +88,7 @@ public class EmployeeRDController {
     }
 
     public void searchEmployee() {
-
-
         String empNumber = employeeSearchField.getText().split(" ")[0];
-
 
         FindIterable<Document> documents = EmployeeDataCollection.find(eq("emp_id", empNumber));
         for (Document document : documents) {
@@ -157,7 +150,6 @@ public class EmployeeRDController {
             contactNumberLbl.setText("");
             addressLbl.setText("");
             employeeSearchField.clear();
-
         } else {
             // User clicked Cancel or closed the alert
         }

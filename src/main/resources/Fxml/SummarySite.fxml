@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="900.0" styleClass="summary_container" stylesheets="@../Styles/Summary.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.employeeattendancesystem.Controllers.SummarySiteController">
+<AnchorPane prefHeight="600.0" prefWidth="900.0" styleClass="summary_container" stylesheets="@../Styles/summary.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.employeeattendancesystem.Controllers.SummarySiteController">
    <children>
       <Label fx:id="siteNameLbl" layoutX="20.0" layoutY="27.0" prefHeight="27.0" prefWidth="260.0" text="Site Name">
          <font>

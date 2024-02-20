@@ -25,6 +25,7 @@ public class SummarySiteController {
     public ListView<AnchorPane> employeeList;
     public Button previousMonthBtn, nextMonthBtn, thisMonthBtn;
     LocalDate dateFocus;
+
     MongoDatabase database = MongoDBConnection.getDatabase("attendence_db");
     MongoCollection<Document> DaySiteSummaryDataCollection = database.getCollection("EmployeeAttendance");
 

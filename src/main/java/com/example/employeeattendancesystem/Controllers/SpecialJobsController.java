@@ -60,8 +60,6 @@ public class SpecialJobsController {
         });
 
         // Handle item selection from the suggestion list
-        // ----- call the searchSite method inside this method -----
-        // ----- make a way to hide the list view when you don't want to search anything -----
         employeeList.setOnMouseClicked(event -> {
             String selectedItem = employeeList.getSelectionModel().getSelectedItem();
             if (selectedItem != null) {

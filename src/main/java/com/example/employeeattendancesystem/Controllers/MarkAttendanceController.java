@@ -47,8 +47,9 @@ public class MarkAttendanceController {
     public void initialize() throws IOException {
 
         Database database = new Database();
+
         // Populating suggestions data from the database
-        suggestions.addAll(database.getSiteSearchDetails());  // <--- add the database here
+        suggestions.addAll(database.getSiteSearchDetails());
 
         // Autocomplete functionality
         siteSearchField.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -68,8 +69,6 @@ public class MarkAttendanceController {
         });
 
         // Handle item selection from the suggestion list
-        // ----- call the searchSite method inside this method -----
-        // ----- make a way to hide the list view when you don't want to search anything -----
         siteSuggestionList.setOnMouseClicked(event -> {
             String selectedItem = siteSuggestionList.getSelectionModel().getSelectedItem();
             if (selectedItem != null) {
@@ -107,8 +106,6 @@ public class MarkAttendanceController {
 
         var items = FXCollections.<AnchorPane>observableArrayList();
 
-        // ...
-
         for (Document doc : supCollection.find()) {
             String supName = (String) doc.get("supName");
             List<String> sites = (List<String>) doc.get("sites");
@@ -119,7 +116,6 @@ public class MarkAttendanceController {
             MarkAttendanceSupervisorCellController cellController = loader.getController();
 
             cellController.supervisorNameLbl.setText(supName);
-
 
             String[] buttonColors = {"#0082e6", "#0091ff", "#1a9cff", "#33a7ff", "#4db2ff", "#66bdff", "#80c8ff", "#99d3ff"};
 
@@ -136,22 +132,14 @@ public class MarkAttendanceController {
                         (int) (color.getBlue() * 255));
 
                 button.setStyle("-fx-background-color: " + hexColor + ";");
-
                 button.setOnAction(event -> switchToMarkAttendanceSite(event, site));
-
-                // Set the cursor to hand when hovering over the button
                 button.setOnMouseEntered(e -> button.getScene().setCursor(Cursor.HAND));
                 button.setOnMouseExited(e -> button.getScene().setCursor(Cursor.DEFAULT));
 
                 cellController.supervisorSitesList.getChildren().add(button);
             }
-
-
             items.add((AnchorPane) cell);
         }
-
-// ...
-
         supervisorList.setItems(items);
     }
 
@@ -180,8 +168,6 @@ public class MarkAttendanceController {
         alert.setHeaderText("Mark Holiday");
         alert.setContentText("Do you want to mark today: " + holiday + " as a holiday?");
 
-
-
         ButtonType okButton = new ButtonType("OK");
         ButtonType cancelButton = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
         alert.getButtonTypes().setAll(okButton, cancelButton);
@@ -209,10 +195,7 @@ public class MarkAttendanceController {
                 Document update = new Document();
                 update.put(arrayName, Arrays.asList(holidayDocument));
 
-
-
                 HolidayEmpCollection.updateOne(Filters.eq("_id", site), new Document("$set", update));
-
             }
 
             List<String> allEmployees = db.getEmployeeSearchDetails();
@@ -224,11 +207,9 @@ public class MarkAttendanceController {
                 updateEmp.put(holiday, holidayStatus);
 
                 HolidayAtteEmpCollection.updateOne(Filters.eq("_id", empID), new Document("$set", updateEmp));
-
             }
 
             switchToAttendanceDashboard(event);
-
         } else {
             // User clicked Cancel or closed the alert
         }

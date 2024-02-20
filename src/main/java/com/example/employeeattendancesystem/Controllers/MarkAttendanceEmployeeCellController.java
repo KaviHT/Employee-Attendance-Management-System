@@ -69,8 +69,6 @@ public class MarkAttendanceEmployeeCellController {
 
         // Call addToArray to update the employeeList with the new values
         addToArray(employeeName.getText(), employeeStatusChoice.getValue(), inTime, outTime, note);
-
-
     }
 
     public void addToArray(String employeeName, String employeeStatus, String inTime, String outTime, String note) {

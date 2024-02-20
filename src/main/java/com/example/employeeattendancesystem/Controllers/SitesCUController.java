@@ -38,7 +38,6 @@ public class SitesCUController {
     private static String theselectItem;
 
     MongoDBConnection mongoDBConnection = new MongoDBConnection();
-
     MongoDatabase Database = mongoDBConnection.getDatabase("attendence_db");
     MongoCollection<Document> siteCollection = Database.getCollection("site");
     MongoCollection<Document> EmpSearchCollection = Database.getCollection("site");
@@ -51,9 +50,6 @@ public class SitesCUController {
             titleLbl.setText("Edit Site");
 
             String siteNumber = theselectItem.split(" ")[0];
-
-
-
             FindIterable<Document> documents = siteCollection.find(eq("site_id", siteNumber));
 
             for (Document document : documents) {
@@ -122,8 +118,8 @@ public class SitesCUController {
     public String getSelectedPerson() {
         if (employeeRBtn.isSelected()) {
             displayLbl.setText("Employees:");
+
             // Handle item selection from the suggestion list
-            // ----- make a way to hide the list view when you don't want to search anything -----
             employeeSuggestionList.setOnMouseClicked(event -> {
                 String selectedItem = employeeSuggestionList.getSelectionModel().getSelectedItem();
                 if (selectedItem != null) {

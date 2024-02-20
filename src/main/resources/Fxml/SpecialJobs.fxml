@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchorPane" prefHeight="600.0" prefWidth="700.0" styleClass="sjobs_container" stylesheets="@../Styles/specialJobs.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.employeeattendancesystem.Controllers.SpecialJobsController">
+<AnchorPane fx:id="anchorPane" prefHeight="600.0" prefWidth="700.0" styleClass="sjobs_container" stylesheets="@../Styles/special-jobs.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.employeeattendancesystem.Controllers.SpecialJobsController">
    <children>
       <DatePicker fx:id="pickedDate" layoutX="109.0" layoutY="23.0" prefHeight="25.0" prefWidth="180.0" />
       <TextField fx:id="siteNameField" layoutX="109.0" layoutY="57.0" prefHeight="25.0" prefWidth="180.0" />

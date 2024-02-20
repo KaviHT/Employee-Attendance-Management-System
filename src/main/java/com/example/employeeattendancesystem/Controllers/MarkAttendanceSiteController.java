@@ -61,11 +61,6 @@ public class MarkAttendanceSiteController {
 
             date = DummyController.getSelectedDate();
             dateLbl.setText(String.valueOf(date));
-
-
-            /*
-            ADD ALL PAST RECORDS OF ATTENDANCE FROM DATABASE
-             */
         }
 
         System.out.println(date);
@@ -97,11 +92,6 @@ public class MarkAttendanceSiteController {
 
         Database database = new Database();
 
-        /*
-        CHECK IF EMPLOYEE REPLACEMENT WERE ADDED TODAY FROM THE DATABASE
-        CHECK IF ALREADY MARKED
-         */
-
         // Populating suggestions data from the database
         suggestions.addAll(database.getEmployeeSearchDetails());  // <--- add the database here
 
@@ -123,8 +113,6 @@ public class MarkAttendanceSiteController {
         });
 
         // Handle item selection from the suggestion list
-        // ----- call the searchEmployee method inside this method -----
-        // ----- make a way to hide the list view when you don't want to search anything -----
         employeeSuggestionList.setOnMouseClicked(event -> {
             String selectedItem = employeeSuggestionList.getSelectionModel().getSelectedItem();
             if (selectedItem != null) {
@@ -159,6 +147,7 @@ public class MarkAttendanceSiteController {
                         cellController.employeeName.setText(selectedItem + " (rep)");
                         cellController.employeeStatusChoice.setValue("Replacement");
                         cellController.deleteReplacementBtn.setVisible(true);
+
                         // Delete replacement employee functionality
                         Parent finalEmployeeCell = employeeCell;
                         cellController.deleteReplacementBtn.setOnAction(event1 -> deleteReplacementEmployee((AnchorPane) finalEmployeeCell));
@@ -186,16 +175,14 @@ public class MarkAttendanceSiteController {
     public void deleteReplacementEmployee(AnchorPane employeeCell) {
         System.out.println("Replacement employee deleted");
         String siteName = DummyController.getSiteName();
-
         LocalDate date = LocalDate.now(); // Get today's date
 
-// Create a formatter for the desired pattern
+        // Create a formatter for the desired pattern
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("YYYY-MM-dd");
 
-// Convert the LocalDate to a String
+        // Convert the LocalDate to a String
         String DayEmp = date.format(formatter);
         System.out.println(date);
-
 
         Label employeeNameLabel = (Label) employeeCell.lookup("#employeeName");
         if (employeeNameLabel != null) {
@@ -220,19 +207,11 @@ public class MarkAttendanceSiteController {
                     doc.remove(DayEmp);
                     break;
                 }
-
             }
         }
-
-
-
         System.out.println(MarkAttendanceEmployeeCellController.employeeList);
-
         employeeList.getItems().remove(employeeCell);
     }
-
-
-
 
     public void switchToMarkAttendance(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/Fxml/ViewFactory/MarkAttendanceView.fxml"));

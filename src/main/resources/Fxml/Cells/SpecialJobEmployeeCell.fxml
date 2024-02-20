@@ -9,7 +9,7 @@
 
 <AnchorPane prefHeight="75.0" prefWidth="290.0" style="-fx-background-color: #d3eaf2; -fx-background-radius: 10;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.employeeattendancesystem.Controllers.SpecialJobEmployeeCellController">
    <children>
-      <Button fx:id="deleteBtn" layoutX="221.0" layoutY="35.0" mnemonicParsing="false" onAction="#deleteRecord" styleClass="delete_btn" stylesheets="@../../Styles/SitesRD.css" text="delete" />
+      <Button fx:id="deleteBtn" layoutX="221.0" layoutY="35.0" mnemonicParsing="false" onAction="#deleteRecord" styleClass="delete_btn" stylesheets="@../../Styles/sitesRD.css" text="delete" />
       <Label fx:id="employeeNameLbl" layoutX="9.0" layoutY="51.0" prefHeight="17.0" prefWidth="190.0" text="Employee name" />
       <Label fx:id="siteNameLbl" layoutX="9.0" layoutY="29.0" prefHeight="17.0" prefWidth="175.0" text="Label">
          <font>

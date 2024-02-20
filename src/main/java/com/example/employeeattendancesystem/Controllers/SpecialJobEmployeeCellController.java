@@ -37,9 +37,7 @@ public class SpecialJobEmployeeCellController {
         Optional<ButtonType> result = alert.showAndWait();
 
         // Handle the user's response
-        if (result.isPresent() && result.get() == okButton) {
-            // User clicked OK
-
+        if (result.isPresent() && result.get() == okButton) {   // User clicked OK
             // Create a filter to match the document
             Bson filter = Filters.and(
                     Filters.eq("siteName", siteNameLbl.getText()),
@@ -51,7 +49,6 @@ public class SpecialJobEmployeeCellController {
             DelSpecialJobsCollection.deleteOne(filter);
 
             reloadWindow(event);
-
         } else {
             // User clicked Cancel or closed the alert
         }

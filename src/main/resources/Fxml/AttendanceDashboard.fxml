@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="700.0" styleClass="dash_container" stylesheets="@../Styles/attendanceDashboard.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.employeeattendancesystem.Controllers.AttendanceDashboardController">
+<AnchorPane prefHeight="600.0" prefWidth="700.0" styleClass="dash_container" stylesheets="@../Styles/attendance-dashboard.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.employeeattendancesystem.Controllers.AttendanceDashboardController">
    <children>
       <HBox alignment="CENTER" layoutX="50.0" layoutY="20.0" prefHeight="150.0" prefWidth="600.0" spacing="40.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="20.0">
          <children>
