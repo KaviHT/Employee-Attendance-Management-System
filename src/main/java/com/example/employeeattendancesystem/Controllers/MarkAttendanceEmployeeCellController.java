@@ -25,6 +25,7 @@ public class MarkAttendanceEmployeeCellController {
     public static List <Document> employeeList = new ArrayList<>();
     public Button deleteReplacementBtn;
     private String DayEmp;
+    public static List <Document> dayEmpList = new ArrayList<>();
 
     MongoDBConnection mongoDBConnection = new MongoDBConnection();
     MongoDatabase Database = mongoDBConnection.getDatabase("attendence_db");
@@ -114,25 +115,12 @@ public class MarkAttendanceEmployeeCellController {
     }
 
     public void saveEmployeeAttendance(String employeeName, String site, String dateEmp) {
-        // Create the document in the required format
-        Document employeeAttendance = new Document("_id", employeeName)
+        LocalDate currentDate = LocalDate.now();
+        Document employee = new Document("_id", employeeName)
                 .append("Site", site)
-                .append(LocalDate.now().toString(), dateEmp);
-
-        // Check if a document for this employee already exists
-        Document existingDocument = DayAtteEmpCollection.find(eq("_id", employeeName)).first();
-
-        if (existingDocument == null) {
-            // If the document does not exist, insert the new document
-            DayAtteEmpCollection.insertOne(employeeAttendance);
-            System.out.println("New document has been created.");
-        } else {
-            // If the document exists, update it with the new date and attendance details
-            DayAtteEmpCollection.findOneAndUpdate(
-                    eq("_id", employeeName),
-                    new Document("$set", new Document(LocalDate.now().toString(), dateEmp)));
-            System.out.println("Existing document has been updated.");
-        }
+                .append(currentDate.toString(), dateEmp);
+        dayEmpList.add(employee);
+        System.out.println(dateEmp);
     }
 
     public void saveFunction() {
@@ -140,7 +128,22 @@ public class MarkAttendanceEmployeeCellController {
             String siteName = DummyController.getSiteName();
             String dateSiteAttendance = currentDate+"_"+siteName;
 
+        for (Document employee : dayEmpList) {
+            String employeeName = employee.getString("_id");
+            Document employeeAttendance = DayAtteEmpCollection.find(eq("_id", employeeName)).first();
 
+            if (employeeAttendance == null) {
+                DayAtteEmpCollection.insertOne(employee);
+            } else {
+                DayAtteEmpCollection.findOneAndUpdate(
+                        eq("_id", employeeName),
+                        new Document("$set", employee),
+                        new FindOneAndUpdateOptions().upsert(true));
+            }
+        }
+
+        System.out.println(dayEmpList);
+        dayEmpList.clear();
 
             Document siteAttendance = AtteEmpCollection.find(eq("_id", siteName)).first();
 

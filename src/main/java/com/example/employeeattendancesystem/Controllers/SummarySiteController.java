@@ -18,6 +18,7 @@ import org.bson.Document;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.Set;
 
 public class SummarySiteController {
     public Label siteNameLbl, yearLbl, monthLbl, noRecordsMsgLbl;
@@ -78,10 +79,25 @@ public class SummarySiteController {
             monthMaxDate = 28;
         }
 
+        // Get the current year and month in the format "yyyy-MM"
+        String currentYearMonth = String.format("%04d-%02d", dateFocus.getYear(), dateFocus.getMonthValue());
+
         // Fetch all documents with the given siteName
         FindIterable<Document> docs = DaySiteSummaryDataCollection.find(Filters.eq("Site", siteName));
+
         int employeeCount = 0;
         for (Document doc : docs) {
+            // Get the field names (dates) in the document
+            Set<String> keys = doc.keySet();
+
+            // Check if the document has any fields (dates) that start with the current year and month
+            boolean hasCurrentMonthRecord = keys.stream().anyMatch(key -> key.startsWith(currentYearMonth));
+
+            // If the document has no fields (dates) for the current month, skip this document
+            if (!hasCurrentMonthRecord) {
+                continue;
+            }
+
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Cells/SummarySiteEmployeeCell.fxml"));
             Parent cell = loader.load();
             SummarySiteEmployeeCellController employeeCellController = loader.getController();
@@ -99,14 +115,14 @@ public class SummarySiteController {
                 dayStatusLbl.setText(String.valueOf(j + 1));
 
                 // Get the attendance status for the day
-                String dateKey = dateFocus.getYear() + "-" + String.format("%02d", dateFocus.getMonthValue()) + "-" + String.format("%02d", j + 1);
+                String dateKey = currentYearMonth + "-" + String.format("%02d", j + 1);
                 String attendanceData = doc.getString(dateKey);
                 if (attendanceData != null) {
                     String[] parts = attendanceData.split("_");
                     String attendanceStatus = parts[0];// Attendance status is the first element
-                    String InTime=parts[1];
-                    String OutTime=parts[2];
-                    String Notes=parts[3];
+                    String InTime = parts[1];
+                    String OutTime = parts[2];
+                    String Notes = parts[3];
 
                     Tooltip tooltip = new Tooltip("InTime: " + InTime + "\nOutTime: " + OutTime + "\nNotes: " + Notes);
                     Tooltip.install(dayStatusLbl, tooltip);
@@ -124,7 +140,6 @@ public class SummarySiteController {
                         dayStatusLbl.setTextFill(Color.ORANGE);
                     } else if ("Replacement".equals(attendanceStatus)) {
                         dayStatusLbl.setTextFill(Color.BLUE);
-
                     }
                 }
 

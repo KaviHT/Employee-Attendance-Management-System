@@ -86,7 +86,7 @@ public class EmployeeCUController {
         // Implementation of creating a new Employee
         if (titleLbl.getText().equals("Create a New Employee")) {
 
-            Document doc = new Document("emp_id", employeeNumberField.getText())
+            Document doc = new Document("emp_id", employeeNumberField.getText().replace(" ",""))
                     .append("first_name", firstNameField.getText())
                     .append("last_name", lastNameField.getText())
                     .append("address", addressField.getText())
