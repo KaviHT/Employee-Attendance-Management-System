@@ -23,6 +23,7 @@ import org.bson.conversions.Bson;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Iterator;
 import java.util.Optional;
 
 
@@ -210,17 +211,17 @@ public class MarkAttendanceSiteController {
                 }
             }
 
-            // Create a filter to find the document
-            Bson filter = Filters.and(
-                    Filters.eq("_id", employeeNameLabel.getText()),
-                    Filters.eq("Site", siteName)
-            );
+            Iterator<Document> iterator = MarkAttendanceEmployeeCellController.dayEmpList.iterator();
+            while (iterator.hasNext()) {
+                Document doc = iterator.next();
 
-            // Create an update operation to remove the field
-            Bson update = Updates.unset(DayEmp);
+                if (doc.get("_id").equals(employeeNameLabel.getText()) && doc.get("Site").equals(siteName) && doc.containsKey(DayEmp)) {
+                    // Remove the document from the list
+                    doc.remove(DayEmp);
+                    break;
+                }
 
-            // Update the document
-            RepDelEmpCollection.updateOne(filter, update);
+            }
         }
 
 

@@ -76,6 +76,7 @@ public class EmployeeRDController {
         anchorPane.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
             if (!event.getTarget().equals(employeeSearchField) && !event.getTarget().equals(employeeSuggestionList)) {
                 employeeSuggestionList.setVisible(false);
+
             }
         });
 
@@ -92,7 +93,9 @@ public class EmployeeRDController {
 
     public void searchEmployee() {
 
+
         String empNumber = employeeSearchField.getText().split(" ")[0];
+
 
         FindIterable<Document> documents = EmployeeDataCollection.find(eq("emp_id", empNumber));
         for (Document document : documents) {

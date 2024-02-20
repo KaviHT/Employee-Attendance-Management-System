@@ -196,7 +196,7 @@ public class SitesCUController {
 
             String siteEmployee = sb.toString();
 
-            Document siteDoc = new Document("site_id", siteIDField.getText())
+            Document siteDoc = new Document("site_id", siteIDField.getText().replace(" ",""))
                     .append("site_name", siteNameField.getText())
                     .append("working_hours", workingHours)
                     .append("sup_details", siteSupervisorLbl.getText())
