@@ -57,6 +57,5 @@
          <font>
             <Font name="System Bold" size="16.0" />
          </font></Label>
-      <Label layoutX="14.0" layoutY="568.0" text="Copyright © Shadow Tea and Environmental (PVT) LTD, All Right Reserved." />
    </children>
 </AnchorPane>

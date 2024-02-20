@@ -27,7 +27,7 @@ public class EmployeeCUController {
     public DatePicker dobField;
     public ToggleGroup gender;
     public RadioButton maleRBtn, femaleRBtn, otherRBtn;
-    public Label titleLbl;
+    public Label titleLbl, dobErrorLbl, genderErrorLbl;
     private Stage stage;
     private Scene scene;
     private Parent root;
@@ -78,6 +78,20 @@ public class EmployeeCUController {
     }
 
     public void saveEmployee(ActionEvent event) {
+
+        // Input validation
+        if (dobField.getValue() == null) {
+            dobErrorLbl.setVisible(true);
+            genderErrorLbl.setVisible(false);
+            return;
+        } else if (gender.getSelectedToggle() == null) {
+            genderErrorLbl.setVisible(true);
+            dobErrorLbl.setVisible(false);
+            return;
+        } else {
+            dobErrorLbl.setVisible(false);
+            genderErrorLbl.setVisible(false);
+        }
 
         MongoDBConnection mongoDBConnection = new MongoDBConnection();
         MongoDatabase Database = mongoDBConnection.getDatabase("attendence_db");

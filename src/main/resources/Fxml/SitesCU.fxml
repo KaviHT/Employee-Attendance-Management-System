@@ -35,8 +35,8 @@
             <Font name="System Bold" size="14.0" />
          </font></Label>
       <ListView fx:id="siteEmployeeList" layoutX="60.0" layoutY="227.0" prefHeight="110.0" prefWidth="200.0" AnchorPane.leftAnchor="60.0" />
-      <TextField fx:id="siteIDField" layoutX="138.0" layoutY="68.0" />
-      <TextField fx:id="siteNameField" layoutX="138.0" layoutY="100.0" prefHeight="25.0" prefWidth="149.0" />
+      <TextField fx:id="siteIDField" layoutX="138.0" layoutY="68.0" prefHeight="25.0" prefWidth="160.0" promptText="Enter without spaces: &quot;S01&quot;" />
+      <TextField fx:id="siteNameField" layoutX="138.0" layoutY="100.0" prefHeight="25.0" prefWidth="160.0" />
       <Label fx:id="titleLbl" alignment="CENTER" layoutX="81.0" layoutY="17.0" prefHeight="17.0" prefWidth="450.0" text="Title">
          <font>
             <Font size="18.0" />

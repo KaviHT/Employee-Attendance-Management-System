@@ -22,7 +22,7 @@ public class LoginController {
 
     public void switchToDashboard(ActionEvent event) throws IOException {
         // Account validation
-        if (!usernameFld.getText().equals("1") || !passwordFld.getText().equals("1")) {
+        if (!usernameFld.getText().equals("admin") || !passwordFld.getText().equals("admin")) {
             errorLbl.setVisible(true);
             errorLbl.setText("Wrong Username or Password");
         }

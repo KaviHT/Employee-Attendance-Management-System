@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="dashboard_container" stylesheets="@../Styles/dashboard.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.employeeattendancesystem.Controllers.DashboardController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="dashboard_container" stylesheets="@../Styles/dashboard.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.employeeattendancesystem.Controllers.DashboardController">
    <children>
       <Button fx:id="sitesBtn" layoutX="249.0" layoutY="126.0" mnemonicParsing="false" onAction="#switchToSites" prefHeight="97.0" prefWidth="105.0" styleClass="sites_btn" textAlignment="RIGHT">
          <graphic>
@@ -38,6 +38,13 @@
          <font>
             <Font size="14.0" />
          </font>
+         <graphic>
+            <ImageView fitHeight="56.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true" styleClass="attendance_btn">
+               <image>
+                  <Image url="@../Images/attendance.png" />
+               </image>
+            </ImageView>
+         </graphic>
       </Button>
       <Button fx:id="logoutBtn" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#switchToLogin" prefHeight="32.0" prefWidth="80.0" styleClass="logout_btn" text="LogOut">
          <graphic>
@@ -47,8 +54,14 @@
                </image>
             </ImageView>
          </graphic>
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
       </Button>
-      <Label layoutX="14.0" layoutY="368.0" text="Copyright © Shadow Tea and Environmental (PVT) LTD, All Right Reserved." />
+      <Label layoutX="240.0" layoutY="21.0" text="Dashboard">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font></Label>
       <Text fill="#09417a" layoutX="72.0" layoutY="244.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Employee">
          <font>
             <Font name="Damascus Bold" size="17.0" />
@@ -64,10 +77,5 @@
             <Font name="Damascus Bold" size="17.0" />
          </font>
       </Text>
-      <ImageView fitHeight="56.0" fitWidth="58.0" layoutX="454.0" layoutY="147.0" pickOnBounds="true" preserveRatio="true" styleClass="attendance_btn">
-         <image>
-            <Image url="@../Images/attendance.png" />
-         </image>
-      </ImageView>
    </children>
 </AnchorPane>
