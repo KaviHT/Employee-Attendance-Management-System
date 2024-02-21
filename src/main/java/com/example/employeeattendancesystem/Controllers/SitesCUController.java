@@ -171,7 +171,7 @@ public class SitesCUController {
         String finishTime = finishTimeField.getText();
         String workingHours = startTime + "-" + finishTime;
 
-        String siteID = siteIDField.getText();
+        String siteID = siteIDField.getText().replace(" ","");
         String siteName=siteNameField.getText();
         String fullSiteName= siteID+ " " +siteName;
 
