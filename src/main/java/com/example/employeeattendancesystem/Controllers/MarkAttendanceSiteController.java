@@ -36,6 +36,7 @@ public class MarkAttendanceSiteController {
     public TextField employeeSearchField;
     public ListView<String> employeeSuggestionList;
     private final ObservableList<String> suggestions = FXCollections.observableArrayList();
+    public DatePicker markDatePicker;
     private LocalDate date;
     private MarkAttendanceEmployeeCellController cellController = null;
     MongoDBConnection mongoDBConnection = new MongoDBConnection();
@@ -47,6 +48,7 @@ public class MarkAttendanceSiteController {
 
     public void initialize() throws IOException {
         date = LocalDate.now();
+        markDatePicker.setValue(date);
         msgAttendanceLbl.setVisible(false);
         dateLbl.setVisible(false);
 
@@ -162,6 +164,35 @@ public class MarkAttendanceSiteController {
         anchorPane.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
             if (!event.getTarget().equals(employeeSearchField) && !event.getTarget().equals(employeeSuggestionList)) {
                 employeeSuggestionList.setVisible(false);
+            }
+        });
+
+        markDatePicker.valueProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                // Confirmation for the User
+                Alert saveConfirm = new Alert(Alert.AlertType.CONFIRMATION);
+                saveConfirm.setTitle("Confirmation");
+                saveConfirm.setHeaderText("Edit Attendance");
+                saveConfirm.setContentText("Do you want to edit attendance records on " + newValue + "?");
+
+                ButtonType yesButton = new ButtonType("Yes");
+                ButtonType noButton = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
+                saveConfirm.getButtonTypes().setAll(yesButton, noButton);
+
+                Optional<ButtonType> result = saveConfirm.showAndWait();
+
+                // Handle the user's response
+                if (result.isPresent() && result.get() == yesButton) {
+                    System.out.println("Selected date: " + newValue);
+                    dateLbl.setText(newValue.toString());
+                    dateLbl.setVisible(true);
+                    msgAttendanceLbl.setVisible(true);
+
+                    // Pass the date to the DummyController
+                    DummyController.setMarkDate(newValue);
+                } else {
+                    // User clicked Cancel or closed the alert
+                }
             }
         });
     }

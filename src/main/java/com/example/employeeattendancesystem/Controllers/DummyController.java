@@ -5,7 +5,7 @@ import java.time.LocalDate;
 public class DummyController {
 
     private static String siteName;
-    private static LocalDate selectedDate;
+    private static LocalDate selectedDate, attendanceMarkDate;
     private static boolean editStatus;
 
     public static String getSiteName() {
@@ -30,6 +30,14 @@ public class DummyController {
 
     public static boolean getEditStatus() {
         return editStatus;
+    }
+
+    public static void setMarkDate(LocalDate markDate) {
+        attendanceMarkDate = markDate;
+    }
+
+    public static LocalDate getMarkDate() {
+        return attendanceMarkDate;
     }
 
 }
