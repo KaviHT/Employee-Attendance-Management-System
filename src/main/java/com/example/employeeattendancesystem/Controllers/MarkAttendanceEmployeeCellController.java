@@ -113,16 +113,17 @@ public class MarkAttendanceEmployeeCellController {
     }
 
     public void saveEmployeeAttendance(String employeeName, String site, String dateEmp) {
-        LocalDate currentDate = LocalDate.now();
+        LocalDate currentDate = DummyController.getMarkDate();
         Document employee = new Document("_id", employeeName)
                 .append("Site", site)
                 .append(currentDate.toString(), dateEmp);
         dayEmpList.add(employee);
-        System.out.println(dateEmp);
+
+
     }
 
     public void saveFunction() {
-            LocalDate currentDate = LocalDate.now();
+            LocalDate currentDate = DummyController.getMarkDate();
             String siteName = DummyController.getSiteName();
             String dateSiteAttendance = currentDate+"_"+siteName;
 

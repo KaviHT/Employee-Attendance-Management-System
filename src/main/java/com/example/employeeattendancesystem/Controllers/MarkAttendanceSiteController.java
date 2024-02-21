@@ -49,6 +49,7 @@ public class MarkAttendanceSiteController {
     public void initialize() throws IOException {
         date = LocalDate.now();
         markDatePicker.setValue(date);
+        DummyController.setMarkDate(date);
         msgAttendanceLbl.setVisible(false);
         dateLbl.setVisible(false);
 
