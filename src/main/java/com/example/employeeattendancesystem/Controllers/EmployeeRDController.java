@@ -27,7 +27,7 @@ public class EmployeeRDController {
 
     public Button backBtn, searchBtn, createBtn, deleteBtn, editBtn;
     public AnchorPane anchorPane;
-    public Label employeeNumberLbl, firstNameLbl, lastNameLbl, genderLbl, dobLbl, contactNumberLbl, addressLbl;
+    public Label employeeNumberLbl, firstNameLbl, lastNameLbl, genderLbl, dobLbl, contactNumberLbl, addressLbl, nicLbl;
     public TextField employeeSearchField;
     public ListView<String> employeeSuggestionList;
     private final ObservableList<String> suggestions = FXCollections.observableArrayList();

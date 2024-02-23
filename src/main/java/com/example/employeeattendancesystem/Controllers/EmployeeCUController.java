@@ -23,7 +23,7 @@ import static com.mongodb.client.model.Filters.eq;
 public class EmployeeCUController {
 
     public Button backBtn, saveEmployeeBtn;
-    public TextField employeeNumberField, firstNameField, lastNameField, addressField, contactNumberField;
+    public TextField employeeNumberField, firstNameField, lastNameField, addressField, contactNumberField, nicField;
     public DatePicker dobField;
     public ToggleGroup gender;
     public RadioButton maleRBtn, femaleRBtn, otherRBtn;

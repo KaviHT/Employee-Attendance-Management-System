@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="420.0" prefWidth="600.0" styleClass="sites_container" stylesheets="@../Styles/sitesCU.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.employeeattendancesystem.Controllers.EmployeeCUController">
+<AnchorPane prefHeight="440.0" prefWidth="600.0" styleClass="sites_container" stylesheets="@../Styles/sitesCU.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.employeeattendancesystem.Controllers.EmployeeCUController">
    <children>
       <Button fx:id="backBtn" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#switchToEmployeeRD" prefHeight="34.0" prefWidth="43.0" styleClass="back_btn">
          <graphic>
@@ -27,12 +27,13 @@
             </ImageView>
          </graphic>
       </Button>
-      <GridPane layoutX="75.0" layoutY="58.0" prefHeight="283.0" prefWidth="450.0">
+      <GridPane layoutX="75.0" layoutY="58.0" prefHeight="309.0" prefWidth="450.0">
          <columnConstraints>
             <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="295.7777557373047" minWidth="10.0" prefWidth="141.33331298828125" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="494.6667175292969" minWidth="10.0" prefWidth="309.33335367838544" />
          </columnConstraints>
          <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -57,22 +58,22 @@
                   <Font name="System Bold" size="15.0" />
                </font>
             </Label>
-            <Label text="Address:" GridPane.rowIndex="3">
+            <Label text="Address:" GridPane.rowIndex="4">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </Label>
-            <Label text="Gender:" GridPane.rowIndex="4">
+            <Label text="Gender:" GridPane.rowIndex="5">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </Label>
-            <Label text="Date of Birth:" GridPane.rowIndex="5">
+            <Label text="Date of Birth:" GridPane.rowIndex="6">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </Label>
-            <Label text="Contact Number:" GridPane.rowIndex="6">
+            <Label text="Contact Number:" GridPane.rowIndex="7">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
@@ -92,17 +93,17 @@
                   <Insets right="60.0" />
                </GridPane.margin>
             </TextField>
-            <TextField fx:id="addressField" GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <TextField fx:id="addressField" GridPane.columnIndex="1" GridPane.rowIndex="4">
                <GridPane.margin>
                   <Insets right="60.0" />
                </GridPane.margin>
             </TextField>
-            <TextField fx:id="contactNumberField" GridPane.columnIndex="1" GridPane.rowIndex="6">
+            <TextField fx:id="contactNumberField" GridPane.columnIndex="1" GridPane.rowIndex="7">
                <GridPane.margin>
                   <Insets right="60.0" />
                </GridPane.margin>
             </TextField>
-            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
                <children>
                   <RadioButton fx:id="maleRBtn" mnemonicParsing="false" text="Male">
                      <toggleGroup>
@@ -118,7 +119,7 @@
                   </Label>
                </children>
             </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
                <children>
                   <DatePicker fx:id="dobField" />
                   <Label fx:id="dobErrorLbl" text="Dob cannot be empty" textFill="RED" visible="false">
@@ -128,9 +129,15 @@
                   </Label>
                </children>
             </HBox>
+            <Label text="NIC:" GridPane.rowIndex="3">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <TextField fx:id="nicField" maxWidth="249.0" prefHeight="25.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
          </children>
       </GridPane>
-      <Button fx:id="saveEmployeeBtn" layoutX="237.0" layoutY="352.0" mnemonicParsing="false" onAction="#saveEmployee" prefHeight="40.0" prefWidth="129.0" styleClass="save_btn" text="Save Employee">
+      <Button fx:id="saveEmployeeBtn" layoutX="235.0" layoutY="386.0" mnemonicParsing="false" onAction="#saveEmployee" prefHeight="40.0" prefWidth="129.0" styleClass="save_btn" text="Save Employee">
          <font>
             <Font name="Arial Rounded MT Bold" size="14.0" />
          </font></Button>
