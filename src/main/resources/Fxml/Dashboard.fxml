@@ -72,6 +72,11 @@
             <Font name="Damascus Bold" size="17.0" />
          </font>
       </Text>
+      <Button fx:id="backupBtn" layoutX="472.0" layoutY="360.0" mnemonicParsing="false" onAction="#backupDatabase" styleClass="backup_btn" text="Backup Database">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
       <Text fill="#09417a" layoutX="436.0" layoutY="244.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Attendance">
          <font>
             <Font name="Damascus Bold" size="17.0" />

@@ -6,17 +6,30 @@
     -fx-background-color: #2f7ad3;
     -fx-background-radius: 40%;
 }
+
 .emp_btn:hover, .sites_btn:hover, .attendance_btn:hover{
     -fx-background-color: #63a8ec;
     -fx-cursor: hand;
 }
+
 .logout_btn{
     -fx-background-color: #70a2d4;
     -fx-background-radius: 5%;
 }
+
 .logout_btn:hover{
     -fx-background-color: #003F70;
     -fx-text-fill: white;
     -fx-cursor: hand;
+}
 
+.backup_btn{
+    -fx-background-color: #70a2d4;
+    -fx-background-radius: 5%;
+}
+
+.backup_btn:hover{
+    -fx-background-color: #003F70;
+    -fx-text-fill: white;
+    -fx-cursor: hand;
 }
