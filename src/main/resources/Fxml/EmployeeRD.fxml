@@ -120,7 +120,11 @@
                   <Font name="System Bold" size="15.0" />
                </font>
             </Label>
-            <Label fx:id="nicLbl" text="-" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Label fx:id="nicLbl" layoutX="158.0" layoutY="95.0" text=" - " GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
          </children>
       </GridPane>
       <Button fx:id="deleteBtn" layoutX="233.0" layoutY="388.0" mnemonicParsing="false" onAction="#deleteEmployee" prefHeight="32.0" prefWidth="62.0" styleClass="delete_btn" text="Delete" textFill="#003f70">
