@@ -95,6 +95,7 @@ public class EmployeeRDController {
             String empId = document.getString("emp_id");
             String firstName = document.getString("first_name");
             String lastName = document.getString("last_name");
+            String NIC=document.getString("NIC");
             String empAddress = document.getString("address");
             String gender = document.getString("gender");
             String dateOfBirth = document.getString("dateOfBirth");
@@ -103,6 +104,7 @@ public class EmployeeRDController {
             employeeNumberLbl.setText(empId);
             firstNameLbl.setText(firstName);
             lastNameLbl.setText(lastName);
+            nicLbl.setText(NIC);
             genderLbl.setText(gender);
             dobLbl.setText(dateOfBirth);
             contactNumberLbl.setText(contactNumber);
@@ -145,6 +147,7 @@ public class EmployeeRDController {
             employeeNumberLbl.setText("");
             firstNameLbl.setText("");
             lastNameLbl.setText("");
+            nicLbl.setText("");
             genderLbl.setText("");
             dobLbl.setText("");
             contactNumberLbl.setText("");
