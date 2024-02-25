@@ -243,6 +243,7 @@ public class MarkAttendanceSiteController {
         }
         System.out.println(MarkAttendanceEmployeeCellController.employeeList);
         employeeList.getItems().remove(employeeCell);
+
     }
 
     public void switchToMarkAttendance(ActionEvent event) throws IOException {

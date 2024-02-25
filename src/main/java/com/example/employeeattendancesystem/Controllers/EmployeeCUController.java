@@ -52,6 +52,7 @@ public class EmployeeCUController {
                 String empId = document.getString("emp_id");
                 String firstName = document.getString("first_name");
                 String lastName = document.getString("last_name");
+                String NIC=document.getString("NIC");
                 String empAddress = document.getString("address");
                 String gender = document.getString("gender");
                 String dateOfBirth = document.getString("dateOfBirth");
@@ -63,6 +64,7 @@ public class EmployeeCUController {
                 employeeNumberField.setText(empId);
                 firstNameField.setText(firstName);
                 lastNameField.setText(lastName);
+                nicField.setText(NIC);
                 setSelectedGender(gender);
                 dobField.setValue(date);
                 contactNumberField.setText(contactNumber);
@@ -103,6 +105,7 @@ public class EmployeeCUController {
             Document doc = new Document("emp_id", employeeNumberField.getText().replace(" ",""))
                     .append("first_name", firstNameField.getText())
                     .append("last_name", lastNameField.getText())
+                    .append("NIC", nicField.getText())
                     .append("address", addressField.getText())
                     .append("gender", getSelectedGender())
                     .append("dateOfBirth", dobField.getValue().toString())
@@ -127,6 +130,7 @@ public class EmployeeCUController {
             // update the employee details
             existingEmployee.put("first_name", firstNameField.getText());
             existingEmployee.put("last_name", lastNameField.getText());
+            existingEmployee.put("NIC",  nicField.getText());
             existingEmployee.put("address", addressField.getText());
             existingEmployee.put("gender", getSelectedGender());
             existingEmployee.put("dateOfBirth", dobField.getValue().toString());
@@ -173,6 +177,7 @@ public class EmployeeCUController {
         employeeNumberField.clear();
         firstNameField.clear();
         lastNameField.clear();
+        nicField.clear();
         addressField.clear();
         dobField.setValue(null);
         gender.selectToggle(null);

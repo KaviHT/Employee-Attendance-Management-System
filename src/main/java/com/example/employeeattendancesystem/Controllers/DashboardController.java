@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -74,11 +75,6 @@ public class DashboardController {
         // Handle the user's response
         if (result.isPresent() && result.get() == yesButton) {  // User clicked OK
             LocalDate backupDate = LocalDate.now();
-
-            // ---------------------------------------------------------------
-            // Implementation for getting backup from the Database
-            // ---------------------------------------------------------------
-
             filePathSelection(backupDate);
         } else {
             // User clicked Cancel or closed the alert
@@ -86,27 +82,33 @@ public class DashboardController {
     }
 
     private void filePathSelection(LocalDate backupDate) {
-        // Open the file path selection window
-        FileChooser fileChooser = new FileChooser();
-        // Set extension filter for text files
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("CSV files (*.csv)", "*.csv");
-        fileChooser.getExtensionFilters().add(extFilter);
+        // Open the directory path selection window
+        // Open the directory path selection window
+        DirectoryChooser directoryChooser = new DirectoryChooser();
 
-        // Set a default file name
-        fileChooser.setInitialFileName(backupDate + "_Backup" + ".csv");
+        // Set initial directory
+        File initialDirectory = new File(System.getProperty("user.home"));
+        directoryChooser.setInitialDirectory(initialDirectory);
 
-        // Show save file dialog
+        // Show save directory dialog
         Stage stage = (Stage) backupBtn.getScene().getWindow();
-        fileChooser.setTitle("Save Backup");
-        File file = fileChooser.showSaveDialog(stage);
+        directoryChooser.setTitle("Save Backup");
+        File directory = directoryChooser.showDialog(stage);
 
-        if (file != null) {
-
-            // -----------------------------------------------------
-            // Implement file saving logic here using file.getPath()
-            // -----------------------------------------------------
-
-            System.out.println("Save path selected: " + file.getPath());
+        if (directory != null) {
+            try {
+                String backupPath = directory.getPath() + File.separator + backupDate + "_Backup";
+                String mongodumpPath = "C:\\Program Files\\MongoDB\\Tools\\100\\bin\\mongodump";
+                ProcessBuilder processBuilder = new ProcessBuilder(mongodumpPath, "--db", "attendence_db", "--out", backupPath);
+                Process process = processBuilder.start();
+                int exitCode = process.waitFor();
+                if (exitCode == 0) {
+                    System.out.println("Backup created successfully at " + backupPath);
+                } else {
+                    System.out.println("Backup creation failed with exit code " + exitCode);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
-    }
-}
+}}
