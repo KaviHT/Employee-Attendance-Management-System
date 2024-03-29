@@ -2,7 +2,6 @@ package com.example.employeeattendancesystem.Controllers;
 
 import com.example.employeeattendancesystem.Utils.Database;
 import com.example.employeeattendancesystem.Utils.MongoDBConnection;
-import com.mongodb.BasicDBObject;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
@@ -36,12 +35,16 @@ import java.util.Map;
 
 public class ReportsController {
     public AnchorPane anchorPane;
-    public DatePicker atrStartDate, atrEndDate, sjrStartDate, sjrEndDate;
-    public Button atrConvertBtn, sjrConvertBtn;
-    public ListView<String> siteSuggestionList;
-    public TextField siteSearchField;
-    private final ObservableList<String> suggestions = FXCollections.observableArrayList();
-    private String selectedItem;
+    public DatePicker atrStartDate, atrEndDate, sjrStartDate, sjrEndDate, erStartDate, erEndDate, srStartDate, srEndDate;
+    public Button atrConvertBtn, sjrConvertBtn, erConvertBtn, srConvertBtn;
+    public ListView<String> atrSiteSuggestionList, erEmployeeSuggestionList, srSiteSuggestionList;
+    public TextField atrSiteSearchField, erEmployeeSearchField, srSiteSearchField;
+    private final ObservableList<String> atrSiteSuggestions = FXCollections.observableArrayList();
+    private final ObservableList<String> srSiteSuggestions = FXCollections.observableArrayList();
+    private final ObservableList<String> erEmployeeSuggestions = FXCollections.observableArrayList();
+    private String atrSelectedItem;
+    private String erSelectedItem;
+    private String srSelectedItem;
 
     MongoDBConnection mongoDBConnection = new MongoDBConnection();
     MongoDatabase Database = mongoDBConnection.getDatabase("attendence_db");
@@ -54,49 +57,114 @@ public class ReportsController {
         Database database = new Database();
 
         // Add the "All" to the site options
-        suggestions.add("All");
+        atrSiteSuggestions.add("All");
 
         // Populating suggestions data from the database
-        suggestions.addAll(database.getSiteSearchDetails());
+        atrSiteSuggestions.addAll(database.getSiteSearchDetails());
+        srSiteSuggestions.addAll(database.getSiteSearchDetails());
+        erEmployeeSuggestions.addAll(database.getEmployeeSearchDetails());
 
         // Set the list to the ListView and select "All" by default
         // siteSuggestionList.getSelectionModel().select("All");
-        selectedItem = "All";
+        atrSelectedItem = "All";
 
         // Update the search field to show the default selected item
-        siteSearchField.setText(selectedItem);
+        atrSiteSearchField.setText(atrSelectedItem);
 
         // Autocomplete functionality
-        siteSearchField.textProperty().addListener((observable, oldValue, newValue) -> {
+        atrSiteSearchField.textProperty().addListener((observable, oldValue, newValue) -> {
             // Clear previous suggestions
-            siteSuggestionList.getItems().clear();
+            atrSiteSuggestionList.getItems().clear();
 
             // Filter and add matching suggestions
             String searchText = newValue.toLowerCase().trim();
-            for (String item : suggestions) {
+            for (String item : atrSiteSuggestions) {
                 if (item.toLowerCase().contains(searchText)) {
-                    siteSuggestionList.getItems().add(item);
+                    atrSiteSuggestionList.getItems().add(item);
                 }
             }
 
             // Show or hide the suggestion list based on whether there are suggestions
-            siteSuggestionList.setVisible(!siteSuggestionList.getItems().isEmpty());
+            atrSiteSuggestionList.setVisible(!atrSiteSuggestionList.getItems().isEmpty());
         });
 
         // Handle item selection from the suggestion list
-        siteSuggestionList.setOnMouseClicked(event -> {
-            selectedItem = siteSuggestionList.getSelectionModel().getSelectedItem();
-            if (selectedItem != null) {
-                siteSearchField.setText(selectedItem);
-                siteSuggestionList.setVisible(false);
+        atrSiteSuggestionList.setOnMouseClicked(event -> {
+            atrSelectedItem = atrSiteSuggestionList.getSelectionModel().getSelectedItem();
+            if (atrSelectedItem != null) {
+                atrSiteSearchField.setText(atrSelectedItem);
+                atrSiteSuggestionList.setVisible(false);
                 SitesCUController siteCU = new SitesCUController();
-                siteCU.receiveSelectedItem(selectedItem);
+                siteCU.receiveSelectedItem(atrSelectedItem);
+            }
+        });
+
+        // Autocomplete functionality
+        erEmployeeSearchField.textProperty().addListener((observable, oldValue, newValue) -> {
+            // Clear previous suggestions
+            erEmployeeSuggestionList.getItems().clear();
+
+            // Filter and add matching suggestions
+            String searchText = newValue.toLowerCase().trim();
+            for (String item : erEmployeeSuggestions) {
+                if (item.toLowerCase().contains(searchText)) {
+                    erEmployeeSuggestionList.getItems().add(item);
+                }
+            }
+
+            // Show or hide the suggestion list based on whether there are suggestions
+            erEmployeeSuggestionList.setVisible(!erEmployeeSuggestionList.getItems().isEmpty());
+        });
+
+        // Handle item selection from the suggestion list
+        erEmployeeSuggestionList.setOnMouseClicked(event -> {
+            erSelectedItem = erEmployeeSuggestionList.getSelectionModel().getSelectedItem();
+            if (erSelectedItem != null) {
+                erEmployeeSearchField.setText(erSelectedItem);
+                erEmployeeSuggestionList.setVisible(false);
+                SitesCUController siteCU = new SitesCUController();
+                siteCU.receiveSelectedItem(erSelectedItem);
+            }
+        });
+
+
+        // Autocomplete functionality
+        srSiteSearchField.textProperty().addListener((observable, oldValue, newValue) -> {
+            // Clear previous suggestions
+            srSiteSuggestionList.getItems().clear();
+
+            // Filter and add matching suggestions
+            String searchText = newValue.toLowerCase().trim();
+            for (String item : srSiteSuggestions) {
+                if (item.toLowerCase().contains(searchText)) {
+                    srSiteSuggestionList.getItems().add(item);
+                }
+            }
+
+            // Show or hide the suggestion list based on whether there are suggestions
+            srSiteSuggestionList.setVisible(!srSiteSuggestionList.getItems().isEmpty());
+        });
+
+        // Handle item selection from the suggestion list
+        srSiteSuggestionList.setOnMouseClicked(event -> {
+            srSelectedItem = srSiteSuggestionList.getSelectionModel().getSelectedItem();
+            if (srSelectedItem != null) {
+                srSiteSearchField.setText(srSelectedItem);
+                srSiteSuggestionList.setVisible(false);
+                SitesCUController siteCU = new SitesCUController();
+                siteCU.receiveSelectedItem(srSelectedItem);
             }
         });
 
         anchorPane.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
-            if (!event.getTarget().equals(siteSearchField) && !event.getTarget().equals(siteSuggestionList)) {
-                siteSuggestionList.setVisible(false);
+            if (!event.getTarget().equals(atrSiteSearchField) && !event.getTarget().equals(atrSiteSuggestionList)) {
+                atrSiteSuggestionList.setVisible(false);
+            }
+            if (!event.getTarget().equals(erEmployeeSearchField) && !event.getTarget().equals(erEmployeeSuggestionList)) {
+                erEmployeeSuggestionList.setVisible(false);
+            }
+            if (!event.getTarget().equals(srSiteSearchField) && !event.getTarget().equals(srSiteSuggestionList)) {
+                srSiteSuggestionList.setVisible(false);
             }
         });
     }
@@ -109,8 +177,8 @@ public class ReportsController {
             FindIterable<Document> documents;
 
             // If selectedItem is not "All", filter the documents where site equals to selectedItem
-            if (!selectedItem.equals("All")) {
-                documents = PrintEmpCollection.find(Filters.eq("Site", selectedItem));
+            if (!atrSelectedItem.equals("All")) {
+                documents = PrintEmpCollection.find(Filters.eq("Site", atrSelectedItem));
             } else {
                 documents = PrintEmpCollection.find();
             }
@@ -183,7 +251,7 @@ public class ReportsController {
                 sheet.addMergedRegion(new CellRangeAddress(startRow, rowIndex - 1, 0, 0));
             }
             // Save the workbook to a file
-            filePathSelection(startDate, endDate, "Attendance Report", "Attendance_Report_" + selectedItem.replace(" ", "-") + "_", workbook);
+            filePathSelection(startDate, endDate, "Attendance Report", "Attendance_Report_" + atrSelectedItem.replace(" ", "-") + "_", workbook);
         }
     }
 
@@ -223,6 +291,42 @@ public class ReportsController {
 
             // Save the workbook to a file
             filePathSelection(startDate, endDate, "Special Job Report", "Special_Job_Report_", workbook);
+        }
+    }
+
+    public void erConvertCSV() {
+        if (dateInputValidation(erStartDate, erEndDate)) {
+            String startDate = erStartDate.getValue().toString();
+            String endDate = erEndDate.getValue().toString();
+
+            // ----------------- Implementation -----------------
+
+            // Create a new workbook and sheet
+            Workbook workbook = new XSSFWorkbook();
+            Sheet sheet = workbook.createSheet("Employee Report");
+
+            // ----------------- Implementation -----------------
+
+            // Save the workbook to a file
+            filePathSelection(startDate, endDate, "Employee Report", "Employee_Report_", workbook);
+        }
+    }
+
+    public void srConvertCSV() {
+        if (dateInputValidation(srStartDate, srEndDate)) {
+            String startDate = srStartDate.getValue().toString();
+            String endDate = srEndDate.getValue().toString();
+
+            // ----------------- Implementation -----------------
+
+            // Create a new workbook and sheet
+            Workbook workbook = new XSSFWorkbook();
+            Sheet sheet = workbook.createSheet("Site Report");
+
+            // ----------------- Implementation -----------------
+
+            // Save the workbook to a file
+            filePathSelection(startDate, endDate, "Site Report", "Site_Report_", workbook);
         }
     }
 

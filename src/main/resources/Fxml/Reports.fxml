@@ -75,7 +75,7 @@
       <DatePicker fx:id="erStartDate" layoutX="51.0" layoutY="435.0" prefHeight="25.0" prefWidth="179.0" promptText="Select start date" />
       <DatePicker fx:id="erEndDate" layoutX="51.0" layoutY="490.0" prefHeight="25.0" prefWidth="179.0" promptText="Select end date" />
       <TextField fx:id="erEmployeeSearchField" layoutX="52.0" layoutY="376.0" prefHeight="25.0" prefWidth="179.0" />
-      <Button fx:id="erConvertBtn" layoutX="123.0" layoutY="543.0" mnemonicParsing="false" onAction="#atrConvertCSV" styleClass="convert_btn" text="Convert to Exel" />
+      <Button fx:id="erConvertBtn" layoutX="123.0" layoutY="543.0" mnemonicParsing="false" onAction="#erConvertCSV" styleClass="convert_btn" text="Convert to Exel" />
       <Label layoutX="406.0" layoutY="355.0" text="Select Site:">
          <font>
             <Font name="System Bold" size="12.0" />
@@ -94,7 +94,7 @@
       <DatePicker fx:id="srStartDate" layoutX="406.0" layoutY="431.0" prefHeight="25.0" prefWidth="179.0" promptText="Select start date" />
       <DatePicker fx:id="srEndDate" layoutX="406.0" layoutY="486.0" prefHeight="25.0" prefWidth="179.0" promptText="Select end date" />
       <TextField fx:id="srSiteSearchField" layoutX="407.0" layoutY="372.0" prefHeight="25.0" prefWidth="179.0" />
-      <Button fx:id="srConvertBtn" layoutX="478.0" layoutY="539.0" mnemonicParsing="false" onAction="#atrConvertCSV" styleClass="convert_btn" text="Convert to Exel" />
+      <Button fx:id="srConvertBtn" layoutX="478.0" layoutY="539.0" mnemonicParsing="false" onAction="#srConvertCSV" styleClass="convert_btn" text="Convert to Exel" />
       <Button fx:id="sjrConvertBtn" layoutX="473.0" layoutY="250.0" mnemonicParsing="false" onAction="#sjrConvertCSV" styleClass="convert_btn" text="Convert to Exel" />
       <ListView fx:id="atrSiteSuggestionList" layoutX="52.0" layoutY="111.0" prefHeight="190.0" prefWidth="179.0" visible="false" />
       <ListView fx:id="erEmployeeSuggestionList" layoutX="52.0" layoutY="401.0" prefHeight="190.0" prefWidth="179.0" visible="false" />
