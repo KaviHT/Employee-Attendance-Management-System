@@ -28,10 +28,15 @@ import java.io.FileOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.apache.poi.ss.usermodel.Cell;
+
 
 public class ReportsController {
     public AnchorPane anchorPane;
@@ -296,39 +301,186 @@ public class ReportsController {
 
     public void erConvertCSV() {
         if (dateInputValidation(erStartDate, erEndDate)) {
-            String startDate = erStartDate.getValue().toString();
-            String endDate = erEndDate.getValue().toString();
-
-            // ----------------- Implementation -----------------
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            String startDate = erStartDate.getValue().format(formatter);
+            String endDate = erEndDate.getValue().format(formatter);
+            String selectedEmployee = erEmployeeSearchField.getText();
 
             // Create a new workbook and sheet
             Workbook workbook = new XSSFWorkbook();
             Sheet sheet = workbook.createSheet("Employee Report");
 
-            // ----------------- Implementation -----------------
+            // Connect to MongoDB and fetch the document for the selected employee
+            MongoCollection<Document> collection = mongoDBConnection.getDatabase("attendence_db").getCollection("EmployeeAttendance");
+            Document employeeDocument = collection.find(Filters.eq("_id", selectedEmployee)).first();
+
+            // Extract the site name from the employee's document
+            String siteName = employeeDocument.getString("Site");
+
+            // Create the first row for the site name
+            Row siteNameRow = sheet.createRow(0);
+            Cell siteNameCell = siteNameRow.createCell(0);
+            siteNameCell.setCellValue("Site Name: " + siteName);
+
+            // Create the second row for the employee details
+            Row employeeDetailsRow = sheet.createRow(1);
+            Cell employeeDetailsCell = employeeDetailsRow.createCell(0);
+            employeeDetailsCell.setCellValue("Employee Details: " + selectedEmployee);
+
+            // Create the third row for the column headers
+            Row headerRow = sheet.createRow(2);
+            headerRow.createCell(0).setCellValue("Date");
+            headerRow.createCell(1).setCellValue("Status");
+            headerRow.createCell(2).setCellValue("In Time");
+            headerRow.createCell(3).setCellValue("Out Time");
+            headerRow.createCell(4).setCellValue("Notes");
+
+            // Initialize counters for presents, leaves, and half days
+            int totalPresents = 0;
+            int totalLeaves = 0;
+            int totalHalfDays = 0;
+
+            // Initialize rowIndex for the first data row
+            int rowIndex = 3; // Data rows start from the fourth row
+
+            // Iterate over each date within the date range
+            LocalDate start = LocalDate.parse(startDate, formatter);
+            LocalDate end = LocalDate.parse(endDate, formatter);
+            for (LocalDate date = start; !date.isAfter(end); date = date.plusDays(1)) {
+                String dateKey = date.format(formatter);
+                String record = employeeDocument.getString(dateKey); // Get the record for the date
+
+                if (record != null && !record.isEmpty()) {
+                    String[] parts = record.split("_"); // Split the record into parts
+                    String status = parts[0]; // Status is the first part of the record
+
+                    // Update counters based on the status
+                    if (status.equalsIgnoreCase("Present")) {
+                        totalPresents++;
+                    } else if (status.equalsIgnoreCase("Leave")) {
+                        totalLeaves++;
+                    } else if (status.equalsIgnoreCase("Half Day")) {
+                        totalHalfDays++;
+                    }
+
+                    Row row = sheet.createRow(rowIndex++);
+                    row.createCell(0).setCellValue(dateKey); // Date
+                    row.createCell(1).setCellValue(status); // Status
+                    row.createCell(2).setCellValue(parts[1]); // In Time
+                    row.createCell(3).setCellValue(parts[2]); // Out Time
+                    row.createCell(4).setCellValue(parts[3]); // Notes
+                }
+            }
+
+            // Add rows at the bottom for the total counts
+            Row totalPresentsRow = sheet.createRow(rowIndex++);
+            totalPresentsRow.createCell(0).setCellValue("Total Presents");
+            totalPresentsRow.createCell(1).setCellValue(totalPresents);
+
+            Row totalLeavesRow = sheet.createRow(rowIndex++);
+            totalLeavesRow.createCell(0).setCellValue("Total Leaves");
+            totalLeavesRow.createCell(1).setCellValue(totalLeaves);
+
+            Row totalHalfDaysRow = sheet.createRow(rowIndex++);
+            totalHalfDaysRow.createCell(0).setCellValue("Total Half Days");
+            totalHalfDaysRow.createCell(1).setCellValue(totalHalfDays);
+
+            // Autosize the columns based on the content
+            for (int i = 0; i < 5; i++) { // There are 5 columns in total
+                sheet.autoSizeColumn(i);
+            }
 
             // Save the workbook to a file
-            filePathSelection(startDate, endDate, "Employee Report", "Employee_Report_", workbook);
+            filePathSelection(startDate, endDate, "Employee Report", "Employee_Report_" + selectedEmployee.replace(" ", "_") + "_", workbook);
         }
     }
 
     public void srConvertCSV() {
         if (dateInputValidation(srStartDate, srEndDate)) {
-            String startDate = srStartDate.getValue().toString();
-            String endDate = srEndDate.getValue().toString();
-
-            // ----------------- Implementation -----------------
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            String startDate = srStartDate.getValue().format(formatter);
+            String endDate = srEndDate.getValue().format(formatter);
+            String selectedSite = srSiteSearchField.getText();
 
             // Create a new workbook and sheet
             Workbook workbook = new XSSFWorkbook();
             Sheet sheet = workbook.createSheet("Site Report");
 
-            // ----------------- Implementation -----------------
+            // Calculate the number of columns needed for the dates
+            LocalDate start = LocalDate.parse(startDate, formatter);
+            LocalDate end = LocalDate.parse(endDate, formatter);
+            int totalDays = (int) ChronoUnit.DAYS.between(start, end) + 1; // Inclusive of end date
+
+            // Create a row at the top for the site name and merge cells
+            Row siteNameRow = sheet.createRow(0);
+            Cell siteNameCell = siteNameRow.createCell(0);
+            siteNameCell.setCellValue("Site Name: " + selectedSite);
+            // Merge cells for the site name
+            sheet.addMergedRegion(new CellRangeAddress(0, 0, 0, totalDays + 1)); // Merge across all date columns and two additional columns for totals
+
+            // Create the header row for the dates starting from the second row
+            Row headerRow = sheet.createRow(1);
+            headerRow.createCell(0).setCellValue("_id");
+
+            // Fill in the headers with dates
+            int dateColumnIndex = 1; // Column index for dates starts from 1
+            for (LocalDate date = start; !date.isAfter(end); date = date.plusDays(1)) {
+                headerRow.createCell(dateColumnIndex++).setCellValue(date.format(formatter));
+            }
+
+            // Headers for total presents and absents
+            headerRow.createCell(dateColumnIndex++).setCellValue("Total Presents");
+            headerRow.createCell(dateColumnIndex++).setCellValue("Total Leaves");
+
+            // Connect to MongoDB and fetch documents
+            MongoCollection<Document> collection = mongoDBConnection.getDatabase("attendence_db").getCollection("EmployeeAttendance");
+            FindIterable<Document> documents = collection.find(Filters.eq("Site", selectedSite));
+
+            // Initialize rowIndex for the first employee row
+            int rowIndex = 2; // Employee rows start from the third row
+
+            // Iterate over each document (employee)
+            for (Document doc : documents) {
+                Row row = sheet.createRow(rowIndex++);
+                row.createCell(0).setCellValue(doc.getString("_id")); // Employee's ID and Name
+
+                int cellIndex = 1; // Reset cell index for each employee row
+                int totalPresents = 0; // Counter for presents
+                int totalAbsents = 0; // Counter for absents
+
+                // Iterate over each date within the date range
+                for (LocalDate date = start; !date.isAfter(end); date = date.plusDays(1)) {
+                    String dateKey = date.format(formatter);
+                    String record = doc.getString(dateKey); // Get the record for the date
+
+                    // Extract the status if there is a record for that date
+                    String status = "N/A";
+                    if (record != null && !record.isEmpty()) {
+                        status = record.split("_")[0]; // The status is the first part of the record
+                        if (status.equalsIgnoreCase("Present")) {
+                            totalPresents++;
+                        } else if (status.equalsIgnoreCase("Leave")) {
+                            totalAbsents++;
+                        }
+                    }
+                    row.createCell(cellIndex++).setCellValue(status); // Set the status in the corresponding cell
+                }
+
+                // Write the total counts at the end of the row
+                row.createCell(cellIndex++).setCellValue(totalPresents); // Total presents
+                row.createCell(cellIndex++).setCellValue(totalAbsents); // Total absents
+            }
+
+            // Autosize all columns based on the content
+            for (int i = 0; i < dateColumnIndex; i++) { // Include the '_id' column and the two total count columns
+                sheet.autoSizeColumn(i);
+            }
 
             // Save the workbook to a file
-            filePathSelection(startDate, endDate, "Site Report", "Site_Report_", workbook);
+            filePathSelection(startDate, endDate, "Site Report", "Site_Report_" + selectedSite.replace(" ", "_") + "_", workbook);
         }
     }
+
 
     private void filePathSelection(String startDate, String endDate, String title, String fileName, Workbook workbook) {
         // Open the file path selection window
