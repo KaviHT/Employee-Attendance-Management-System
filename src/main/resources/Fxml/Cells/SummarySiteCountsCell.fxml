@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="50.0" prefWidth="96.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.employeeattendancesystem.Controllers.SummarySiteCountsCellController">
+   <children>
+      <Label layoutX="4.0" layoutY="6.0" text="Present: " />
+      <Label layoutX="4.0" layoutY="27.0" text="Leaves:" />
+      <Label fx:id="presentCountLbl" layoutX="54.0" layoutY="6.0" text="Label" />
+      <Label fx:id="leaveCountLbl" layoutX="54.0" layoutY="27.0" text="Label" />
+   </children>
+</AnchorPane>
