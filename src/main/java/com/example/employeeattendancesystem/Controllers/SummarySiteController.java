@@ -22,7 +22,7 @@ import java.util.Set;
 
 public class SummarySiteController {
     public Label siteNameLbl, yearLbl, monthLbl, noRecordsMsgLbl;
-    public ListView<AnchorPane> employeeList;
+    public ListView<AnchorPane> employeeList, countsList;
     public Button previousMonthBtn, nextMonthBtn, thisMonthBtn;
     LocalDate dateFocus;
 
@@ -74,7 +74,9 @@ public class SummarySiteController {
         yearLbl.setText(String.valueOf(dateFocus.getYear()));
         monthLbl.setText(String.valueOf(dateFocus.getMonth()));
 
-        var items = FXCollections.<AnchorPane>observableArrayList();
+        var employeeCellItems = FXCollections.<AnchorPane>observableArrayList();
+        var countsCellItems = FXCollections.<AnchorPane>observableArrayList();
+
         int monthMaxDate = dateFocus.getMonth().maxLength();
         if (dateFocus.getYear() % 4 != 0 && monthMaxDate == 29) {
             monthMaxDate = 28;
@@ -87,7 +89,11 @@ public class SummarySiteController {
         FindIterable<Document> docs = DaySiteSummaryDataCollection.find(Filters.eq("Site", siteName));
 
         int employeeCount = 0;
+
         for (Document doc : docs) {
+            int presentCount = 0;
+            int leaveCount = 0;
+
             // Get the field names (dates) in the document
             Set<String> keys = doc.keySet();
 
@@ -99,9 +105,15 @@ public class SummarySiteController {
                 continue;
             }
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Cells/SummarySiteEmployeeCell.fxml"));
-            Parent cell = loader.load();
-            SummarySiteEmployeeCellController employeeCellController = loader.getController();
+            // Load employeeCells
+            FXMLLoader employeeCellLoader = new FXMLLoader(getClass().getResource("/Fxml/Cells/SummarySiteEmployeeCell.fxml"));
+            Parent employeeCell = employeeCellLoader.load();
+            SummarySiteEmployeeCellController employeeCellController = employeeCellLoader.getController();
+
+            // Load countsCells
+            FXMLLoader countsCellLoader = new FXMLLoader(getClass().getResource("/Fxml/Cells/SummarySiteCountsCell.fxml"));
+            Parent countsCell = countsCellLoader.load();
+            SummarySiteCountsCellController countsCellController = countsCellLoader.getController();
 
             // Set employee name and number
             employeeCellController.employeeNameLbl.setText(doc.getString("_id"));
@@ -131,25 +143,40 @@ public class SummarySiteController {
                     // If the employee is present, mark the date in green
                     if ("Present".equals(attendanceStatus)) {
                         dayStatusLbl.setTextFill(Color.GREEN);
+                        presentCount++;
                     }
                     // If the employee is absent, mark the date in red
                     else if ("Leave".equals(attendanceStatus)) {
                         dayStatusLbl.setTextFill(Color.RED);
+                        leaveCount++;
                     }
                     // If the employee is on half day, mark the date in yellow
                     else if ("Half Day".equals(attendanceStatus)) {
                         dayStatusLbl.setTextFill(Color.ORANGE);
                     } else if ("Replacement".equals(attendanceStatus)) {
                         dayStatusLbl.setTextFill(Color.BLUE);
+                        presentCount++;
                     }
                 }
-
                 employeeCellController.statusSummaryHbox.getChildren().add(dayStatusLbl);
             }
-
-            items.add((AnchorPane) cell);
+            employeeCellItems.add((AnchorPane) employeeCell);
+            countsCellController.presentCountLbl.setText(String.valueOf(presentCount));
+            countsCellController.leaveCountLbl.setText(String.valueOf(leaveCount));
+            countsCellItems.add((AnchorPane) countsCell);
         }
-        employeeList.setItems(items);
+        employeeList.setItems(employeeCellItems);
+        countsList.setItems(countsCellItems);
+    }
+
+    // Template for populating ListView with AnchorPane cells (not active in code)
+    private void showCounts() throws IOException {
+        var countsCellItems = FXCollections.<AnchorPane>observableArrayList();
+        FXMLLoader countsCellLoader = new FXMLLoader(getClass().getResource("/Fxml/Cells/SummarySiteCountsCell.fxml"));
+        Parent countsCell = countsCellLoader.load();
+        SummarySiteCountsCellController countsCellController = countsCellLoader.getController();
+        countsCellItems.add((AnchorPane) countsCell);
+        countsList.setItems(countsCellItems);
     }
 }
 
